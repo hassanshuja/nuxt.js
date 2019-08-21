@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="18px" viewBox="0 0 16 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="MERCHANT-DASHBOARD-Notif-Mobile" transform="translate(-291.000000, -15.000000)" fill="#3D3D3D" stroke="#FFFFFF">
+            <g id="Group" transform="translate(292.000000, 16.000000)">
+                <path d="M7,16 C8.10436756,16 9,15.1043676 9,14 L5,14 C5,15.1043676 5.89563244,16 7,16 Z" id="Stroke-1"></path>
+                <path d="M7,2 C8.10436756,2 9,1.10436756 9,0 L5,0 C5,1.10436756 5.89563244,2 7,2 Z" id="Stroke-1-Copy" transform="translate(7.000000, 1.000000) rotate(-180.000000) translate(-7.000000, -1.000000) "></path>
+                <path d="M5.634094,2.19169725 C6.06946695,2.07010288 6.52568876,2 6.9996934,2 C7.47308484,2 7.92930664,2.07010288 8.3652928,2.19169725 C10.534186,2.79718761 12.1291227,4.80225405 12.1291227,7.19009461 C12.1303491,8.47924314 12.1278963,9.76839167 12.1303491,11.0581606 C12.1321887,12.1990384 12.8735491,12.9881611 14,13.0545417 L14,14 L9.16184136,14 L4.83693224,14 L0,14 L0,13.0545417 C1.12583768,12.9881611 1.86658491,12.1990384 1.86903771,11.0581606 C1.87149052,9.76839167 1.86842451,8.47924314 1.86965091,7.19009461 C1.86965091,4.80225405 3.46458762,2.79718761 5.634094,2.19169725 Z" id="Stroke-5"></path>
+            </g>
+        </g>
+    </g>
+</svg>

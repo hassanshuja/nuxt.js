@@ -1,0 +1,27 @@
+{
+  "links": {
+    "home": "Home",
+    "about": "About",
+    "english": "EN",
+    "indonesia": "ID"
+  },
+  "home": {
+    "title": "Welcome",
+    "introduction": "This is an introduction in English."
+  },
+  "about": {
+    "title": "About",
+    "introduction": "This page is made to give you more informations."
+  },
+  "menu":{
+    "men":"MEN",
+    "women":"WOMEN",
+    "sale":"SALE",
+    "blog":"BLOG",
+    "brands":"BRANDS"
+  },
+  "top-offer":{
+    "view-detail":"View Details",
+    "hide-detail":"Hide Details"
+  }
+}

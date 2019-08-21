@@ -1,0 +1,112 @@
+.owl-dots {
+    display: none !important;
+}
+div#section_part:after {
+    float: none;
+    content: "";
+    margin: 0 auto;
+    width: 87.5%;
+    /* padding-top: 234px; */
+    border-bottom: 1px solid #979797;
+    bottom: 0px;
+    padding-bottom: 0px;
+    display: -webkit-box;
+    /* margin: 0 14px; */
+    opacity: 0.3;
+    padding: 10px;
+}
+@media (min-width: 979px) and (max-width: 1800px) {
+    .search_box {
+        padding: 22px 0px;
+        font-size: 8px;
+        font-weight: 500;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: #000000;
+        font-family: Lato;
+        /* display: grid; */
+        /* padding-left: 0px; */
+        text-align: -webkit-right;}
+}
+
+.owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top:33%;
+    margin-left: -20px;
+    display: block !important;
+    border:0px solid black;
+}
+.owl-theme .owl-nav [class*=owl-]:hover {
+    background: transparent;
+}
+button.owl-next:focus {
+    outline: none;
+}
+button.owl-prev:focus {
+    outline: none;
+}
+.owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 33%;
+
+    right: 0;
+    display: block !important;
+    border:0px solid
+}
+@media only screen and (max-width: 1180px){
+
+}
+@media only screen and (max-width: 768px)
+
+{
+    .slicknav_btn {
+        background-color: #ffffff;
+        padding: 4px;
+    }
+    div#header {
+
+        border-bottom:none;
+
+    }
+
+}
+@media only screen and (max-width: 767px)
+{
+
+    .tile img {
+
+        width: -webkit-fill-available !important;
+    }
+}
+@media only screen and (max-width: 575px){
+    div#section_part {
+        padding: none;
+        padding-bottom: 12px;
+    }
+
+}
+@media only screen and (max-width: 414px)
+
+{
+    .tile img{height: 224px;}
+    .shop_now_product_below {
+
+        position: relative;
+
+        bottom: 84px;
+
+    }
+    .slicknav_menu {
+        font-size: 16px;
+        margin-top: 1px;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: transparent !important;
+    }
+}

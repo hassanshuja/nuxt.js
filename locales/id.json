@@ -1,0 +1,27 @@
+{
+  "links": {
+    "home": "Accueil",
+    "about": "À propos",
+    "english": "EN",
+    "indonesia": "ID"
+  },
+  "home": {
+    "title": "Bienvenue",
+    "introduction": "Ceci est un texte d'introduction en Français."
+  },
+  "about": {
+    "title": "À propos",
+    "introduction": "Cette page est faite pour vous donner plus d'informations."
+  },
+  "menu":{
+    "men":"PRIA",
+    "women":"PEREMPUAN",
+    "sale":"PENJUALAN",
+    "blog":"BLOG",
+    "brands":"MEREK"
+  },
+  "top-offer":{
+    "view-detail":"Melihat rincian",
+    "hide-detail":"Sembunyikan rincian"
+  }
+}
