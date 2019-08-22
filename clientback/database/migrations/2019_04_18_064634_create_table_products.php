@@ -42,7 +42,9 @@ class CreateTableProducts extends Migration
             $table->boolean('is_featured')->default(0);
             $table->boolean('is_new_arrival')->default(0);
             $table->boolean('stock_availability')->default(1);
+            $table->boolean('is_sustainable')->default(0);
             $table->boolean('status')->default(0);
+
             $table->timestamps();
             $table->softDeletes();
         });

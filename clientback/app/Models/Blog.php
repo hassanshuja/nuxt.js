@@ -27,4 +27,8 @@ class Blog extends Model {
 
         return $this->hasMany(BlogImages::class,'blog_id','id');
     }
+
+    public function blog_category(){
+        return $this->belongsTo(BlogCategory::class,'blog_category_id','id');
+    }
 }

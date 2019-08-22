@@ -33,11 +33,11 @@
                 <div class="row kt-margin-b-20">
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Name (Eng):</label>
-                        <input type="text" class="form-control kt-input" placeholder="E.g: abc" data-col-index="1">
+                        <input type="text" class="form-control kt-input" placeholder="E.g: abc" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Name (Indo):</label>
-                        <input type="text" class="form-control kt-input" placeholder="E.g: abc" data-col-index="2">
+                        <input type="text" class="form-control kt-input" placeholder="E.g: abc" data-col-index="1">
                     </div>
                 </div>
                 <div class="kt-separator kt-separator--md kt-separator--dashed"></div>

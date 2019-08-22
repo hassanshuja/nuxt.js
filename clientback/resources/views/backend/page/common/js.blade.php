@@ -19,8 +19,10 @@
                     processData: false,
                     cache: false,
                     contentType: false,
-                    success: function (response) {
-                        console.log(response);
+                    success: function (data) {
+                        //console.log(response);
+                        $('.success').fadeIn(200).show().delay(1000).fadeOut();
+                        $("#data").html(data);
 
                     },
                     error : function(xhr, status, error){
@@ -43,10 +45,8 @@
                 });
 
             });
-
-
-
         });
 
     </script>
+
 @endsection

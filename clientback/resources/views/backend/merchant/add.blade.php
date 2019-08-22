@@ -72,10 +72,10 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group kt-form__group col-lg-6">
+                        {{--<div class="form-group kt-form__group col-lg-6">
                             <label>Image:</label>
                             <input type="file" class=" image-upload" name="image" data-theme="fas">
-                        </div>
+                        </div>--}}
                         <div class="form-group kt-form__group col-lg-6">
                             <label for="note" class="form-control-label">Notes:</label>
                             <textarea  class="form-control" name="notes" id="notes"></textarea>

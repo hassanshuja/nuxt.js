@@ -11,7 +11,7 @@
     <script type="text/javascript">
         var list_url = '{!! route("admin.merchant.list-ajax") !!}';
         var table_id = 'kt_table_1';
-        var columns = ['name','email','photo','status','action'];
+        var columns = ['name','email','status','action'];
         var getProvince = '{!! route('admin.merchant.getprovince') !!}';
         var getCity = '{!! route('admin.merchant.getcity') !!}';
         var getSuburb = '{!! route('admin.merchant.suburb') !!}';

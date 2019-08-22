@@ -42,7 +42,10 @@
                         required: !0,
                     },
                     code: {
-                        required: !0
+                        required: !0,
+                    },
+                    description:{
+                        required: !0,
                     }
                 }
             };

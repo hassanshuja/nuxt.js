@@ -11,6 +11,4 @@
 |
 */
 
-Route::get('/', function () {
-    return view('backend.layout.login');
-});
+

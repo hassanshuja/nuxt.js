@@ -27,5 +27,9 @@
             border: 1px solid #DDD;
             padding: 5px;
         }
+        .note-toolbar {
+            position: relative;
+            z-index: 20;
+        }
     </style>
 @endsection

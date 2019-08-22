@@ -17,8 +17,14 @@ class CreateBrandTable extends Migration
             $table->bigIncrements('id');
             $table->string('name')->nullable();
             $table->string('name_l')->nullable();
-            $table->string('code');
-            $table->text('note')->nullable();
+            $table->string('slug')/*->unique()*/;
+            $table->string('country_name')->nullable();
+            $table->string('country_name_l')->nullable();
+            $table->integer('brand_since')->nullable();
+            $table->text('description')->nullable();
+            $table->text('description_l')->nullable();
+            $table->text('image_url')->nullable();
+            $table->text('banner_url')->nullable();
             $table->boolean('status')->default(1);
             $table->timestamps();
             $table->softDeletes();

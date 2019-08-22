@@ -15,7 +15,7 @@
                                 <h3 class="name">{!! $val['name'] !!}</h3>
                                 <strong class="d-inline-block mb-2 text-primary">Brand : {!! $val['product_brand']['name'] !!}</strong><br/>
 
-                                <strong class="d-inline-block mb-2 text-primary">Category : {!! $val['product_subcategories']['name'] !!}</strong><br/>
+                                <strong class="d-inline-block mb-2 text-primary">Category : {!! $val['product_categories']['name'] !!}</strong><br/>
                                 <strong class="d-inline-block mb-2 text-primary">Status : {!! $val['status'] ? '<span class="kt-font-success">Active </span>' : '<span class="kt-font-danger kt-font-bold">Inactive </span>' !!}</strong><br/>
                                 <strong class="d-inline-block mb-2 text-primary">Price : {!! $val['price'] !!}</strong><br/>
                                 <strong class="d-inline-block mb-2 text-primary">SKU : {!! $val['sku'] !!}</strong>
@@ -32,11 +32,11 @@
                             <h5 class="motto">"To be or not to be, this is my awesome motto!"</h5>
                         </div>--}}
                         <div class="content">
-                            <div class="main">
+                            {{--<div class="main">
                                 <h4 class="text-center">Description</h4>
                                 <p class="text-center">{!! $val['description'] !!}</p>
 
-                                {{--<div class="stats-container">
+                                <div class="stats-container">
                                     <div class="stats">
                                         <h4>235</h4>
                                         <p>
@@ -55,9 +55,9 @@
                                             Projects
                                         </p>
                                     </div>
-                                </div>--}}
+                                </div>
 
-                            </div>
+                            </div>--}}
                         </div>
                         <div class="footer">
                             <div class="social-links text-center">

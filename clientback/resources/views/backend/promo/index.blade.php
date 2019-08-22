@@ -21,7 +21,7 @@
                         </a>
                         <a href="javascript:void(0)" data-type="add" data-action="{!! route('admin.promo.add') !!}" data-toggle="modal" data-target="#add" class="btn btn btn-success btn-icon-sm">
                             <i class="la la-plus"></i>
-                            Ad Promo
+                            Add Promo
                         </a>
                     </div>
                 </div>

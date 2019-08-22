@@ -27,4 +27,9 @@ class Shop extends Model {
 
     }
 
+    public function category(){
+
+        return $this->belongsToMany(Category::class,'categories_shops','shop_id','category_id');
+    }
+
 }

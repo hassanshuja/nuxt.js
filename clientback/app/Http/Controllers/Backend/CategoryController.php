@@ -68,14 +68,14 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
             'name' => 'required|string|max:255',
             'slug' => 'required|unique:categories,slug,NULL,id,deleted_at,NULL'
         ]);
-        $image_url = '';
+        /*$image_url = '';
         if ( request()->hasFile('image')){
             if (request()->file('image')->isValid()){
                 $file_url = request()->file('image')->storePubliclyAs('images/category',request()->file('image')->getClientOriginalName());
                 $image_url = 'storage/'.$file_url;
             }
         }
-        $data['image_url'] = $image_url;
+        $data['image_url'] = $image_url;*/
 
         $record= Category::create($data);
         $record->shops()->sync($data['shop_id']);
@@ -97,7 +97,7 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
         $record->name = $data['name'];
         $record->name_l = $data['name_l'];
         $record->slug = $data['slug'];
-        $record->description = $data['description'];
+        /*$record->description = $data['description'];
         $record->description_l = $data['description_l'];
         $image_url = '';
         if ( request()->hasFile('image')){
@@ -106,7 +106,7 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
                 $image_url = 'storage/'.$file_url;
             }
         }
-        $data['image_url'] = $image_url;
+        $data['image_url'] = $image_url;*/
         $record->save();
         $record->shops()->sync($data['shop_id']);
         return response()->json(['status'=>true,'msg'=>'Record Updated Successfully.']);

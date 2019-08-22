@@ -16,7 +16,7 @@ class DiscountProductController extends Controller{
         $return_data = [];
         $query = new Discount();
         $query = $query->where('discount_related',2);
-        $sortColumn = array('title','','','','status');
+        $sortColumn = array('title','start_at','','','','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){

@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-12">
+                        <div class="col-sm-6">
                             <div class="form-group m-form__group">
                                 <label for="category_id" class="form-control-label"> Parent Category</label>
                                 <select class="form-control" id="parent_id" name="parent_id">
@@ -43,8 +43,6 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group m-form__group">
                                 <label for="category_id" class="form-control-label">Gender</label>
@@ -55,14 +53,8 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group kt-form__group">
-                                <label>Image:</label>
-                                <input type="file" class=" image-upload" name="image" data-theme="fas">
-                            </div>
-                        </div>
                     </div>
-                    <div class="row">
+                    {{--<div class="row">
                         <div class="col-sm-6">
                             <div class="form-group kt-form__group">
                                 <label for="note" class="form-control-label">Description (English):</label>
@@ -75,7 +67,18 @@
                                 <textarea  class="form-control" name="description_l" id="description_l"></textarea>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
+                    {{--<div class="row">
+
+
+                        <div class="col-sm-6">
+                            <div class="form-group kt-form__group">
+                                <label>Image:</label>
+                                <input type="file" class=" image-upload" name="image" data-theme="fas">
+                            </div>
+                        </div>
+                    </div>--}}
+
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary" id="m_form_submit">Submit</button>

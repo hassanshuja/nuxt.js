@@ -71,9 +71,9 @@
             <tr>
                 <th>Title </th>
                 <th>Offer Period </th>
-                <th>Type </th>
-                <th>Amount </th>
-                <th>Offer Type </th>
+                <th class="no-sort">Type </th>
+                <th class="no-sort">Amount </th>
+                <th class="no-sort">Offer Type </th>
                 <th> Status </th>
                 <th class="no-sort"> Actions </th>
             </tr>

@@ -84,7 +84,7 @@
                             </li>
                             <li class="kt-menu__item  @if(request()->route()->getName() == 'admin.tag.index') kt-menu__item--active @endif" aria-haspopup="true">
                                 <a href="{!! route('admin.tag.index') !!}" class="kt-menu__link ">
-                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Styles</span>
+                                    <i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tags</span>
                                 </a>
                             </li>
                         </ul>
@@ -149,6 +149,16 @@
                             <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.home.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.home.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Home Index</span></a></li>
                             <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.men.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.men.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Men Index</span></a></li>
                             <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.women.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.women.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Women Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.about.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.about.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">About Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.orderandshipping.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.orderandshipping.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Orader & Shipping Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.returnandexchange.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.returnandexchange.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Return & Exchange Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.paymentmethods.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.paymentmethods.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Payment Methods Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.partnership.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.partnership.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Partnership Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.termsandconditions.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.termsandconditions.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Terms & Conditions Index</span></a></li>
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.smartsizing.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.smartsizing.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Smart Sizing Index</span></a></li>
+
+                            <li class="kt-menu__item @if(request()->route()->getName() == 'admin.page.contact.index') kt-menu__item--active @endif" aria-haspopup="true"><a href="{!! route('admin.page.contact.index') !!}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Conatct Index</span></a></li>
+
                         </ul>
                     </div>
                 </li>

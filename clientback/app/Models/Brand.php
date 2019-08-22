@@ -9,13 +9,13 @@ class Brand extends Model {
 
     protected $table = 'brands';
 
-    protected $fillable = ['code','name','name_l','note','status'];
+    protected $fillable = ['slug','name','name_l','description','description_l','country_name','country_name_l','brand_since','image_url','banner_url','status'];
+
+    protected $appends = ['key','key_l'];
 
     public function getImageAttribute()
     {
         return $this->attributes['image_url'] != '' && file_exists($this->attributes['image_url']) ? '<img src="'.url($this->attributes['image_url']).'" width="75px" height="75px" />' : '<img src="'.url('images/notAvailable.png').'" width="75px" height="75px" />';
-
-
     }
 
     public function getStatusValAttribute(){
@@ -32,4 +32,13 @@ class Brand extends Model {
         return $this->belongsToMany(Shop::class,'shop_brand','brand_id','shop_id');
     }
 
+    public function getKeyAttribute(){
+        return ucfirst(substr($this->attributes['name'], 0, 1));
+
+    }
+
+    public function getKeyLAttribute(){
+        return ucfirst(substr($this->attributes['name_l'], 0, 1));
+
+    }
 }

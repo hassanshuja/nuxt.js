@@ -1,15 +1,15 @@
 <?php
 
-Route::group(['prefix' => ADMIN,'middleware'=>'admin.guest'], function ($api) {
+Route::group(['middleware'=>'admin.guest'], function ($api) {
     $api->get('/', 'LoginController@showLoginForm');
     $api->post('login', 'LoginController@login')->name('admin.login');
 });
 
-Route::group(['prefix' => ADMIN,'middleware'=>['admin.auth'],'as'=>'admin.'], function ($api) {
+Route::group(['middleware'=>['admin.auth'],'as'=>'admin.'], function ($api) {
 
     $api->get('admin-logout', function () {
         auth()->guard('admin')->logout();
-        return redirect()->to(ADMIN);
+        return redirect()->to('/');
     })->name('logout');
 
     //Dashboard
@@ -217,10 +217,58 @@ Route::group(['prefix' => ADMIN,'middleware'=>['admin.auth'],'as'=>'admin.'], fu
             'index'=>'home.index'
         ]]);
 
-        /*General Index*/
+        /*common Index*/
         $api->resource('common', 'Page\CommonContentController',['names' => [
             'index'=>'common.index',
             'store' => 'common.add'
+        ]]);
+
+        /*About Index*/
+        $api->resource('about', 'Page\AboutContentController',['names' => [
+            'index'=>'about.index',
+            'store' => 'about.add'
+        ]]);
+
+        /*orderandshipping Index*/
+        $api->resource('orderandshipping', 'Page\OrderandShippingContentController',['names' => [
+            'index'=>'orderandshipping.index',
+            'store' => 'orderandshipping.add'
+        ]]);
+
+        /*returnandexchange Index*/
+        $api->resource('returnandexchange', 'Page\ReturnandexchangeContentController',['names' => [
+            'index'=>'returnandexchange.index',
+            'store' => 'returnandexchange.add'
+        ]]);
+
+        /*paymentmethods Index*/
+        $api->resource('paymentmethods', 'Page\PaymentMethodsContentController',['names' => [
+            'index'=>'paymentmethods.index',
+            'store' => 'paymentmethods.add'
+        ]]);
+
+        /*partnership Index*/
+        $api->resource('partnership', 'Page\PartnershipContentController',['names' => [
+            'index'=>'partnership.index',
+            'store' => 'partnership.add'
+        ]]);
+
+        /*termsandconditions Index*/
+        $api->resource('termsandconditions', 'Page\TermsAndConditionsContentController',['names' => [
+            'index'=>'termsandconditions.index',
+            'store' => 'termsandconditions.add'
+        ]]);
+
+        /*smartsizing Index*/
+        $api->resource('smartsizing', 'Page\SmartSizingController',['names' => [
+            'index'=>'smartsizing.index',
+            'store' => 'smartsizing.add'
+        ]]);
+
+        /*contact Index*/
+        $api->resource('contact', 'Page\ContactContentController',['names' => [
+            'index'=>'contact.index',
+            'store' => 'contact.add'
         ]]);
 
     });
