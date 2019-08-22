@@ -12,6 +12,5 @@ Route::get('blog',['as'=>'blog','uses'=>'Front\Blog\BlogController@index']);
 Route::get('blog/detail/{slug}',['as'=>'blog.category','uses'=>'Front\Blog\BlogController@detail']);
 Route::get('brands',['as'=>'brands','uses'=>'Front\Brand\BrandController@index']);
 Route::get('brands/{slug}',['as'=>'brands.product-list','uses'=>'Front\Brand\BrandController@productList']);
-
-
+Route::get('page/catalogue',['as'=>'page.catalogue','uses'=>'Front\Catalogue\CatalogueController@index']);
 
