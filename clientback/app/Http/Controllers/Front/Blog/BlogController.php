@@ -8,9 +8,10 @@ use App\Models\Blog;
 
 class BlogController extends Controller
 {
-    public function index($skip)
+    public function index()
     {
-        $blogs = Blog::where('status',1)->latest()->with('blog_images','products')->skip($skip)->limit(10)->get();
+        // $blogs = Blog::where('status',1)->latest()->with('blog_images','products')->skip($skip)->limit(10)->get();
+        $blogs = Blog::where('status',1)->get();
         return BlogResource::collection(
             $blogs
         );

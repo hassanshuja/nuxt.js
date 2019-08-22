@@ -1,6 +1,7 @@
 <?php
 
 Route::resource('categories', 'Front\Categories\CategoryController');
+Route::get('blog', 'Front\Blog\BlogController@index');
 
 Route::get('page/women',['as'=>'page.women','uses'=>'Front\Page\PageController@women']);
 Route::get('page/home',['as'=>'page.home','uses'=>'Front\Page\PageController@home']);
