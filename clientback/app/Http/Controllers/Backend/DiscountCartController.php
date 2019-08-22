@@ -15,7 +15,7 @@ class DiscountCartController extends Controller{
         $return_data = [];
         $query = new Discount();
         $query = $query->where('discount_related',0);
-        $sortColumn = array('title','','','','status');
+        $sortColumn = array('title','start_at','','','','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){
@@ -81,11 +81,11 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
         ]);
         $data['discount_related'] = 0;
         Discount::create($data);
-        return response()->json(['status'=>true,'msg'=>'Record Added Successfully.']);
+        return response()->json(['status'=>true,'msg'=>'Record Added Successfully.','table'=>'kt_table_1']);
     }
     public function changeStatus(){
         $request = request()->all();
-        Discount::where('id',$request['id'])->update(['status'=>$request['status'],'table'=>'kt_table_1']);
+        Discount::where('id',$request['id'])->update(['status'=>$request['status']]);
         return response()->json(true);
     }
 

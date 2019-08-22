@@ -8,7 +8,7 @@ class TagController extends Controller{
 
     public function index()
     {
-        return view('backend.tag.index', ['page_title' => 'Styles Management']);
+        return view('backend.tag.index', ['page_title' => 'Tags Management']);
     }
 
     public function listAjax(){

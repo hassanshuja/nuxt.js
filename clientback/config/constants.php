@@ -98,7 +98,7 @@ function date_compare($a, $b)
 }
 define('DS', DIRECTORY_SEPARATOR);
 define('JS_VERSION','?ver='.time());
-define('ADMIN','ap-admin');
+define('ADMIN','/');
 define('APP_URL',config('app.url'));
 define('GOOGLE_API_KEY','AIzaSyA1R7RgsvFUDD7vxqYH7HcNeRIuZc2gMsk');
 define('PDF_PATH',env('APP_URL'));

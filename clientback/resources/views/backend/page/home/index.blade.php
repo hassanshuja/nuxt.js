@@ -14,6 +14,10 @@
         </div>
 
         <!--begin::Form-->
+        <div class="alert alert-success alert-dismissible success" style="display:none">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Product Successfully Added!!.
+        </div>
         <div class="row">
             <div class="col-lg-6">
                 <div class="kt-portlet">

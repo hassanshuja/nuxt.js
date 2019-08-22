@@ -13,6 +13,12 @@
             </div>
         </div>
 
+        <div class="alert alert-success alert-dismissible success" style="display:none">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong>Data Successfully Added!!.
+        </div>
+
+
         <form class="kt-form" onsubmit="return false" id="section_1_form" action="{!! route('admin.page.common.add') !!}">
             <div class="kt-portlet__body">
                 <div class="kt-form__section kt-form__section--first">
@@ -64,5 +70,6 @@
             </div>
         </form>
     </div>
+
 @endsection
 @include('backend.page.common.js')

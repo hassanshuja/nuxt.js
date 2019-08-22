@@ -77,7 +77,7 @@
                                         <input type="text" class="form-control" id="name_l" name="name_l" value="{!! @$product['name_l'] !!}" placeholder="Product Name">
                                     </div>
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-6">
                                     <div class="form-group kt-form__group">
                                         <label for="category_id" class="form-control-label">Select Category</label>
                                         <select class="form-control m-select2" id="category_id"  name="category_id">
@@ -88,6 +88,10 @@
                                         </select>
                                     </div>
                                 </div>
+
+                            </div>
+
+                            <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group kt-form__group">
                                         <label for="category_id" class="form-control-label">Select Brand</label>
@@ -99,9 +103,6 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-sm-3">
                                     <div class="form-group kt-form__group">
                                         <label class="form-control-label">Color:</label>
@@ -123,15 +124,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="form-group kt-form__group">
-                                        <label class="kt-label m-label--single">Sale Price:</label>
-                                        <div class="kt-form__control">
-                                            <input type="text" class="form-control" id="sale_price" name="sale_price" value="{!! @$product['sale_price'] !!}" placeholder="Price">
-                                        </div>
-                                    </div>
 
-                                </div>
                                 <div class="col-sm-3">
                                     <div class="form-group kt-form__group">
                                         <div class="kt-form__label">
@@ -143,6 +136,7 @@
                                     </div>
 
                                 </div>
+
 
                             </div>
 
@@ -177,9 +171,9 @@
                                         <label for="color" class="form-control-label">Sizing Type</label>
                                         <select class="form-control" id="sizing_type"  name="sizing_type">
                                             <option value="NONE">Select Sizing Type</option>
-                                            <option value="TOPS" @if(@$product['sizing_gender'] == 'MEN') selected @endif>TOPS</option>
-                                            <option value="BOTTOM" @if(@$product['sizing_gender'] == 'WOMEN') selected @endif>BOTTOM</option>
-                                            <option value="SHOES" @if(@$product['sizing_gender'] == 'WOMEN') selected @endif>SHOES</option>
+                                            <option value="TOPS" @if(@$product['sizing_type'] == 'TOPS') selected @endif>TOPS</option>
+                                            <option value="BOTTOM" @if(@$product['sizing_type'] == 'BOTTOM') selected @endif>BOTTOM</option>
+                                            <option value="SHOES" @if(@$product['sizing_type'] == 'SHOES') selected @endif>SHOES</option>
                                         </select>
                                     </div>
                                 </div>
@@ -212,13 +206,26 @@
                                                 <span></span>
                                             </label>
                                             <label class="kt-checkbox">
-                                                <input type="checkbox" name="status" @if(@$product['status'] == 1) checked @endif value="{!! $product['status'] !!}">Product Status
+                                                <input type="checkbox" name="is_sustainable" @if(@$product['is_sustainable'] == 1) checked @endif value="1">Sustainable products
                                                 <span></span>
                                             </label>
+                                            {{--<label class="kt-checkbox">
+                                                Product Status
+                                                <span></span>
+                                            </label>--}}
+
+
                                         </div>
                                     </div>
                                 </div>
 
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-2 col-form-label"> Product Status</label>
+                                <div class="col-10 form-group">
+                                    <label><span class="kt-switch kt-switch--outline kt-switch--icon kt-switch--success"><input type="checkbox" name="status" @if(@$product['status'] == 1) checked @endif value="{!! $product['status'] !!}">  <span></span></span>
+                                    </label>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-6">

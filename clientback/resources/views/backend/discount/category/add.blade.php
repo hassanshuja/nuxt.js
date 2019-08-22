@@ -73,10 +73,10 @@
                                             <div class="col-sm-4">
                                                 <div class="kt-form__group--inline">
                                                     <div class="kt-form__label">
-                                                        <label class="kt-label m-label--single">Quantity:</label>
+                                                        <label class="kt-label m-label--single">Min. Quantity:</label>
                                                     </div>
                                                     <div class="kt-form__control">
-                                                        <input type="number" name="qty" value="1" class="form-control" placeholder="Quantity">
+                                                        <input type="number" name="qty" value="1" class="form-control" placeholder="Min. Quantity">
                                                     </div>
                                                 </div>
                                                 <div class="d-md-none kt-margin-b-10"></div>

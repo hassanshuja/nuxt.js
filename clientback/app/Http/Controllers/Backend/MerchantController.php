@@ -26,7 +26,7 @@ class MerchantController extends Controller{
         $data = [];
         $return_data = [];
         $query = new Merchant();
-        $sortColumn = array('name','email','','status');
+        $sortColumn = array('name','email','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){
@@ -51,7 +51,7 @@ class MerchantController extends Controller{
             $index = 0;
             $data[$key]['name'] = $val['name'];
             $data[$key]['email'] = $val['email'];
-            $data[$key]['photo'] = $val['image'];
+            /*$data[$key]['photo'] = $val['image'];*/
             $data[$key]['status'] = $val['status_val'];
             $action = '<div class="actions"><a class="edit btn btn-warning btn-sm" data-toggle="modal" data-modal="#kt_table_1" data-type="edit"  data-key="'.$key.'" data-action="'.route('admin.merchant.update',$val['id']).'"   href="#add">Edit</a> </div>'; /*<a data-toggle="confirmation"
 data-placement="top" href="javascript:void(0);" data-title="delete"  class=" btn btn-danger btn-sm delete-data" data-modal="#m_table_1" data-key="'.$key.'" data-action="'.route('admin.system-user.delete',$val['id']).'"><i class="fa fa-trash"></i>  </a>*/
@@ -75,14 +75,14 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class=" btn
             'phone' => 'required|numeric|unique:merchants',
             'password' => 'required|string|min:6'
         ]);
-        $image_url = '';
+        /*$image_url = '';
         if ( request()->hasFile('image')){
             if (request()->file('image')->isValid()){
                 $file_url = request()->file('image')->storePubliclyAs('images/merchant',request()->file('image')->getClientOriginalName());
                 $image_url = 'storage/'.$file_url;
             }
         }
-        $data['image_url'] = $image_url;
+        $data['image_url'] = $image_url;*/
 
         Merchant::create($data);
         return response()->json(['status'=>true,'msg'=>'Record Added Successfully.']);
@@ -102,14 +102,14 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class=" btn
         ]);
         $data = request()->only(['name','email','phone','password','image_url','province','city','subdistrict','area','code','address','zip_code','province_id','city_id','suburb_id','area_id','notes','gender','verification_code','status_verification','status']);
         $record = Merchant::find($id);
-        $image_url = '';
+       /* $image_url = '';
         if ( request()->hasFile('image')){
             if (request()->file('image')->isValid()){
                 $file_url = request()->file('image')->storePubliclyAs('images/merchant',request()->file('image')->getClientOriginalName());
                 $image_url = 'storage/'.$file_url;
             }
             $data['image_url'] = $image_url;
-        }
+        }*/
 
         $record->update($data);
         return response()->json(['status'=>true,'msg'=>'Record Updated Successfully.']);

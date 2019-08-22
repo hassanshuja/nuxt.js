@@ -18,11 +18,16 @@ class BlogResource extends JsonResource
     {
         $lang = $request->header('lang');
         return [
-            'name' => $lang ? $this->name : $this->name_l,
-            'description'=> $lang ? $this->description : $this->name_l,
-            'image_url'=>$this->image_url,
+            'title' => $lang ? $this->title : $this->title_l,
+            'subtitle'=> $lang ? $this->subtitle : $this->subtitle_l,
+            'description'=> $lang ? $this->description : $this->description,
+            'author'=> $lang ? $this->author : $this->author_l,
+            'date'=> date('d F Y',strtotime($this->created_at)),
+            'images'=>$this->blog_images,
             'slug' => $this->slug,
-            'children' => CategoryResource::collection($this->whenLoaded('children'))
+            'products' => $this->products,
+            'category_name'=> $lang ? $this->blog_category->name : $this->blog_category->name_l,
+            'category_url'=> $this->blog_category->slug,
         ];
     }
 }

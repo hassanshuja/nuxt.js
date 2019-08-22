@@ -41,7 +41,7 @@
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Category:</label>
-                        <select class="form-control kt-input" data-col-index="3">
+                        <select class="form-control kt-input" data-col-index="2">
                             <option value="">Select</option>
                             @foreach($category as $key=>$val)
                                 <option value="{!! $key !!}">{!! $val !!}</option>
@@ -50,7 +50,7 @@
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
                         <label>Status:</label>
-                        <select class="form-control kt-input" data-col-index="3">
+                        <select class="form-control kt-input" data-col-index="5">
                             <option value="">Select</option>
                             <option value="1">Active</option>
                             <option value="0">InActive</option>
@@ -83,9 +83,9 @@
                 <tr>
                     <th>Slug </th>
                     <th>Title(Eng) </th>
-                    <th>Category </th>
-                    <th>Gender </th>
-                    <th class="no-sort">Image </th>
+                    <th class="no-sort">Category </th>
+                    <th class="no-sort">Gender </th>
+                    {{--<th class="no-sort">Image </th>--}}
                     <th> Status </th>
                     <th class="no-sort"> Actions </th>
                 </tr>
@@ -96,7 +96,7 @@
                     <th>Title(Eng) </th>
                     <th>Category </th>
                     <th>Gender </th>
-                    <th class="no-sort">Image </th>
+                    {{--<th class="no-sort">Image </th>--}}
                     <th> Status </th>
                     <th class="no-sort"> Actions </th>
                 </tr>

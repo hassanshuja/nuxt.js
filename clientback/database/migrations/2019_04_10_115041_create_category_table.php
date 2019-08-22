@@ -24,10 +24,11 @@ class CreateCategoryTable extends Migration
             $table->text('description_l')->nullable();
             $table->text('image_url')->nullable();
             $table->integer('order')->nullable();
+            $table->integer('old_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('parent_id')->references('id')->on('categories');
+            /*$table->foreign('parent_id')->references('id')->on('categories');*/
         });
     }
 

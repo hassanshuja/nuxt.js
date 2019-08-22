@@ -17,7 +17,7 @@ class PromoCodeController extends Controller{
         $data = [];
         $return_data = [];
         $query = new PromoCode();
-        $sortColumn = array('code','name','','','status');
+        $sortColumn = array('code','type','','','start_at','end_at','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){
@@ -47,8 +47,8 @@ class PromoCodeController extends Controller{
             $data[$key]['start_at'] = $val['start_at'];
             $data[$key]['end_at'] = $val['end_at'];
             $data[$key]['status'] = $val['status_val'];
-            $action = '<div class="actions"><a class="edit btn btn-warning btn-sm" data-toggle="modal" data-modal="#kt_table_1" data-type="edit"  data-key="'.$key.'" data-action="'.route('admin.brand.update',$val['id']).'"   href="#add">Edit</a> <a data-toggle="confirmation"
-data-placement="top" href="javascript:void(0);" data-title="delete"  class="delete-data btn btn-danger btn-sm" data-modal="#kt_table_1" data-key="'.$key.'" data-action="'.route('admin.brand.delete',$val['id']).'">Delete  </a></div>'; /**/
+            $action = '<div class="actions"><a class="edit btn btn-warning btn-sm" data-toggle="modal" data-modal="#kt_table_1" data-type="edit"  data-key="'.$key.'" data-action="'.route('admin.promo.update',$val['id']).'"   href="#add">Edit</a> <a data-toggle="confirmation"
+data-placement="top" href="javascript:void(0);" data-title="delete"  class="delete-data btn btn-danger btn-sm" data-modal="#kt_table_1" data-key="'.$key.'" data-action="'.route('admin.promo.delete',$val['id']).'">Delete  </a></div>'; /**/
             $data[$key]['action'] = $action;
             $return_data[$key] = $val;
             $return_data[$key]['shop_id'] = !empty($val['shops']) ?  array_pluck($val['shops'],'id') : [];
@@ -83,11 +83,13 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
 
     public function update($id){
         $data = request()->all();
+
         $this->validate(request(),[
-            'name' => 'required|string|max:255',
-            'code' => 'required|unique:brands,code,'.$id.',id,deleted_at,NULL'
+            'type' => 'required|string|max:255',
+            'code' => 'required|unique:promo_codes,code,'.$id.',id,deleted_at,NULL'
         ]);
         $record = PromoCode::find($id);
+
         $record->type = $data['type'];
         $record->value = $data['value'];
         $record->code = $data['code'];

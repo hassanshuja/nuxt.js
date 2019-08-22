@@ -36,7 +36,7 @@
                         <input type="text" class="form-control kt-input" placeholder="E.g: abc" data-col-index="1">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
-                        <label>Code:</label>
+                        <label>Slug:</label>
                         <input type="text" class="form-control kt-input" placeholder="E.g: men" data-col-index="0">
                     </div>
                     <div class="col-lg-3 kt-margin-b-10-tablet-and-mobile">
@@ -72,18 +72,20 @@
             <table class="table table-striped- table-bordered table-hover table-checkable" id="kt_table_1">
                 <thead>
                 <tr>
-                    <th>Code </th>
+                    <th>Slug </th>
                     <th>Name </th>
-                    <th>Shop</th>
+                    <th class="no-sort">Shop</th>
+                    {{--<th class="no-sort">Image </th>--}}
                     <th> Status </th>
                     <th class="no-sort"> Actions </th>
                 </tr>
                 </thead>
                 <tfoot>
                 <tr>
-                    <th>Code </th>
+                    <th>Slug </th>
                     <th>Name </th>
                     <th>Shop</th>
+                    {{--<th>Image </th>--}}
                     <th> Status </th>
                     <th class="no-sort"> Actions </th>
                 </tr>

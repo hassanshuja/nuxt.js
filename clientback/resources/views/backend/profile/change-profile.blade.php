@@ -13,12 +13,20 @@
                 <div class="upload-msg">
                     Upload a file to start cropping
                 </div>
+
                 <div class="upload-demo-wrap">
                     <div id="upload-demo"></div>
-                    <button type="button" id="upload_btn" class="btn btn-outline-info btn-lg">Upload</button>
+                    <div class="col-lg-6">
+                        <button type="button" id="upload_btn" class="btn btn-outline-info ">Upload</button>
+                    </div>
                 </div>
+
             </div>
+
         </div>
-        <span class="btn btn-primary btn-file"> Browse <input type="file" name="post-cover" class="item-img" accept="image/*"> </span>
+        <br>
+        <div class="col-lg-12" style="margin-top: -57px; padding-left: 100px">
+            <span style="float: right" class="btn btn-primary btn-file"> Browse <input type="file" name="post-cover" class="item-img" accept="image/*"> </span >
+        </div>
     </div>
 </div>

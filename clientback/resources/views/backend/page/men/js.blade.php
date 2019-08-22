@@ -59,6 +59,9 @@
                     contentType: false,
                     success: function (response) {
                         console.log(response);
+                            // console.log(response);
+                            $('.success').fadeIn(200).show().delay(1000).fadeOut();
+                            $("#data").html(response);
 
                     },
                     error : function(xhr, status, error){
@@ -97,6 +100,8 @@
                     contentType: false,
                     success: function (response) {
                         console.log(response);
+                        $('.success').fadeIn(200).show().delay(1000).fadeOut();
+                        $("#data").html(response);
 
                     },
                     error : function(xhr, status, error){
@@ -135,6 +140,8 @@
                     contentType: false,
                     success: function (response) {
                         console.log(response);
+                        $('.success').fadeIn(200).show().delay(1000).fadeOut();
+                        $("#data").html(response);
 
                     },
                     error : function(xhr, status, error){

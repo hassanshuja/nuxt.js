@@ -10,7 +10,7 @@ class SubCategoryController extends Controller{
     public function index()
     {
         $shop = Shop::where('status',1)->pluck('name','id');
-        $category = Category::where('status',1)->pluck('name','id');
+        $category = Category::whereNull('parent_id')->where('status',1)->pluck('name','id');
         return view('backend.sub-category.index', ['page_title' => 'Sub Category Management','shop'=>$shop,'category'=>$category]);
     }
 
@@ -21,7 +21,7 @@ class SubCategoryController extends Controller{
         $return_data = [];
         $query = new Category();
         $query = $query->whereNotNull('parent_id');
-        $sortColumn = array('name','name','','','status');
+        $sortColumn = array('slug','name','','','','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){
@@ -48,7 +48,7 @@ class SubCategoryController extends Controller{
             $data[$key]['name'] = $val['name'];
             $data[$key]['category'] = $val['parent']['name'];
             $data[$key]['shop'] = !empty($val['shops']) ?  implode(',',array_pluck($val['shops'],'name')) : '';
-            $data[$key]['image'] = $val['image'];
+            /*$data[$key]['image'] = $val['image'];*/
             $data[$key]['status'] = $val['status_val'];
             $action = '<div class="actions"><a class="edit btn btn-warning btn-sm" data-toggle="modal" data-modal="#kt_table_1" data-type="edit"  data-key="'.$key.'" data-action="'.route('admin.sub-category.update',$val['id']).'"   href="#add">Edit</a> <a data-toggle="confirmation"
 data-placement="top" href="javascript:void(0);" data-title="delete"  class="delete-data btn btn-danger btn-sm" data-modal="#kt_table_1" data-key="'.$key.'" data-action="'.route('admin.sub-category.delete',$val['id']).'">Delete </a></div>'; /**/
@@ -72,14 +72,14 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
             'parent_id'=>'required',
             'slug' => 'required|unique:categories,slug,NULL,id,deleted_at,NULL'
         ]);
-        $image_url = '';
+        /*$image_url = '';
         if ( request()->hasFile('image')){
             if (request()->file('image')->isValid()){
                 $file_url = request()->file('image')->storePubliclyAs('images/category',request()->file('image')->getClientOriginalName());
                 $image_url = 'storage/'.$file_url;
             }
         }
-        $data['image_url'] = $image_url;
+        $data['image_url'] = $image_url;*/
 
         $record = Category::create($data);
         $record->shops()->sync($data['shop_id']);
@@ -99,13 +99,13 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
             'slug' => 'required|unique:categories,slug,'.$id.',id,deleted_at,NULL'
         ]);
         $record = Category::find($id);
-        if ( request()->hasFile('image')){
+        /*if ( request()->hasFile('image')){
             if (request()->file('image')->isValid()){
                 $file_url = request()->file('image')->storePubliclyAs('images/category',request()->file('image')->getClientOriginalName());
                 $image_url = 'storage/'.$file_url;
                 $record->image_url =$image_url;
             }
-        }
+        }*/
         $record->name = $data['name'];
         $record->name_l = $data['name_l'];
         $record->slug = $data['slug'];

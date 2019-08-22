@@ -117,7 +117,29 @@
                 width:'100%'
             });
             $('.summernote').summernote({
-                height: 150
+                height: 150,
+                popover: {
+                    image: [
+                        ['image', ['resizeFull', 'resizeHalf', 'resizeQuarter', 'resizeNone']],
+                        ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                        ['remove', ['removeMedia']]
+                    ],
+                    link: [
+                        ['link', ['linkDialogShow', 'unlink']]
+                    ],
+                    table: [
+                        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+                        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']],
+                    ],
+                    air: [
+                        ['color', ['color']],
+                        ['font', ['bold', 'underline', 'clear']],
+                        ['para', ['ul', 'paragraph']],
+                        ['table', ['table']],
+                        ['insert', ['link', 'picture']]
+                    ]
+                }
+
             });
             $(document).on('change','.image-upload1',function (event) {
                 // Reference to the DOM input element
@@ -141,7 +163,6 @@
                 }
             });
             $("#tags").tagsinput('items');
-
 
             $(".image-upload").fileinput({
                 theme: 'fas',
@@ -259,10 +280,6 @@
                     }
                 });
             });
-
-
-
-
         });
 
     </script>

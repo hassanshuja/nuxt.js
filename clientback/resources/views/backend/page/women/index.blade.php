@@ -12,7 +12,10 @@
                 </h3>
             </div>
         </div>
-
+        <div class="alert alert-success alert-dismissible success" style="display:none">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Success!</strong> Product Successfully Added!!.
+        </div>
         <!--begin::Form-->
         <div class="row">
             <div class="col-lg-6">
@@ -82,6 +85,15 @@
                                         </label>
                                         @if(@$page['section_1']['image_url'])
                                             <input type="hidden" value="{!!$page['section_1']['image_url'] !!}" name="section_1[image_url1]">
+                                        @endif
+                                    </div>
+                                    <div class="col-sm-4 imgUp">
+                                        <div class="imagePreview" @if(@$page['section_1']['mobile_image_url'] != '') style="background-image: url({!! url($page['section_1']['mobile_image_url']) !!}) !important;" @endif></div>
+                                        <label class="btn btn-primary col-sm-12">
+                                            Upload<input type="file" name="section_1[mobile_image_url]"  id="section_1_mobile_image_url" class="uploadFile img" value="Upload Photo" style="width: 0px;height: 0px;overflow: hidden;">
+                                        </label>
+                                        @if(@$page['section_1']['mobile_image_url'])
+                                            <input type="hidden" value="{!!$page['section_1']['mobile_image_url'] !!}" name="section_1[mobile_image_url1]">
                                         @endif
                                     </div>
                                 </div>

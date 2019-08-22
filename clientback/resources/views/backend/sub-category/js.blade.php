@@ -13,7 +13,7 @@
     <script type="text/javascript">
         var list_url = '{!! route("admin.sub-category.list-ajax") !!}';
         var table_id = 'kt_table_1';
-        var columns = ['slug','name','category','shop','image','status','action'];
+        var columns = ['slug','name','category','shop','status','action'];
         jQuery(document).ready(function() {
             $("#shop_id").select2({
                 placeholder: "Select Shop",
@@ -40,7 +40,7 @@
                 }
             };
             SnippetForm.init(validationRule,table_id);
-            $(".image-upload").fileinput({
+            /*$(".image-upload").fileinput({
                 theme: 'fas',
                 "autoReplace": true,
                 showUpload:false,
@@ -49,7 +49,7 @@
                 fileActionSettings: {
                     showUpload:false,
                 }
-            });
+            });*/
         });
     </script>
 

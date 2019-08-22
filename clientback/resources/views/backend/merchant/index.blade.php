@@ -74,7 +74,7 @@
                 <tr>
                     <th>Name </th>
                     <th>Email </th>
-                    <th class="no-sort">Photo</th>
+                    {{--<th class="no-sort">Photo</th>--}}
                     <th> Status </th>
                     <th class="no-sort"> Actions </th>
                 </tr>
@@ -83,7 +83,7 @@
                 <tr>
                     <th>Name </th>
                     <th>Email </th>
-                    <th>Photo</th>
+                    {{--<th>Photo</th>--}}
                     <th> Status </th>
                     <th> Actions </th>
                 </tr>

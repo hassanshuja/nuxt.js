@@ -72,6 +72,30 @@ class WomenController extends Controller{
                 $data['section_1']['image_url']= '';
             }
         }
+        if(isset($data['section_1']['mobile_image_url']) && !empty($data['section_1']['mobile_image_url'])) {
+            $file = $data['section_1']['mobile_image_url'];
+            //get filename with extension
+            $filenamewithextension = $file->getClientOriginalName();
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $file->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = time().'.'.$extension;
+
+            //Upload File
+            $image_url = $file->storePubliclyAs('images/page/women', $filenametostore);
+            $data['section_1']['mobile_image_url']= 'storage/'.$image_url;
+        }else{
+            if (isset($data['section_1']['mobile_image_url1'])){
+                $data['section_1']['mobile_image_url']= $data['section_1']['mobile_image_url1'];
+                unset($data['section_1']['mobile_image_url1']);
+            }else{
+                $data['section_1']['mobile_image_url']= '';
+            }
+        }
         PageBuilder::updateOrCreate(['slug'=>'women'],['section_1'=>json_encode($data['section_1'])]);
     }
 

@@ -19,7 +19,7 @@ class AttributeController extends Controller{
         $data = [];
         $return_data = [];
         $query = new AttributeValue();
-        $sortColumn = array('name','name_l','status');
+        $sortColumn = array('name','name_l','name');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){

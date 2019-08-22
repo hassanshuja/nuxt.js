@@ -31,7 +31,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                   {{-- <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group kt-form__group">
                                 <label for="note" class="form-control-label">Description (English):</label>
@@ -44,7 +44,7 @@
                                 <textarea  class="form-control" name="description_l" id="description_l"></textarea>
                             </div>
                         </div>
-                    </div>
+                    </div>--}}
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group m-form__group">
@@ -56,12 +56,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        {{--<div class="col-sm-6">
                             <div class="form-group kt-form__group">
                                 <label>Image:</label>
                                 <input type="file" class=" image-upload" name="image" data-theme="fas">
                             </div>
-                        </div>
+                        </div>--}}
                     </div>
 
 

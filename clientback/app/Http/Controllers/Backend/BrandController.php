@@ -19,7 +19,7 @@ class BrandController extends Controller{
         $data = [];
         $return_data = [];
         $query = new Brand();
-        $sortColumn = array('code','name','','','status');
+        $sortColumn = array('slug','name','','status');
         $sort_order = $request['order']['0']['dir'];
         $order_field = $sortColumn[$request['order']['0']['column']];
         if($order_field != ''){
@@ -42,9 +42,9 @@ class BrandController extends Controller{
         $records = $query->skip($iDisplayStart)->take($iDisplayLength)->get();
         foreach ($records as $key=>$val){
             $index = 0;
-            $data[$key]['code'] = $val['code'];
+            $data[$key]['slug'] = $val['slug'];
             $data[$key]['name'] = $val['name'];
-            $data[$key]['note'] = $val['note'];
+            /*$data[$key]['image'] = $val['image'];*/
             $data[$key]['shop'] = !empty($val['shops']) ?  implode(',',array_pluck($val['shops'],'name')) : '';
             $data[$key]['status'] = $val['status_val'];
             $action = '<div class="actions"><a class="edit btn btn-warning btn-sm" data-toggle="modal" data-modal="#kt_table_1" data-type="edit"  data-key="'.$key.'" data-action="'.route('admin.brand.update',$val['id']).'"   href="#add">Edit</a> <a data-toggle="confirmation"
@@ -66,8 +66,33 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
         $data = request()->all();
         $this->validate(request(),[
             'name' => 'required|string|max:255',
-            'code' => 'required|unique:brands,code,NULL,id,deleted_at,NULL'
+            'slug' => 'required|unique:brands,slug,NULL,id,deleted_at,NULL',
+            'brand_since'=> 'required|numeric',
+            'description'=>'required',
+            'description_l' =>'required',
+            'country_name'=>'required',
+            'country_name_l' =>'required',
+
+            /*'image'=> 'required',
+            'banner'=> 'required',*/
         ]);
+        $image_url = '';
+        if ( request()->hasFile('image')){
+            if (request()->file('image')->isValid()){
+                $file_url = request()->file('image')->storePubliclyAs('images/brand/images',request()->file('image')->getClientOriginalName());
+                $image_url = 'storage/'.$file_url;
+            }
+        }
+        $data['image_url'] = $image_url;
+
+        $banner_url = '';
+        if ( request()->hasFile('banner')){
+            if (request()->file('banner')->isValid()){
+                $file_url = request()->file('image')->storePubliclyAs('images/brand/banner',request()->file('image')->getClientOriginalName());
+                $banner_url = 'storage/'.$file_url;
+            }
+        }
+        $data['banner_url'] = $banner_url;
 
         $record = Brand::create($data);
         $record->shops()->sync($data['shop_id']);
@@ -83,13 +108,20 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
         $data = request()->all();
         $this->validate(request(),[
             'name' => 'required|string|max:255',
-            'code' => 'required|unique:brands,code,'.$id.',id,deleted_at,NULL'
+            'slug' => 'required|unique:brands,slug,'.$id.',id,deleted_at,NULL'
         ]);
         $record = Brand::find($id);
         $record->name = $data['name'];
         $record->name_l = $data['name_l'];
-        $record->code = $data['code'];
-        $record->note = $data['note'];
+        $record->slug = $data['slug'];
+        $record->brand_since = $data['brand_since'];
+        $record->description = $data['description'];
+        $record->description_l = $data['description_l'];
+        $record->country_name = $data['country_name'];
+        $record->country_name_l = $data['country_name_l'];
+        $record->slug = $data['slug'];
+
+
         $record->save();
         $record->shops()->sync($data['shop_id']);
         return response()->json(['status'=>true,'msg'=>'Record Updated Successfully.']);
