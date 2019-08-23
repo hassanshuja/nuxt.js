@@ -59,8 +59,8 @@
 					<div class="row" style="margin-top:110px;">
 							<div class="col-sm-12 col-md-3 col-lg-3">
 								<div class="tab" id="mobile_hide">
-									<button class="tablinks active" onclick="openCity(event, 'Paris')" id="defaultOpen"><img src="images/APSTROFIICONS_11.png"></button>
-									 <button class="tablinks" onclick="openCity(event, 'London')"><img src="images/APSTROFIICONS_10.png"></button>
+									<button class="tablinks active" @click="changeColumns(4)" id="defaultOpen"><img src="/images/APSTROFIICONS_11.png"></button>
+									 <button class="tablinks" @click="changeColumns(3)"><img src="/images/APSTROFIICONS_10.png"></button>
 								</div>
 
 									<div class="View_cloth">
@@ -204,36 +204,11 @@
 								</div>
 
 					<div class="col-sm-12 col-md-9 col-lg-9">
-						<div class="size_show"> <button class="clear_all">Clear All</button></div>  
-							<div id="London" class="tabcontent" style="display: none;">
-								<template v-for="item in productsList">
-									<div class="col-sm-12 col-md-4 colum_pro">
-										<div class="best_saller_inner">
-											<div class="best_saller_main">
-												<a href="#">
-													<!-- <img src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/> -->
-													<template v-if="item.product_images && item.product_images.length > 0">
-														<img width="300" height="450" src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/>
-													</template>
-													<template v-else>
-													<img width="300" height="450" src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/>
-													</template>
-													<div class="brand_name">
-														<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
-														<div class="brand_category">{{ item.name }}</div>
-														<div class="productbrand_price"><div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div><span>IDR {{ item.price }}</span>
-														</div>
-													</div>
-												</a> 
-											</div>  
-										</div>  
-									</div>
-								</template>
-							</div>
-
+						<div class="size_show"> <button class="clear_all">Clear All</button></div>
+							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
 							<div id="Paris" class="tabcontent" style="display: block;">
 								<template v-for="item in productsList">
-									<div class="col-sm-12 col-md-3 colum_pro">
+									<div :class="'col-sm-12 col-md-'+tabColumns +' colum_pro'">
 										<div class="best_saller_inner">
 											<div class="best_saller_main">
 												<a href="#">
@@ -257,16 +232,18 @@
 									</div>
 								</template>
 								
-								
-								<div class="pagination">
-									<a href="#" @click.prevent="nextPage()" class="">1</a>
-									<a href="#" class="">2</a>
-									<a href="#" class="active">3</a>
-									<a href="#">4</a>
-									<a href="#">5</a>
-									<a href="#">&gt;</a>
-								</div>
+								<template v-if="page_count > 0">
+									<paginate
+									  v-model="page"
+									  :page-range="5"
+									  :page-count="20"
+									  :click-handler="changePage"
+									  :active-class="'page-active'"
+									  :container-class="'pagination'">
+									</paginate>
+								</template>
 							</div>
+							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
 						</div> 
 						<!-- END CONTAINER PRODUCT -->
 					</div>  
@@ -277,22 +254,27 @@
 </template>
 
 <script>
-
+		
 		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
 		import AboutContent from "../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
 		export default {
 				name: "index",
-				components: {AboutContent, BottomHeader},
+				components: {
+					AboutContent,
+					BottomHeader
+				},
 				computed:{
 						...mapGetters(['common'])
 				},
 				data: function () {
 						return {
 								categoryList:[],
-								current_page: null,
+								page: null,
 								per_page: 10,
-								productsList: []
+								page_count: null,
+								productsList: [],
+								tabColumns: 3
 						}
 				},
 				//transition: 'slide',
@@ -311,15 +293,34 @@
 						app.$axios.setHeader('lang', store.state.locale)
 						let response1 = await app.$axios.$get('women/category');
 						let response2 = await app.$axios.$get('page/catalogue');
+						console.log(app.$axios.defaults)
+						console.log(app.$axios.defaults.baseURL)
 						return {
 								productsList: response2.data,
-								current_page: response2.current_page,
+								page: response2.current_page,
+								page_count: response2.total,
 								categoryList:response1.data
 						}
 				},
 				methods: {
 					nextPage() {
 						console.log('next page')
+					},
+					async changePage() {
+						let response2 = await this.$axios.$get('page/catalogue?page='+this.page);
+						if(response2) {
+							this.productsList = response2.data;
+							this.page = response2.current_page
+							this.page_count = response2.total
+							window.scrollTo(0,0);
+						}
+					},
+					changeColumns(type) {
+						if(type == 4) {
+							this.tabColumns = 3
+						} else {
+							this.tabColumns = 4
+						}
 					}
 				}
 		}

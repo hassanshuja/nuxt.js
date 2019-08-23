@@ -65,6 +65,7 @@ export default {
       { src: '~/plugins/vue-lazyload', ssr: false },
       { src: '~/plugins/infiniteloading', ssr: false },
       { src: '~/plugins/axios', ssr: false },
+      { src: '~/plugins/vuejs-paginate', ssr: false },
       { src:'~plugins/vue-scrollto.js',ssr:false}
   ],
 
@@ -81,7 +82,8 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-      baseURL: process.env.BASE_URL
+      baseURL: process.env.BASE_URL,
+      imageURL: process.env.IMAGE_URL
   },
 
   /*
