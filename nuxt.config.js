@@ -82,8 +82,7 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-      baseURL: process.env.BASE_URL,
-      imageURL: process.env.IMAGE_URL
+      baseURL: process.env.BASE_URL
   },
 
   /*

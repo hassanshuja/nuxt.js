@@ -214,10 +214,10 @@
 												<a href="#">
 													<!-- <img src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/> -->
 													<template v-if="item.product_images && item.product_images.length > 0">
-														<img width="300" height="450" :src="'http://localhost:8000/'+item.product_images[0].image_url"/>
+														<img width="300" height="450" :src="IMAGE_URL + item.product_images[0].image_url"/>
 													</template>
 													<template v-else>
-													<img width="300" height="450" src="/images/notAvailable.png"/>
+													<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'"/>
 													</template>
 													<div>{{ item.product_images.image_url}}</div>
 													<div class="brand_name">
@@ -274,7 +274,8 @@
 								per_page: 10,
 								page_count: null,
 								productsList: [],
-								tabColumns: 3
+								tabColumns: 3,
+								IMAGE_URL: 'http://localhost:8000/'
 						}
 				},
 				//transition: 'slide',

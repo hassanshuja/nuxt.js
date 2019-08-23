@@ -96,42 +96,18 @@
 										</div>
 										<div class="col-md-12 bot">
 												<div class="owl-carousel owl-theme">
+													<template v-for="item in productsList">
 														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
+																<a href="#">
+																	<template v-if="item.product_images && item.product_images.length > 0">
+																		<img width="300" height="450" :src="IMAGE_URL+item.product_images[0].image_url"/>
+																	</template>
+																	<template v-else>
+																	<img width="300" height="450" :src="IMAGE_URL+'images/nopreview.png'"/>
+																	</template>
+																</a>
 														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
-														<div class="item">
-																<a href="#"><img src="~assets/images/girls.png"></a>
-														</div>
+													</template>
 												</div>
 
 										</div>
@@ -155,185 +131,26 @@
 
 										</div>
 
-										<div class="col-sm-6 col-md-3 res_two">
-
+										<template v-for="item in featuredList">
+											<div class="col-sm-6 col-md-3 res_two">
 												<div class="best_saller_inner">
-
-														<div class="best_saller_main">
-
-																<a href="#"><img src="~assets/images/stylefour.jpg">
-
-																		<div class="best_saller_name">
-
-																				Sliver Black Wiz Mules Slip-ons
-
-																				<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																		</div></a>
-
-														</div>
-
+													<div class="best_saller_main">
+														<a href="#">
+															<template v-if="item.product_images && item.product_images.length > 0">
+																<img width="400" height="570" :src="IMAGE_URL+item.product_images[0].image_url"/>
+															</template>
+															<template v-else>
+															<img width="400" height="570" :src="IMAGE_URL+'images/nopreview.png'"/>
+															</template>
+															<div class="best_saller_name">
+																{{ item.name }}
+																<p><b>{{ item.product_brand.name}}</b> / IDR {{ item.price }}</p>
+															</div>
+														</a>
+													</div>
 												</div>
-
-										</div>
-
-										<div class="col-sm-6 col-md-3 res_two">
-
-												<div class="best_saller_inner">
-
-														<div class="best_saller_main">
-
-																<a href="#"><img src="~assets/images/styleone.jpg">
-
-																		<div class="best_saller_name">
-
-																				Sliver Black Wiz Mules Slip-ons
-
-																				<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																		</div></a>
-
-														</div>
-
-												</div>
-
-										</div>
-
-										<div class="col-sm-6 col-md-3 res_two">
-
-												<div class="best_saller_inner">
-
-														<div class="best_saller_main">
-
-																<a href="#"><img src="~assets/images/stylethree.jpg">
-
-																		<div class="best_saller_name">
-
-																				Sliver Black Wiz Mules Slip-ons
-
-																				<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																		</div></a>
-
-														</div>
-
-												</div>
-
-										</div>
-
-										<div class="col-sm-6 col-md-3 res_two">
-
-												<div class="best_saller_inner">
-
-														<div class="best_saller_main">
-
-																<a href="#"><img src="~assets/images/styletwo.jpg">
-
-																		<div class="best_saller_name">
-
-																				Sliver Black Wiz Mules Slip-ons
-
-																				<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																		</div></a>
-
-														</div>
-
-												</div>
-
-										</div>
-
-										<div class="sec_round">
-
-												<div class="col-sm-6 col-md-3 res_two">
-
-														<div class="best_saller_inner">
-
-																<div class="best_saller_main">
-
-																		<a href="#"><img src="~assets/images/stylefour.jpg">
-
-																				<div class="best_saller_name">
-
-																						Sliver Black Wiz Mules Slip-ons
-
-																						<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																				</div></a>
-
-																</div>
-
-														</div>
-
-												</div>
-
-												<div class="col-sm-6 col-md-3 res_two">
-
-														<div class="best_saller_inner">
-
-																<div class="best_saller_main">
-
-																		<a href="#"><img src="~assets/images/styleone.jpg">
-
-																				<div class="best_saller_name">
-
-																						Sliver Black Wiz Mules Slip-ons
-
-																						<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																				</div></a>
-
-																</div>
-
-														</div>
-
-												</div>
-
-												<div class="col-sm-6 col-md-3 res_two">
-
-														<div class="best_saller_inner">
-
-																<div class="best_saller_main">
-
-																		<a href="#"><img src="~assets/images/stylethree.jpg">
-
-																				<div class="best_saller_name">
-
-																						Sliver Black Wiz Mules Slip-ons
-
-																						<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																				</div></a>
-
-																</div>
-
-														</div>
-
-												</div>
-
-												<div class="col-sm-6 col-md-3 res_two">
-
-														<div class="best_saller_inner">
-
-																<div class="best_saller_main">
-
-																		<a href="#"><img src="~assets/images/styletwo.jpg">
-
-																				<div class="best_saller_name">
-
-																						Sliver Black Wiz Mules Slip-ons
-
-																						<p><b>LECATHVA</b> / IDR 619,000</p>
-
-																				</div></a>
-
-																</div>
-
-														</div>
-
-												</div>
-
-										</div>
+											</div>
+										</template>
 
 
 
@@ -493,7 +310,10 @@
 				data: function () {
 						return {
 								sliderList : [],
-								categoryList:[]
+								categoryList:[],
+								featuredList:[],
+								productsList: [],
+								IMAGE_URL: 'http://localhost:8000/'
 						}
 				},
 				//transition: 'slide',
@@ -508,7 +328,8 @@
 								margin: 10,
 								responsiveClass: true,
 								navigation : true,
-								navText: ["<img src='"+require("@/assets/images/arrow_left_new.svg")+"'>","<img src='"+require("@/assets/images/arrow_right_new.svg")+"'>"],
+								navText: ["<img src='images/arrow_left_new.svg'>","<img src='images/arrow_right_new.svg'>"],
+    						loop: true,
 								responsive: {
 										0: {
 												items: 2,
@@ -536,9 +357,13 @@
 						app.$axios.setHeader('lang', store.state.locale)
 						let response1 = await app.$axios.$get('women/category');
 						let response2 = await app.$axios.$get('page/women');
+						let allProducts = await app.$axios.$get('women/allproducts');
+						let featuredProducts = await app.$axios.$get('women/featuredproducts');
 						return {
 								data: response2.data,
-								categoryList:response1.data
+								categoryList:response1.data,
+								featuredList: featuredProducts,
+								productsList: allProducts
 						}
 				}
 		}

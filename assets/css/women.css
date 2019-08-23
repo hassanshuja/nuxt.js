@@ -43,6 +43,32 @@ div#section_part:after {
 .owl-theme .owl-nav [class*=owl-]:hover {
     background: transparent;
 }
+button.owl-prev img {
+    float: left;
+    background-color: red;
+    border-radius: 74%;
+    padding: 1px 13px;
+    height: 37%;
+    width: 100px;
+    outline: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: 100%, 82%;
+    border-radius: 50%;
+    width: 251%;
+}
+button.owl-next img {
+    float: left;
+    margin-left: -23px;
+    border-radius: 74%;
+    padding: 1px 13px;
+    height: 37%;
+    width: 100px;
+    outline: black;
+    background-color: rgba(0, 0, 0, 0.3);
+    background-size: 100%, 82%;
+    border-radius: 50%;
+    width: 251%;
+}
 button.owl-next:focus {
     outline: none;
 }
