@@ -23,5 +23,8 @@
   "top-offer":{
     "view-detail":"Melihat rincian",
     "hide-detail":"Sembunyikan rincian"
+  },
+  "singup_newsletter": {
+    "heading" : "Daftar di buletin kami dan dapatkan diskon 10% dari pesanan pertama Anda."
   }
 }

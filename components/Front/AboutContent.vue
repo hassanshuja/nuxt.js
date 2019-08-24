@@ -4,8 +4,8 @@
             <div class="row">
                 <div class="col-sm-12 col-md-12">
                     <div class="about_title">
-                        {{common.about_title}}
-                        <p>{{common.about_content}}</p>
+                        <!-- {{common.about_title}}
+                        <p>{{common.about_content}}</p> -->
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
   <div>
     <HomeTopOffer></HomeTopOffer>
     <HomeHeader></HomeHeader>
+    <BottomHeader></BottomHeader>
     <nuxt />
     <HomeFooter></HomeFooter>
   </div>
@@ -10,7 +11,8 @@
     import HomeHeader from "./partials/home/Header";
     import HomeFooter from "./partials/home/Footer";
     import HomeTopOffer from "./partials/home/TopOffer";
+    import BottomHeader from "./partials/home/BottomHeader";
     export default {
-        components: {HomeTopOffer, HomeFooter, HomeHeader}
+        components: {HomeTopOffer, HomeFooter, HomeHeader, BottomHeader}
     }
 </script>
