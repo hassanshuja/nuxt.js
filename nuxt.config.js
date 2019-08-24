@@ -64,6 +64,7 @@ export default {
       { src: '~/plugins/vue-lazyload', ssr: false },
       { src: '~/plugins/infiniteloading', ssr: false },
       { src: '~/plugins/axios', ssr: false },
+      { src: '~/plugins/vuejs-paginate', ssr: false },
       { src:'~plugins/vue-scrollto.js',ssr:false}
   ],
 

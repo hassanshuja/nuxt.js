@@ -12,8 +12,16 @@ Route::get('blog',['as'=>'blog','uses'=>'Front\Blog\BlogController@index']);
 Route::get('blog/detail/{slug}',['as'=>'blog.category','uses'=>'Front\Blog\BlogController@detail']);
 Route::get('brands',['as'=>'brands','uses'=>'Front\Brand\BrandController@index']);
 Route::get('brands/{slug}',['as'=>'brands.product-list','uses'=>'Front\Brand\BrandController@productList']);
+<<<<<<< HEAD
 Route::post('subscription',['as'=>'subscription','uses'=>'Front\Misc\SubscriptionController@subscription']);
 
 
 
 // Route::resource('subscription', '');
+=======
+Route::get('page/catalogue',['as'=>'page.catalogue','uses'=>'Front\Catalogue\CatalogueController@index']);
+
+/* Women Controller*/
+Route::get('women/allproducts',['as'=>'women.allproducts','uses'=>'Front\Women\WomenController@getAllProducts']);
+Route::get('women/featuredproducts',['as'=>'women.featuredproducts','uses'=>'Front\Women\WomenController@getFeaturedProducts']);
+>>>>>>> 6a5d337f85a08392f75511c1863d763ff55bcef7

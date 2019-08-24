@@ -19,7 +19,7 @@
         props: {
             common: {
                 required: true,
-                type: Object
+                type: Array
             }
         }
 
