@@ -44,7 +44,6 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-
   /*
   ** Global CSS
   */
@@ -99,8 +98,11 @@ export default {
               'window.jQuery': 'jquery'
           })
       ],
-    extend(config, ctx) {
-    }
+      extend(config, options) {
+        return Object.assign({}, config, {
+          devtool: 'source-map'
+        })
+      }
   },
     router: {              // customize nuxt.js router (vue-router).
         middleware: 'i18n',   // middleware all pages of the application

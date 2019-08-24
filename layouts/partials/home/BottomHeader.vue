@@ -1,5 +1,5 @@
 <template>
-    <div id="header_btm">
+    <div id="header_btm" v-if="categoryList">
 
         <div class="container-fluid">
 
@@ -10,14 +10,11 @@
                     <div class="header_menu_cat">
 
                         <ul>
-
-                            <li v-for="(category,index) in categoryList">
+                            <li v-for="(category,index) in categoryList" v-bind:key="index">
                                 <nuxt-link :to="$i18n.path(url+category.slug)" exact>
                                     {{ category.name }}
                                 </nuxt-link>
                             </li>
-
-
                         </ul>
 
                     </div>

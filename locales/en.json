@@ -23,5 +23,8 @@
   "top-offer":{
     "view-detail":"View Details",
     "hide-detail":"Hide Details"
+  },
+  "singup_newsletter": {
+    "heading" : "Sign up to our newsletter and receive 10% off your first order."
   }
 }
