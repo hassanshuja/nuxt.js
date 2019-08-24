@@ -14,6 +14,10 @@ Route::get('brands',['as'=>'brands','uses'=>'Front\Brand\BrandController@index']
 Route::get('brands/{slug}',['as'=>'brands.product-list','uses'=>'Front\Brand\BrandController@productList']);
 Route::get('page/catalogue',['as'=>'page.catalogue','uses'=>'Front\Catalogue\CatalogueController@index']);
 
-/* Women Controller*/
+/* WOMEN ROUTES*/
 Route::get('women/allproducts',['as'=>'women.allproducts','uses'=>'Front\Women\WomenController@getAllProducts']);
 Route::get('women/featuredproducts',['as'=>'women.featuredproducts','uses'=>'Front\Women\WomenController@getFeaturedProducts']);
+
+/* CATALOGUE ROUTES*/
+Route::get('product/colors',['as'=>'product.colors','uses'=>'Front\Catalogue\CatalogueController@getProductColors']);
+Route::get('product/sizes',['as'=>'product.sizes','uses'=>'Front\Catalogue\CatalogueController@getProductSizes']);
