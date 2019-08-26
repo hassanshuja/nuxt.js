@@ -363,7 +363,8 @@
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('categories');
             let response1 = await app.$axios.$get('products/2');
-            console.log(JSON.parse(JSON.stringify(response1.product)))
+            console.log('wlekrjslkdjflskdjff')
+            console.log(JSON.parse(JSON.stringify(response1)))
             console.log(response1.product.attribute_value_color_id, response1.colors)
             return {
                 categoryList: response.data,
@@ -376,7 +377,7 @@
     }
 </script>
 
-<style >
+<style scoped>
     .border_up{
         float: left;
         width: 100%;
