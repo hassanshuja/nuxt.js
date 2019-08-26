@@ -80,64 +80,29 @@
 
     </div><!--row-->
   </div>
-          <!-- <div class="gallery">
 
-                <div class="previews">
-                  <a href="#" class="selected" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                  <a href="#" data-full="images/large.jpg">
-                    <img src="images/small.jpg" />
-                  </a>
-                </div>
-                <div class="full">
-
-                <img src="images/large.jpg" />
-                </div>
-          </div> -->
         </div>
         <div class="col-sm-12 col-md-6">
           <div class="product_view">
             <div class="product_inline">
-              Women / New / Hooman Bags - Pink Bumb Bag
+              <span v-if="product.sizing_gender != 'NONE' ">{{product.sizing_gender}} / </span>
+              <span v-if="product.sizing_type != 'NONE' "> {{product.sizing_type}} / </span>
+              {{product.name}} - {{product.slug}}
             </div>
             <div class="title_productdetails">
-              <span>Hooman Bags</span><span class="name_or"> - Pink Bumb Bag </span><br><span class="blow_identi">IDR 260,000</span>
+              <span>{{product.name}}</span><span class="name_or"> - {{product.slug}} </span><br><span class="blow_identi">IDR {{product.price}}</span>
             </div>
             <div class="pickerWrapper">
                <div class="outline">
-                                <p>Color: </p>
-                             </div>
-                  <ul class="bord">
-                  <li class="inner_ga"><div class="Red" id="squer" style="background-color:red;"></div></li>
-                  <li class="inner_ga"><div class="Green" id="squer" style="background-color:green"></div></li>
-                  <li class="inner_ga"><div class="Yellow" id="squer" style="background-color:yellow"></div></li>
-                  <li class="inner_ga"><div class="Pink" id="squer" style="background-color:pink;"></div></li>
-                                 </ul>
+                <p>Color: </p>
+              </div>
+                <ul class="bord"  >
+                  <template  v-for="(color, index) in colors"  >
+                    <li v-bind:key="index" class="inner_ga" v-if="index == product.attribute_value_color_id" >
+                      <div :class="color" id="squer" :style="'background-color:'+color.toLowerCase()"></div>
+                    </li>
+                  </template>
+              </ul>
             </div>
             <div class="product_in_size">
               <span style="color:#3d3d3d">Size:</span>
@@ -152,17 +117,7 @@
                   <button type="button" class="btnsize">XXL</button>
               </div>
             </div>
-            <!-- <div class="product_qty">
-              <div class="qty">
-                  <span>Quality:</span>
-                  <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                </div>
-            </div> -->
+
             <div class="quality_pro">
                         <span>Quality:</span>
             <div class="custom-drop" style="width:72px;">
@@ -369,150 +324,6 @@
                                <!---------------- end submit popup ----------------------------->
 
 
-
-                                      <!---------------- submit under popup start----------------------------->
-
-                             <!--        <div class="tab-pane" id="brand" style="display: none">
-                                  <form role="form" class="form-horizontal">
-                                      <div class="mesur_title">
-                                      OUR SUGGESTION: M
-                                     </div>
-                                     <div class="col-sm-6 col-md-6 col-lg-6 tag_size">
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Gender
-                                        </div>
-                                        <div class="size_details_ans">
-                                          MEN
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Tops
-                                        </div>
-                                        <div class="size_details_ans">
-                                          UNIQLO
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Bottom
-                                        </div>
-                                        <div class="size_details_ans">
-                                          OFF WHITE
-                                        </div>
-                                      </div>
-                                       <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Shoes
-                                        </div>
-                                        <div class="size_details_ans">
-                                          Common Projects
-                                        </div>
-                                      </div>
-                                      </div>
-                                        <div class="col-sm-6 col-md-6 col-lg-6 tag_size">
-                                          <div class="basic_info_size" style="padding: 13px;">
-                                        <div class="size_menu">
-
-                                        </div>
-                                        <div class="size_details_ans">
-
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Tops Size
-                                        </div>
-                                        <div class="size_details_ans">
-                                          S
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Bottom Size
-                                        </div>
-                                        <div class="size_details_ans">
-                                          M
-                                        </div>
-                                      </div>
-                                       <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Shoes Size
-                                        </div>
-                                        <div class="size_details_ans">
-                                          32
-                                        </div>
-                                      </div>
-                                        </div>
-                                        <div class="col-sm-12">
-                                          <div class="form-group det">
-                                             <button type="button" class="login_secound">EDIT MY BRAND MEASUREMENT</button>
-                                          </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <div class="form-group">
-                                             <button type="button" class="login_secound">CLOSE</button>
-                                          </div>
-                                      </div>
-                                  </form>
-                                   </div>
-
-                                   <!---------------- end submit popup ----------------------------->
-                                    <!---------------- submit popup start----------------------------->
-                                  <!--  <div class="tab-pane" id="brand">
-                                  <form role="form" class="form-horizontal">
-                                      <div class="mesur_title">
-                                      OUR SUGGESTION: M
-                                     </div>
-                                     <div class="col-sm-6 col-md-6 col-lg-6 tag_size">
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Gender
-                                        </div>
-                                        <div class="size_details_ans">
-                                          MEN
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Height
-                                        </div>
-                                        <div class="size_details_ans">
-                                          185 cm
-                                        </div>
-                                      </div>
-                                      <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Weight
-                                        </div>
-                                        <div class="size_details_ans">
-                                          70 kg
-                                        </div>
-                                      </div>
-                                       <div class="basic_info_size">
-                                        <div class="size_menu">
-                                          Age
-                                        </div>
-                                        <div class="size_details_ans">
-                                          26
-                                        </div>
-                                      </div>
-                                      </div>
-                                        <div class="col-sm-12">
-                                          <div class="form-group det">
-                                             <button type="button" class="login_secound">SAVE MY BODY MEASUREMENT</button>
-                                          </div>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <div class="form-group">
-                                             <button type="button" class="login_secound">CLOSE</button>
-                                          </div>
-                                      </div>
-                                  </form>
-                                   </div> -->
-
-
                         </div>
 
                     </div>
@@ -539,7 +350,10 @@
         },
         data: function () {
           return {
-              categoryList:[]
+              categoryList:[],
+              product: [],
+              colors: [],
+              brand: [],
           }
         },
         transition: 'bounce',
@@ -548,14 +362,21 @@
         async asyncData ({ app,store }) {
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('categories');
+            let response1 = await app.$axios.$get('products/2');
+            console.log(JSON.parse(JSON.stringify(response1.product)))
+            console.log(response1.product.attribute_value_color_id, response1.colors)
             return {
-                categoryList: response.data
+                categoryList: response.data,
+                product: response1.product,
+                colors: response1.colors,
+                brand: response1.brand
             }
+
         }
     }
 </script>
 
-<style scoped>
+<style >
     .border_up{
         float: left;
         width: 100%;
@@ -565,3 +386,183 @@
         opacity: 0.3
     }
 </style>
+
+
+<script scoped>
+
+    // lightbox.option({
+
+    //   'resizeDuration': 200,
+
+    //   'wrapAround': true
+
+    // })
+
+
+
+$('.close').on('click',function(){
+  $('.search-input').removeClass('show');
+});
+
+
+//   $(document).ready(function(){
+//     $('.previews a').click(function(){
+//       var largeImage = $(this).attr('data-full');
+//       $('.selected').removeClass();
+//       $(this).addClass('selected');
+//       $('.full img').hide();
+//       $('.full img').attr('src', largeImage);
+//       $('.full img').fadeIn();
+
+
+//     }); // closing the listening on a click
+//     $('.full img').on('click', function(){
+//       var modalImage = $(this).attr('src');
+//       $.fancybox.open(modalImage);
+//     });
+//   }); //closing our doc ready
+
+
+//   var _gaq = _gaq || [];
+//   _gaq.push(['_setAccount', 'UA-36251023-1']);
+//   _gaq.push(['_setDomainName', 'jqueryscript.net']);
+//   _gaq.push(['_trackPageview']);
+
+//   (function() {
+//     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+//     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+//     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+//   })();
+
+
+// var coll = document.getElementsByClassName("collapsible");
+// var i;
+
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.display === "block") {
+//       content.style.display = "none";
+//     } else {
+//       content.style.display = "block";
+//     }
+//   });
+// }
+
+
+// $(document).on('click', '.slicknav_btn', function() {
+//  $('body').toggleClass("overflow");
+
+// var header = $('div#header .container').height();
+// var header_top = $('div#header_top').height();
+// var new_height = parseInt(header) + parseInt(header_top);
+// var win_height = $(window).height();
+// var final_height = parseInt(win_height) - parseInt(new_height) + parseInt(7);
+
+// setInterval(function(){
+// $('.slicknav_nav').css('height', final_height);
+// }, 300);
+// });
+
+
+
+
+//   setTimeout(function(){
+//     if($(window).width() >= 767){
+//     var tallness = $(".carousel-inner").height();
+//     $(".carousel-indicators").height(tallness);
+// }
+//   },1000);
+
+
+
+//   (function() {
+//   const heart = document.getElementById('heart');
+//   heart.addEventListener('click', function() {
+//     heart.classList.toggle('red');
+//   });
+// })();
+
+//    $( "div#squer" ).click(function() {
+//     var clas = this.className;
+//     var color = $( this ).css( "background-color" );
+//      $('div#squer').removeClass("active");
+//     $(this).addClass("active");
+//     $( ".outline p" ).html( "Color: <span style='color:" +
+//     clas + ";'>" + clas + "</span>" );
+// });
+
+// var x, i, j, selElmnt, a, b, c;
+// /*look for any elements with the class "custom-select":*/
+// x = document.getElementsByClassName("custom-drop");
+// for (i = 0; i < x.length; i++) {
+//   selElmnt = x[i].getElementsByTagName("select")[0];
+//   /*for each element, create a new DIV that will act as the selected item:*/
+//   a = document.createElement("DIV");
+//   a.setAttribute("class", "select-selected");
+//   a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+//   x[i].appendChild(a);
+//   /*for each element, create a new DIV that will contain the option list:*/
+//   b = document.createElement("DIV");
+//   b.setAttribute("class", "select-items select-hide");
+//   for (j = 1; j < selElmnt.length; j++) {
+//     /*for each option in the original select element,
+//     create a new DIV that will act as an option item:*/
+//     c = document.createElement("DIV");
+//     c.innerHTML = selElmnt.options[j].innerHTML;
+//     c.addEventListener("click", function(e) {
+//         /*when an item is clicked, update the original select box,
+//         and the selected item:*/
+//         var y, i, k, s, h;
+//         s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+//         h = this.parentNode.previousSibling;
+//         for (i = 0; i < s.length; i++) {
+//           if (s.options[i].innerHTML == this.innerHTML) {
+//             s.selectedIndex = i;
+//             h.innerHTML = this.innerHTML;
+//             y = this.parentNode.getElementsByClassName("same-as-selected");
+//             for (k = 0; k < y.length; k++) {
+//               y[k].removeAttribute("class");
+//             }
+//             this.setAttribute("class", "same-as-selected");
+//             break;
+//           }
+//         }
+//         h.click();
+//     });
+//     b.appendChild(c);
+//   }
+//   x[i].appendChild(b);
+//   a.addEventListener("click", function(e) {
+//       /*when the select box is clicked, close any other select boxes,
+//       and open/close the current select box:*/
+//       e.stopPropagation();
+//       closeAllSelect(this);
+//       this.nextSibling.classList.toggle("select-hide");
+//       this.classList.toggle("select-arrow-active");
+//     });
+// }
+// function closeAllSelect(elmnt) {
+//   /*a function that will close all select boxes in the document,
+//   except the current select box:*/
+//   var x, y, i, arrNo = [];
+//   x = document.getElementsByClassName("select-items");
+//   y = document.getElementsByClassName("select-selected");
+//   for (i = 0; i < y.length; i++) {
+//     if (elmnt == y[i]) {
+//       arrNo.push(i)
+//     } else {
+//       y[i].classList.remove("select-arrow-active");
+//     }
+//   }
+//   for (i = 0; i < x.length; i++) {
+//     if (arrNo.indexOf(i)) {
+//       x[i].classList.add("select-hide");
+//     }
+//   }
+// }
+// /*if the user clicks anywhere outside the select box,
+// then close all select boxes:*/
+// document.addEventListener("click", closeAllSelect);
+</script>
