@@ -27,6 +27,7 @@ Route::get('men/featuredproducts',['as'=>'men.featuredproducts','uses'=>'Front\M
 Route::get('women/allproducts',['as'=>'women.allproducts','uses'=>'Front\Women\WomenController@getAllProducts']);
 Route::get('women/featuredproducts',['as'=>'women.featuredproducts','uses'=>'Front\Women\WomenController@getFeaturedProducts']);
 
+Route::resource('products', 'Front\Products\ProductsController');
 /* CATALOGUE ROUTES*/
 Route::get('product/colors',['as'=>'product.colors','uses'=>'Front\Catalogue\CatalogueController@getProductColors']);
 Route::get('product/sizes',['as'=>'product.sizes','uses'=>'Front\Catalogue\CatalogueController@getProductSizes']);
