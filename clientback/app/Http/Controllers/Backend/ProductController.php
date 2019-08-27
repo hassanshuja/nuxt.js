@@ -237,7 +237,7 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
             'price'=> 'required|numeric',
             'sku' => 'required|unique:products,sku,'.$id.',id,deleted_at,NULL'
         ]);
-        $data = request()->only(['name','name_l','modal','meta_title','meta_keywords','meta_description','description','description_l','sizing_detail','sizing_detail_l','shipping_return_detail','shipping_return_detail_l','brand_id','category_id','sizing_gender','weight','stock_availability','is_featured','is_new_arrival','is_sustainable','status','merchant_id','sizing_gender','sizing_type','sku','attribute_value_color_id','total_qty','price','sale_price','slug']);
+        $data = request()->only(['name','name_l','modal','meta_title','meta_keywords','meta_description','description','description_l','sizing_detail','sizing_detail_l','shipping_return_detail','shipping_return_detail_l','brand_id','category_id','sizing_gender','weight','stock_availability','is_featured','is_new_arrival','is_sustainable','status','merchant_id','sizing_gender','sizing_type','sku','attribute_value_color_id','attribute_value_size_id','total_qty','price','sale_price','slug']);
 
 
         if(!isset($data['is_featured'])){
@@ -335,6 +335,7 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
         $product = Product::where('id',$id)->with('product_images','tags')->first()->toArray();
         $brand = Brand::where('status',1)->pluck('name','id');
         $colors = AttributeValue::where('attribute_id',2)->pluck('name','id');
+        $sizes = AttributeValue::where('attribute_id',1)->pluck('name','id');
         $product['tag_id'] = !empty($product['tags']) ? array_pluck($product['tags'],'id'):[];
         //$product['category_id'] = !empty($product['product_categories']) ? Arr::pluck($product['product_categories'],  'id') : [];
         $category = Category::whereNotNull('parent_id')->where('status',1)->with('parent','shops')->orderBy('parent_id')->get(['name','id','parent_id']);
@@ -348,7 +349,7 @@ data-placement="top" href="javascript:void(0);" data-title="delete"  class="dele
             $i++;
         }
 
-        return view('backend.product.edit', ['page_title' => 'Product Management','brand'=>$brand,'colors'=>$colors,'product'=>$product,'subcategory'=>$categoryArray,'tags'=>$tag,'products'=>$products]);
+        return view('backend.product.edit', ['page_title' => 'Product Management','brand'=>$brand,'colors'=>$colors,'product'=>$product,'subcategory'=>$categoryArray,'tags'=>$tag,'products'=>$products, 'sizes' => $sizes]);
     }
 
     public function deleteImage($id)

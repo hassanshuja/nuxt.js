@@ -15,16 +15,8 @@
                       </div>
                     </template>
                   </template>
-                  <!-- <div data-target="#demo" data-slide-to="0" class="item active"><img src="~assets/images/stylefoursmall.jpg" alt=""></div>
-                  <div data-target="#demo" data-slide-to="1" class="item"><img src="~assets/images/stylefoursmall.jpg" alt=""></div>
-                  <div data-target="#demo" data-slide-to="2" class="item"><img src="~assets/images/stylefoursmall.jpg" alt=""></div>
-                  <div data-target="#demo" data-slide-to="3" class="item"><img src="~assets/images/stylefoursmall.jpg" alt=""></div>
-                  <div data-target="#demo" data-slide-to="4" class="item"><img src="~assets/images/stylefoursmall.jpg" alt=""></div>
-                  <div data-target="#demo" data-slide-to="5" class="item"><img src="~assets/images/stylefoursmall.jpg" alt=""></div> -->
                 </div>
               </div><!-- col-sm-4 Indicators -->
-
-              <!-- <img height="300" width="300" src="~assets/images/stylefour.jpg" alt=""> -->
 
               <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9 product_slider_img ">
                 <div class="carousel-inner">
@@ -44,8 +36,6 @@
                 </div>
               </div>
               
-              
-
               <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9 product_slider_img" id="mobile_vi">
                 <div class="carousel-inner">
                   <template v-if="product.product_images.length > 0">
@@ -57,65 +47,18 @@
                       </a>
                     </template>
                   </template>
-                  
-
-                  <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set"><div class="carousel-item">
-                    <img src="~assets/images/stylefour.jpg" alt="">
-                  </div></a>
-                  <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set"><div class="carousel-item">
-                    <img src="~assets/images/stylefour.jpg" alt="">
-                  </div></a>
-                  <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set"><div class="carousel-item">
-                    <img src="~assets/images/stylefour.jpg" alt="">
-                  </div></a>
-                  <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set"><div class="carousel-item">
-                    <img src="~assets/images/stylefour.jpg" alt="">
-                  </div></a>
-                  <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set"><div class="carousel-item">
-                    <img src="~assets/images/stylefour.jpg" alt="">
-                  </div></a>
+                  <template v-else>
+                    <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set">
+                      <div class="carousel-item active">
+                        <img :src="IMAGE_URL + '/images/nopreview.png'" alt="">
+                      </div>
+                    </a>
+                  </template>
                 </div>
               </div>
             </div><!--row-->
           </div>
-          <!-- <div class="gallery">
-            <div class="previews">
-              <a href="#" class="selected" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-              <a href="#" data-full="images/large.jpg">
-                <img src="images/small.jpg" />
-              </a>
-            </div>
-            <div class="full">
-
-            <img src="images/large.jpg" />
-            </div>
-          </div> -->
+          
         </div>
 
         <div class="col-sm-12 col-md-6">
@@ -124,54 +67,48 @@
               Women / New / Hooman Bags - Pink Bumb Bag
             </div>
             <div class="title_productdetails">
-              <span>Hooman Bags</span><span class="name_or"> - Pink Bumb Bag </span><br><span class="blow_identi">IDR 260,000</span>
+              <span>{{ product.modal }}</span><span class="name_or"> - {{ product.name }} </span><br><span class="blow_identi">IDR {{ product.price.toLocaleString() }}</span>
             </div>
             <div class="pickerWrapper">
                <div class="outline">
-                  <p>Color: <span style="color:Yellow;">Yellow</span></p>
+                  <p>Color: </p>
                 </div>
-                <ul class="bord">
-                  <li class="inner_ga"><div class="Red" id="squer" style="background-color:red;"></div></li>
-                  <li class="inner_ga"><div class="Green" id="squer" style="background-color:green"></div></li>
-                  <li class="inner_ga"><div class="Yellow active" id="squer" style="background-color:yellow"></div></li>
-                  <li class="inner_ga"><div class="Pink" id="squer" style="background-color:pink;"></div></li>
-                </ul>
+                <template v-for="(item, index) in colors">
+                  <ul class="bord">
+                    <li class="inner_ga"><div :class="item" id="squer" :style="'background-color:'+item.toLowerCase() +''"></div></li>
+                    <!-- <li class="inner_ga"><div class="Green" id="squer" style="background-color:green"></div></li> -->
+                    <!-- <li class="inner_ga"><div class="Yellow active" id="squer" style="background-color:yellow"></div></li> -->
+                    <!-- <li class="inner_ga"><div class="Pink" id="squer" style="background-color:pink;"></div></li> -->
+                  </ul>
+                </template>
             </div>
             <div class="product_in_size">
               <span style="color:#3d3d3d">Size:</span>
               <a href="#" data-toggle="modal" data-target="#sizemodel" style="color: #4c4988;font-family: Open Sans;font-size: 11px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing:normal;color: #4c4988;">(Not Sure? Get Your Size Suggestion)</a>
               <div class="select_size_pro">
-                <button type="button" class="btnsize inactive">ALL SIZE</button>
+                <template v-for="(item, index) in sizes">
+                  <button :key="index" type="button" class="btnsize inactive">{{ item }}</button>
+                </template>
+                <!-- <button type="button" class="btnsize inactive">ALL SIZE</button>
                 <button type="button" class="btnsize inactive">XS</button>
                 <button type="button" class="btnsize inactive">S</button>
                 <button type="button" class="btnsize inactive">M</button>
                 <button type="button" class="btnsize inactive">L</button>
                 <button type="button" class="btnsize active">XL</button>
-                <button type="button" class="btnsize inactive">XXL</button>
+                <button type="button" class="btnsize inactive">XXL</button> -->
               </div>
             </div>
-            <!-- <div class="product_qty">
-              <div class="qty">
-                  <span>Quality:</span>
-                  <select>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                </div>
-            </div> -->
             <div class="quality_pro">
             <span>Quality:</span>
-            <div class="custom-drop" style="width:72px;">
-              <select>
+            <div style="width:72px;">
+              <select class="custom-drop" v-model="product.quality">
                 <option value="0">1</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
               </select>
-            <div class="select-selected">1</div><div class="select-items select-hide"><div>1</div><div>2</div><div>3</div><div>4</div></div></div>
+          </div>
           </div>
 
 
@@ -192,19 +129,13 @@
             </div>
             <div class="description_product">
               <button class="collapsible active">Description</button>
-              <div class="content" style="display: block;">
-                <p>Your favorite Champion hoodie, now available in colors we love that are only at Urban Outfitters! Classic pullover silhouette in a durable reverse weave cotton fleece features a soft brushed interior to keep you cozy. Cut with a slightly dropped shoulder for a slouchy look and rib-knit banding at the cuffs + hem for a comfortable fit. Complete with an adjustable drawstring hood, front kanga pocket and a small logo patch at the chest + left sleeve. Champion has been offering its innovative athletic apparel for men and women since 1919.</p>
+              <div class="content" style="display: block;" v-html="product.description">
               </div>
               <button class="collapsible active">Detail &amp; Sizing</button>
-              <div class="content" style="display: block;">
-                <p>• Cotton, polyester</p>
-                                  <p>  • Machine wash</p>
-                                  <p>  • Imported</p>
+              <div class="content" style="display: none;" v-html="product.sizing_detail">
               </div>
               <button class="collapsible active">Shipping &amp; Return</button>
-              <div class="content" style="display: block;">
-                <p>• Shipping: Free shipping all over Indonesia for any purchase over IDR 500,000. The product will be delivered to your door by our Logistic Partner.</p>
-                <p>• Returns/Exchanges: This product is eligible for Return and Exchange within 14 days.</p>
+              <div class="content" style="display: none;" v-html="product.shipping_return_detail">
               </div>
             </div>
           </div>
@@ -384,6 +315,7 @@
               categoryList:[],
               product: [],
               colors: [],
+              sizes: [],
               brand: [],
               IMAGE_URL: 'http://localhost:8000/'
           }
@@ -401,6 +333,7 @@
                 categoryList: response.data,
                 product: response1.product,
                 colors: response1.colors,
+                sizes: response1.sizes,
                 brand: response1.brand
             }
 
@@ -466,60 +399,16 @@
               $( "div#squer" ).click(function() {
                   var clas = this.className;
                   var color = $( this ).css( "background-color" );
-                   $('div#squer').removeClass("active");
-                  $(this).addClass("active");
-                  $( ".outline p" ).html( "Color: <span style='color:" +
-                  clas + ";'>" + clas + "</span>" );
+                   // $('div#squer').removeClass("active");
+                  // $(this).addClass("active");
+                  if(clas == 'White') {
+                    $( ".outline p" ).html( "Color: <span style='color:black;font-weight:bold;'>" + clas + "</span>" );
+                  } else {
+                    $( ".outline p" ).html( "Color: <span style='color:" +
+                    clas + ";font-weight:bold;'>" + clas + "</span>" );
+                  }
+                    
               });
-
-              var x, i, j, selElmnt, a, b, c;
-              /*look for any elements with the class "custom-select":*/
-              x = document.getElementsByClassName("custom-drop");
-              for (i = 0; i < x.length; i++) {
-                selElmnt = x[i].getElementsByTagName("select")[0];
-                /*for each element, create a new DIV that will act as the selected item:*/
-                a = document.createElement("DIV");
-                a.setAttribute("class", "select-selected");
-                a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-                x[i].appendChild(a);
-                /*for each element, create a new DIV that will contain the option list:*/
-                b = document.createElement("DIV");
-                b.setAttribute("class", "select-items select-hide");
-                for (j = 1; j < selElmnt.length; j++) {
-                  c = document.createElement("DIV");
-                  c.innerHTML = selElmnt.options[j].innerHTML;
-                  c.addEventListener("click", function(e) {
-                    var y, i, k, s, h;
-                    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                    h = this.parentNode.previousSibling;
-                    for (i = 0; i < s.length; i++) {
-                      if (s.options[i].innerHTML == this.innerHTML) {
-                        s.selectedIndex = i;
-                        h.innerHTML = this.innerHTML;
-                        y = this.parentNode.getElementsByClassName("same-as-selected");
-                        for (k = 0; k < y.length; k++) {
-                          y[k].removeAttribute("class");
-                        }
-                        this.setAttribute("class", "same-as-selected");
-                        break;
-                      }
-                    }
-                    h.click();
-                  });
-                  b.appendChild(c);
-                }
-                x[i].appendChild(b);
-                a.addEventListener("click", function(e) {
-                  /*when the select box is clicked, close any other select boxes,
-                  and open/close the current select box:*/
-                  e.stopPropagation();
-                  // this.closeAllSelect(this);
-                  this.nextSibling.classList.toggle("select-hide");
-                  this.classList.toggle("select-arrow-active");
-                });
-              }
-              
-              // document.addEventListener("click", this.closeAllSelect);
 
               $('.select_size_pro .btnsize').click(function(){
                 $('.select_size_pro .btnsize').removeClass('active').addClass('inactive');
@@ -527,25 +416,6 @@
               });
 
               console.log('document ready');
-            },
-            closeAllSelect(elmnt) {
-              /*a function that will close all select boxes in the document,
-              except the current select box:*/
-              var x, y, i, arrNo = [];
-              x = document.getElementsByClassName("select-items");
-              y = document.getElementsByClassName("select-selected");
-              for (i = 0; i < y.length; i++) {
-                if (elmnt == y[i]) {
-                  arrNo.push(i)
-                } else {
-                  y[i].classList.remove("select-arrow-active");
-                }
-              }
-              for (i = 0; i < x.length; i++) {
-                if (arrNo.indexOf(i)) {
-                  x[i].classList.add("select-hide");
-                }
-              }
             }
         }
 

@@ -21,8 +21,12 @@ class ProductsController extends Controller
     {
 
         $product = Product::where('id',$id)->with('product_images','tags')->first()->toArray();
+        $modal_colors = Product::where('modal', $product['modal'])->pluck('attribute_value_color_id');
+        $modal_sizes = Product::where('modal', $product['modal'])->pluck('attribute_value_size_id');
         $brand = Brand::where('status',1)->pluck('name','id');
-        $colors = AttributeValue::where('attribute_id',2)->pluck('name','id');
+        $colors = AttributeValue::where('attribute_id',2)->where('id', $modal_colors)->pluck('name','id');
+        $sizes = AttributeValue::where('attribute_id',1)->whereIn('id', $modal_sizes)->pluck('name','id');
+
         $product['tag_id'] = !empty($product['tags']) ? array_pluck($product['tags'],'id'):[];
         //$product['category_id'] = !empty($product['product_categories']) ? Arr::pluck($product['product_categories'],  'id') : [];
         $category = Category::whereNotNull('parent_id')->where('status',1)->with('parent','shops')->orderBy('parent_id')->get(['name','id','parent_id']);
@@ -39,6 +43,7 @@ class ProductsController extends Controller
         return response()->json([
           'brand'=>$brand,
           'colors'=>$colors,
+          'sizes'=>$sizes,
           'product'=>$product,
           'subcategory'=>$categoryArray,
           'tags'=>$tag,
