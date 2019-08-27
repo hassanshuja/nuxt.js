@@ -37,49 +37,31 @@
 
 
 										<div class="col-sm-12 col-md-6 delight">
-
-												<div class="product_img">
-
-														<div class="pro_first">
-
-																<nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact>
-																		<img v-lazy="data.section_2.image_url">
-																</nuxt-link>
-																<div class="top_shop">
-																		<button class="shop_now_cat">{{data.section_2.button_text}}</button>
-																</div>
-
-														</div>
-
-
-
-												</div>
-
+                      <div class="product_img">
+                        <div class="pro_first">
+                          <nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact>
+                            <img v-lazy="data.section_2.image_url">
+                          </nuxt-link>
+                          <div class="top_shop">
+                            <button class="shop_now_cat">{{data.section_2.button_text}}</button>
+                          </div>
+                        </div>
+                      </div>
 										</div>
 
 										<div class="col-sm-12 col-md-6 delight">
-
 												<div class="product_img">
-
 														<div class="pro_first">
-
 																<nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact>
 																		<img v-lazy="data.section_3.image_url">
 																</nuxt-link>
 																<div class="top_shop">
 																		<button class="shop_now_cat">{{data.section_3.button_text}}</button>
 																</div>
-
 														</div>
-
-
 												</div>
-
 										</div>
-
-
 								</div>
-
 						</div>
 
 				</div>
@@ -90,9 +72,9 @@
 
 										<div class="col-md-12 bot">
 											<div class="owl-carousel owl-theme">
-													<template v-for="item in productsList">
-															<div class="item">
-																<a href="#">
+													<template v-for="(item, index) in productsList">
+															<div class="item" :key="index">
+																<a :href="'/product_detail/'+item.id">
 																	<template v-if="item.product_images && item.product_images.length > 0">
 																			<img width="300" height="450" :src="IMAGE_URL+item.product_images[0].image_url"/>
 																	</template>
@@ -107,7 +89,7 @@
 								</div>
 						</div>
 				</div>
-				
+
 				<div class="best_saller">
 						<div class="container-fluid">
 								<div class="row">
@@ -115,11 +97,11 @@
 												BEST SELLER
 										</div>
 
-										<template v-for="item in featuredList">
-											<div class="col-sm-6 col-md-3 res_two">
+										<template v-for="(item, index) in featuredList">
+											<div class="col-sm-6 col-md-3 res_two" :key="index">
 												<div class="best_saller_inner">
 													<div class="best_saller_main">
-														<a href="#">
+														<a :href="'/product_detail/'+item.id">
 															<template v-if="item.product_images && item.product_images.length > 0">
 																<img width="400" height="570" :src="IMAGE_URL+item.product_images[0].image_url"/>
 															</template>

@@ -36,12 +36,14 @@ class ProductsController extends Controller
             $i++;
         }
 
-        return response()->json(   ['brand'=>$brand,
-                                    'colors'=>$colors,
-                                    'product'=>$product,
-                                    'subcategory'=>$categoryArray,
-                                    'tags'=>$tag,
-                                    'products'=>$products]);
+        return response()->json([
+          'brand'=>$brand,
+          'colors'=>$colors,
+          'product'=>$product,
+          'subcategory'=>$categoryArray,
+          'tags'=>$tag,
+          'products'=>$products]
+        );
     }
 
 }

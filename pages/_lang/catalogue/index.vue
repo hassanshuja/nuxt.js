@@ -13,7 +13,7 @@
 													<li>  /  TEES &amp; SCISSORS</li>
 											</ul>
 									</div>
-							</div>      
+							</div>
 					</div>
 
 					<div class="col-sm-12 col-md-6 border_spe">
@@ -35,14 +35,14 @@
 											<option value="price">Sort by price: low to high</option>
 											<option value="price-desc">Sort by price: high to low</option>
 										</select> -->
-										<div class="page_redirect"> 
-											 <ul>   
+										<div class="page_redirect">
+											 <ul>
 												 <li>
-														<a href="#" class="active">30</a> 
+														<a href="#" class="active">30</a>
 														<a href="#">40</a>
 														<a href="#">60</a>
 												 </li>
-											 </ul>  
+											 </ul>
 										</div>
 													<input type="hidden" name="paged" value="1">
 													<input type="hidden" name="WordApp_launch" value="">
@@ -50,9 +50,9 @@
 													<input type="hidden" name="WordApp_demo" value="">
 													<input type="hidden" name="WordApp_mobile_app" value="">
 									</form>
-							</div>  
+							</div>
 					</div>
-			</div>  
+			</div>
 		</div>
 
 		<div class="container-fluid">
@@ -72,7 +72,7 @@
 													<li><a href="#">Jeans</a></li>
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
-												</ul> 
+												</ul>
 											</div>
 										</div>
 									 <button class="collapsible">OUTERWEAR</button>
@@ -83,7 +83,7 @@
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
 												</ul>
-											</div>    
+											</div>
 										</div>
 										<button class="collapsible">PANTS</button>
 										<div class="content_cat" style="display: none;">
@@ -92,7 +92,7 @@
 													<li><a href="#">Jeans</a></li>
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
-												</ul> 
+												</ul>
 											</div>
 										</div>
 										<button class="collapsible">SPORTS</button>
@@ -102,7 +102,7 @@
 													<li><a href="#">Jeans</a></li>
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
-												</ul> 
+												</ul>
 											</div>
 										</div>
 										<button class="collapsible">UNDERWEAR</button>
@@ -112,7 +112,7 @@
 													<li><a href="#">Jeans</a></li>
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
-												</ul> 
+												</ul>
 											</div>
 										</div>
 										<button class="collapsible">FABRIC CARE</button>
@@ -122,7 +122,7 @@
 													<li><a href="#">Jeans</a></li>
 													<li><a href="#">Pants</a></li>
 													<li><a href="#">Trousers,</a></li>
-												</ul> 
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -134,9 +134,9 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in sizesList">
-														<li><button @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
 													</template>
-												</ul> 
+												</ul>
 											</div>
 										</template>
 
@@ -145,12 +145,12 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in colorsList">
-														<li><button @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
 													</template>
-												</ul> 
+												</ul>
 											</div>
 										</template>
-											
+
 
 										<!-- <button class="collapsible">PRICE</button>
 										<div class="content">
@@ -163,9 +163,9 @@
 												<li><button id="btn1">LARGE</button></li>
 												<li><button id="btn1">EXTRA-LARGE</button></li>
 												<li><button id="btn1">Append text</button></li>
-											</ul> 
+											</ul>
 										</div> -->
-									</div>  
+									</div>
 									<div class="box">
 										<button class="promo_code_in">
 											<div id="fold_in"><span>MEN/NEW</span> </div>
@@ -189,14 +189,14 @@
 												<option value="mercedes">Mercedes</option>
 												<option value="audi">Audi</option>
 											</select>
-									</div>  
+									</div>
 								</div>
 
 					<div class="col-sm-12 col-md-9 col-lg-9">
 						<div class="size_show">
 							<template v-if="searchTags.length > 0">
 								<template v-for="(item, index) in searchTags">
-									<div class="form-group">
+									<div class="form-group" :key="index">
 										{{ item.name }}
 										<button @click="removeTag(item.id, index)" class="remove-btn" data-toggle="tooltip" data-placement="top" title="Delete">X</button>
 									</div>
@@ -207,8 +207,8 @@
 
 							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
 							<div id="Paris" class="tabcontent" style="display: block;">
-								<template v-for="item in productsList">
-									<div :class="'col-sm-12 col-md-'+tabColumns +' colum_pro'">
+								<template v-for="(item, index) in productsList">
+									<div :class="'col-sm-12 col-md-'+tabColumns +' colum_pro'" :key="index">
 										<div class="best_saller_inner">
 											<div class="best_saller_main">
 												<a :href="'/product_detail/'+item.id">
@@ -226,12 +226,12 @@
 														<div class="productbrand_price"><div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div><span>IDR {{ item.price }}</span>
 														</div>
 													</div>
-												</a> 
-											</div>  
-										</div>  
+												</a>
+											</div>
+										</div>
 									</div>
 								</template>
-								
+
 								<template v-if="page_count > 0">
 									<paginate
 									  v-model="page"
@@ -244,9 +244,9 @@
 								</template>
 							</div>
 							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
-						</div> 
+						</div>
 						<!-- END CONTAINER PRODUCT -->
-					</div>  
+					</div>
 				<div>
 			</div>
 		</div>
@@ -254,8 +254,8 @@
 </template>
 
 <script>
-		
-		 
+
+
 
 		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
 		import AboutContent from "../../../components/Front/AboutContent";
@@ -329,12 +329,12 @@
 				},
 				methods: {
 					async searchCatalogue() {
-						let searchUrl = 'page/catalogue?page='+this.page; 
+						let searchUrl = 'page/catalogue?page='+this.page;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
 							searchUrl = 'page/catalogue?page='+this.page+'&colors='+colors+'&size='+size;
-						} 
+						}
 						let response2 = await this.$axios.$get(searchUrl);
 						console.log('search Url', searchUrl);
 						if(response2) {
@@ -365,7 +365,7 @@
 						    }
 						  });
 						}
-						
+
 					},
 					selectFilter(name, id, index, type) {
 							if(!$(".size_show").hasClass("active")){
