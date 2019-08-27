@@ -64,7 +64,7 @@
         <div class="col-sm-12 col-md-6">
           <div class="product_view">
             <div class="product_inline">
-              Women / New / Hooman Bags - Pink Bumb Bag
+              {{ category[0].parent.name }} / {{ category[0].name }} / {{ product.modal }} - {{ product.name }}
             </div>
             <div class="title_productdetails">
               <span>{{ product.modal }}</span><span class="name_or"> - {{ product.name }} </span><br><span class="blow_identi">IDR {{ product.price.toLocaleString() }}</span>
@@ -314,6 +314,7 @@
           return {
               categoryList:[],
               product: [],
+              category: [],
               colors: [],
               sizes: [],
               brand: [],
@@ -332,6 +333,7 @@
             return {
                 categoryList: response.data,
                 product: response1.product,
+                category: response1.category,
                 colors: response1.colors,
                 sizes: response1.sizes,
                 brand: response1.brand
