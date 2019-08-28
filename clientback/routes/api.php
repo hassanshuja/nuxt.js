@@ -1,6 +1,8 @@
 <?php
 
-//Route::resource('categories', 'Front\Categories\CategoryController');
+Route::resource('categories', 'Front\Categories\CategoryController');
+// Route::resource('women', 'Front\Page\PageController@women');
+
 
 Route::get('men/category',['as'=>'men.category','uses'=>'Front\Categories\CategoryController@menCategory']);
 Route::get('women/category',['as'=>'women.category','uses'=>'Front\Categories\CategoryController@womenCategory']);
