@@ -44,7 +44,6 @@ export default {
   ** Customize the progress-bar color
   */
   loading: { color: '#fff' },
-
   /*
   ** Global CSS
   */
@@ -65,6 +64,7 @@ export default {
       { src: '~/plugins/vue-lazyload', ssr: false },
       { src: '~/plugins/infiniteloading', ssr: false },
       { src: '~/plugins/axios', ssr: false },
+      { src: '~/plugins/vuejs-paginate', ssr: false },
       { src:'~plugins/vue-scrollto.js',ssr:false}
   ],
 
@@ -81,7 +81,8 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-      baseURL: process.env.BASE_URL
+      baseURL: process.env.BASE_URL,
+      credentials: false
   },
 
   /*
@@ -99,8 +100,11 @@ export default {
               'window.jQuery': 'jquery'
           })
       ],
-    extend(config, ctx) {
-    }
+      extend(config, options) {
+        return Object.assign({}, config, {
+          devtool: 'source-map'
+        })
+      }
   },
     router: {              // customize nuxt.js router (vue-router).
         middleware: 'i18n',   // middleware all pages of the application

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <newsletter></newsletter>
+        <Newsletter></Newsletter>
         <div id="section_part">
             <div class="container-fluid">
                 <div class="row">
@@ -42,7 +42,7 @@
                 </div>
             </div>
         </div>
-        <about-content :common="common"></about-content>
+        <about-content ></about-content>
     </div>
 </template>
 
@@ -63,9 +63,9 @@
         },
         transition: 'bounce',
         mounted(){
-            /*setTimeout(function () {
+            setTimeout(function () {
                 $('#mypopup').modal('show');
-            },2000);*/
+            },2000);
 
             $(document).on('click', '.slicknav_btn', function() {
                 $('body').toggleClass("overflow");

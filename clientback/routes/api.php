@@ -1,8 +1,11 @@
 <?php
 
 Route::resource('categories', 'Front\Categories\CategoryController');
+<<<<<<< HEAD
 // Route::resource('women', 'Front\Page\PageController@women');
 
+=======
+>>>>>>> bdee8e62af6a4ace0a0d850d854ba8750dfbd73c
 
 Route::get('men/category',['as'=>'men.category','uses'=>'Front\Categories\CategoryController@menCategory']);
 Route::get('women/category',['as'=>'women.category','uses'=>'Front\Categories\CategoryController@womenCategory']);
@@ -14,6 +17,22 @@ Route::get('blog',['as'=>'blog','uses'=>'Front\Blog\BlogController@index']);
 Route::get('blog/detail/{slug}',['as'=>'blog.category','uses'=>'Front\Blog\BlogController@detail']);
 Route::get('brands',['as'=>'brands','uses'=>'Front\Brand\BrandController@index']);
 Route::get('brands/{slug}',['as'=>'brands.product-list','uses'=>'Front\Brand\BrandController@productList']);
+Route::post('subscription',['as'=>'subscription','uses'=>'Front\Misc\SubscriptionController@subscription']);
 
 
 
+// Route::resource('subscription', '');
+Route::get('page/catalogue',['as'=>'page.catalogue','uses'=>'Front\Catalogue\CatalogueController@index']);
+
+/* MEN ROUTES*/
+Route::get('men/allproducts',['as'=>'men.allproducts','uses'=>'Front\Men\MenController@getAllProducts']);
+Route::get('men/featuredproducts',['as'=>'men.featuredproducts','uses'=>'Front\Men\MenController@getFeaturedProducts']);
+
+/* WOMEN ROUTES*/
+Route::get('women/allproducts',['as'=>'women.allproducts','uses'=>'Front\Women\WomenController@getAllProducts']);
+Route::get('women/featuredproducts',['as'=>'women.featuredproducts','uses'=>'Front\Women\WomenController@getFeaturedProducts']);
+
+Route::resource('products', 'Front\Products\ProductsController');
+/* CATALOGUE ROUTES*/
+Route::get('product/colors',['as'=>'product.colors','uses'=>'Front\Catalogue\CatalogueController@getProductColors']);
+Route::get('product/sizes',['as'=>'product.sizes','uses'=>'Front\Catalogue\CatalogueController@getProductSizes']);
