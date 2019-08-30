@@ -25,7 +25,8 @@
     "vue-infinite-loading": "^2.4.4",
     "vue-lazyload": "^1.2.6",
     "vue-scrollto": "^2.15.0",
-    "vuejs-paginate": "^2.1.0"
+    "vuejs-paginate": "^2.1.0",
+    "vuex-persist": "^2.0.1"
   },
   "devDependencies": {
     "node-sass": "^4.12.0",
