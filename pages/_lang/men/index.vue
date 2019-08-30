@@ -227,31 +227,7 @@
 						return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
 				},*/
 
-				mounted(){
-						$('.owl-carousel').owlCarousel({
-								loop: true,
-								margin: 10,
-								responsiveClass: true,
-								navigation : true,
-								navText: ["<img src='"+require("@/assets/images/arrow_left_new.svg")+"'>","<img src='"+require("@/assets/images/arrow_right_new.svg")+"'>"],
-								responsive: {
-										0: {
-												items: 2,
-												nav: true
-										},
-										600: {
-												items: 3,
-												nav: false
-										},
-										1000: {
-												items: 6,
-												nav: true,
-												loop: false,
-
-										}
-								}
-						});
-				},
+				mounted(){},
 				async asyncData ({ app,store }) {
 						app.$axios.setHeader('lang', store.state.locale);
 						let response1 = await app.$axios.$get('men/category');
@@ -264,7 +240,8 @@
 								featuredList: featuredProducts,
 								productsList: allProducts
 						}
-				}
+				},
+				methods: {}
 		}
 </script>
 

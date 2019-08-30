@@ -71,14 +71,15 @@
             </div>
             <div class="pickerWrapper">
                <div class="outline">
-                  <p>Color: </p>
+                  <template v-if="selected_color">
+                    <p>Color: <b>{{ selected_color.name }}</b> </p>
+                  </template>
                 </div>
                 <template v-for="(item, index) in colors">
                   <ul class="bord">
-                    <li class="inner_ga"><div :class="item" id="squer" :style="'background-color:'+item.toLowerCase() +''"></div></li>
-                    <!-- <li class="inner_ga"><div class="Green" id="squer" style="background-color:green"></div></li> -->
-                    <!-- <li class="inner_ga"><div class="Yellow active" id="squer" style="background-color:yellow"></div></li> -->
-                    <!-- <li class="inner_ga"><div class="Pink" id="squer" style="background-color:pink;"></div></li> -->
+                    <li @click="selectColor(index, item)" class="inner_ga">
+                      <div :id="index" :class="item" id="squer" :style="'background-color:'+item.toLowerCase() +''"></div>
+                    </li>
                   </ul>
                 </template>
             </div>
@@ -87,7 +88,7 @@
               <a href="#" data-toggle="modal" data-target="#sizemodel" style="color: #4c4988;font-family: Open Sans;font-size: 11px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing:normal;color: #4c4988;">(Not Sure? Get Your Size Suggestion)</a>
               <div class="select_size_pro">
                 <template v-for="(item, index) in sizes">
-                  <button :key="index" type="button" class="btnsize inactive">{{ item }}</button>
+                  <button @click="selectSize(index, item)" :key="index" type="button" class="btnsize inactive">{{ item }}</button>
                 </template>
                 <!-- <button type="button" class="btnsize inactive">ALL SIZE</button>
                 <button type="button" class="btnsize inactive">XS</button>
@@ -99,9 +100,9 @@
               </div>
             </div>
             <div class="quality_pro">
-            <span>Quality:</span>
+            <span>Quantity:</span>
             <div style="width:72px;">
-              <select class="custom-drop" v-model="product.quality">
+              <select class="custom-drop" v-model="selected_quantity">
                 <option value="0">1</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -114,7 +115,7 @@
 
             <div class="product_addtocart">
               <input id="toggle-heart" type="checkbox">
-              <button class="addcart">ADD TO CART</button>
+              <button @click="addToCart" class="addcart">ADD TO CART</button>
               <svg id="heart" width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
 
@@ -160,47 +161,43 @@
                                    <label for="gender" class="col-sm-12 control-label">
                                          Gender</label>
                                       <div class="col-sm-12">
-                                          <label class="container">Men
-                          <input type="radio" checked="checked" name="radio">
-                          <span class="checkmark_rad"></span>
-                        </label>
-                        <label class="container">Women
-                          <input type="radio" name="radio">
-                          <span class="checkmark_rad"></span>
-                      </label>
+                                        <label class="container">Men
+                                          <input type="radio" checked="checked" name="radio">
+                                          <span class="checkmark_rad"></span>
+                                        </label>
+                                        <label class="container">Women
+                                          <input type="radio" name="radio">
+                                          <span class="checkmark_rad"></span>
+                                        </label>
                                       </div>
-                                </div>
+                                  </div>
                                   <div class="form-group">
-                                        <label for="height" class="col-sm-12 control-label">
-                                            Height (In Cm)</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="height" required="">
-                                        </div>
+                                    <label for="height" class="col-sm-12 control-label">
+                                        Height (In Cm)</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="height" required="">
                                     </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="weight" class="col-sm-12 control-label">
+                                        Weight (In Kg)</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control" id="weight" required="">
+                                    </div>
+                                  </div>
+                                  <div class="form-group">
+                                    <label for="age" class="col-sm-12 control-label">
+                                      Age</label>
+                                    <div class="col-sm-12">
+                                      <input type="text" class="form-control" id="age" required="">
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label for="weight" class="col-sm-12 control-label">
-                                            Weight (In Kg)</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="weight" required="">
-                                        </div>
+                                      <button type="button" class="login_dep">SAVE MY BODY MEASUREMENT</button>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="age" class="col-sm-12 control-label">
-                                            Age</label>
-                                        <div class="col-sm-12">
-                                            <input type="text" class="form-control" id="age" required="">
-                                        </div>
-                                    </div>
-                                     <div class="col-sm-12">
-                                          <div class="form-group">
-                                             <button type="button" class="login_dep">SAVE MY BODY MEASUREMENT</button>
-                                          </div>
-                                      </div>
-
-
-
+                                  </div>
                               </form>
-
                             </div>
                              <div class="tab-pane" id="brand">
                                   <form role="form" class="form-horizontal">
@@ -304,11 +301,15 @@
 
 <script>
     import BottomHeader from "../../../layouts/partials/home/BottomHeader";
+    import { mapMutations } from 'vuex'
 
     export default {
         name: "index",
         components: {BottomHeader},
         computed:{
+          carts () {
+            return this.$store.state.carts.list
+          }
         },
         data: function () {
           return {
@@ -318,7 +319,10 @@
               colors: [],
               sizes: [],
               brand: [],
-              IMAGE_URL: 'http://localhost:8000/'
+              IMAGE_URL: 'http://localhost:8000/',
+              selected_quantity: null,
+              selected_color: null,
+              selected_size: null
           }
         },
         transition: 'bounce',
@@ -418,6 +422,30 @@
               });
 
               console.log('document ready');
+            },
+            addToCart() {
+              var product = this.product;
+              var obj = {
+                id: product.id,
+                modal: product.modal,
+                name: product.name,
+                price: product.price,
+                selected_color: this.selected_color,
+                selected_size: this.selected_size,
+                selected_quantity: this.selected_quantity
+              };
+              this.$store.commit('carts/add', obj)
+            },
+            ...mapMutations({
+              toggle: 'carts/toggle'
+            }),
+            selectColor(index, item) {
+              var obj = {id: index, name: item}
+              this.selected_color = obj
+            },
+            selectSize(index, item) {
+              var obj = {id: index, name: item}
+              this.selected_size = obj
             }
         }
 
