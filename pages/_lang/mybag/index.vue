@@ -69,8 +69,7 @@
         </div>
       <div class="proccesd_btn" id="shopping_hide">
         <div class="col-sm-12 col-md-4 col-lg-4">
-          <a class="mybtn" href="/checkout" type="button">PROCEED TO CHECKOUT</a>
-          <button type="button">PROCEED TO CHECKOUT</button>
+          <button @click="$router.push('/checkout')" type="button">PROCEED TO CHECKOUT</button>
         </div>
       </div> 
       <div class="continue_btn" id="shopping_hide">
