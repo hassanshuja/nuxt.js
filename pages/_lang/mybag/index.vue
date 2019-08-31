@@ -29,8 +29,8 @@
                 <td style="width: 22%; padding: 11px 6px !important; height: 36px;border-top: hidden;">
                   <a class="text-left" href="#" data-toggle="modal" style="font-weight: 900;color: #3d3d3d;">{{ cart.modal }}</a>
                   <p>{{ cart.name }}</p>
-                  <p class="gap_bet">Colour: {{ cart.selected_color.name }}</p>
-                  <p class="gap_bet">Size:{{ cart.selected_size.name }}</p>
+                  <p class="gap_bet">Colour: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></p>
+                  <p class="gap_bet">Size:  <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></p>
                   <p class="gap_bet" >
                     <a @click="removeCart(cart)" class="btnDelete" href="#">Remove This item</a>
                   </p>

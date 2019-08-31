@@ -424,16 +424,6 @@
               console.log('document ready');
             },
             addToCart() {
-              console.log(this.$store.state.carts.list);
-              var json = this.$store.state.carts.list;
-              var index1 = null;
-              json.map((item, index) => {
-                if(item.id == this.product.id) {
-                  index1 = index
-                }
-              })
-              alert(index1);
-              return false
               var product = this.product;
               var obj = {
                 id: product.id,
@@ -449,7 +439,33 @@
                 category: this.category,
                 total_price: product.price * this.selected_quantity
               };
-              this.$store.commit('carts/add', obj)
+              var vuex = JSON.parse(localStorage.getItem('vuex'))
+              if(vuex) {
+                var json = vuex.carts.list;
+                var index1 = null;
+                json.map((item, index) => {
+                  if(JSON.stringify(item) == JSON.stringify(obj)) {
+                    index1 = index
+                  }
+                  if(
+                      (item.id == obj.id) &&
+                      (JSON.stringify(item.selected_color) == JSON.stringify(obj.selected_color)) && 
+                      (JSON.stringify(item.selected_size) == JSON.stringify(obj.selected_size)) 
+                    )
+                  {
+                    index1 = index
+                    obj.selected_quantity = parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)
+                    item.selected_quantity = parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)
+                  }
+                });
+                if(index1 || index1 == 0 ) {
+                  this.$store.commit('carts/replace',{obj: obj, index: index1})
+                } else {
+                  this.$store.commit('carts/add', obj)
+                }
+              } else {
+                this.$store.commit('carts/add', obj)
+              }
             },
             ...mapMutations({
               toggle: 'carts/toggle'

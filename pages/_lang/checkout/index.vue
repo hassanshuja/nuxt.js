@@ -74,7 +74,7 @@
 
 				</div>
 				<button class="promo_code show selected" id="shipping" >1. SHIPPING ADDRESS</button>
-				<div class="panel shipping_records" style="display: block; max-height: fit-content;">
+				<div class="panel shipping_records" style="display: block; max-height: max-content;">
 
 				    <div class="checkout_form">
 
@@ -356,7 +356,7 @@
 
                 </div>
 				<button class="promo_code show shipping_cost_tab" id="oreder" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
-				<div class="panel shipping_cost" style="border: none !important; display: block; max-height: fit-content;">
+				<div class="panel shipping_cost" style="border: none !important; display: block; max-height: max-content;">
 
 				      <table class="table" id="checkto">
 
