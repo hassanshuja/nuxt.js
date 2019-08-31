@@ -424,6 +424,16 @@
               console.log('document ready');
             },
             addToCart() {
+              console.log(this.$store.state.carts.list);
+              var json = this.$store.state.carts.list;
+              var index1 = null;
+              json.map((item, index) => {
+                if(item.id == this.product.id) {
+                  index1 = index
+                }
+              })
+              alert(index1);
+              return false
               var product = this.product;
               var obj = {
                 id: product.id,
@@ -432,7 +442,12 @@
                 price: product.price,
                 selected_color: this.selected_color,
                 selected_size: this.selected_size,
-                selected_quantity: this.selected_quantity
+                selected_quantity: this.selected_quantity,
+                images: product.product_images,
+                colors: this.colors,
+                sizes: this.sizes,
+                category: this.category,
+                total_price: product.price * this.selected_quantity
               };
               this.$store.commit('carts/add', obj)
             },
