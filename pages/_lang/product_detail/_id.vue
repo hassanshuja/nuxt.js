@@ -454,8 +454,8 @@
                     )
                   {
                     index1 = index
-                    obj.selected_quantity = parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)
-                    item.selected_quantity = parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)
+                    obj.selected_quantity = (parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)).toString()
+                    item.selected_quantity = (parseInt(obj.selected_quantity) + parseInt(item.selected_quantity)).toString()
                   }
                 });
                 if(index1 || index1 == 0 ) {
