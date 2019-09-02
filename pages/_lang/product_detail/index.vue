@@ -152,19 +152,17 @@
             <div class="description_product">
                  <button class="collapsible">Description</button>
                 <div class="content">
-                  <p>Your favorite Champion hoodie, now available in colors we love that are only at Urban Outfitters! Classic pullover silhouette in a durable reverse weave cotton fleece features a soft brushed interior to keep you cozy. Cut with a slightly dropped shoulder for a slouchy look and rib-knit banding at the cuffs + hem for a comfortable fit. Complete with an adjustable drawstring hood, front kanga pocket and a small logo patch at the chest + left sleeve. Champion has been offering its innovative athletic apparel for men and women since 1919.</p>
+
+                  <span v-html="product.description"></span>
                 </div>
                 <button class="collapsible">Detail &amp; Sizing</button>
                 <div class="content">
-                  <p>• Cotton, polyester</p>
-                                   <p>  • Machine wash</p>
-                                   <p>  • Imported</p>
+                  <span v-html="product.sizing_detail"></span>
                 </div>
                 <button class="collapsible">Shipping &amp; Return</button>
                 <div class="content">
-                  <p>• Shipping: Free shipping all over Indonesia for any purchase over IDR 500,000. The product will be delivered to your door by our Logistic Partner.</p>
+                  <span v-html="product.shipping_return_detail"></span>
 
-                                   <p>• Returns/Exchanges: This product is eligible for Return and Exchange within 14 days.</p>
                 </div>
             </div>
           </div>
