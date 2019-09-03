@@ -19,6 +19,10 @@ Route::post('subscription',['as'=>'subscription','uses'=>'Front\Misc\Subscriptio
 // Route::resource('subscription', '');
 Route::get('page/catalogue',['as'=>'page.catalogue','uses'=>'Front\Catalogue\CatalogueController@index']);
 
+/* MEN ROUTES*/
+Route::get('men/allproducts',['as'=>'men.allproducts','uses'=>'Front\Men\MenController@getAllProducts']);
+Route::get('men/featuredproducts',['as'=>'men.featuredproducts','uses'=>'Front\Men\MenController@getFeaturedProducts']);
+
 /* WOMEN ROUTES*/
 Route::get('women/allproducts',['as'=>'women.allproducts','uses'=>'Front\Women\WomenController@getAllProducts']);
 Route::get('women/featuredproducts',['as'=>'women.featuredproducts','uses'=>'Front\Women\WomenController@getFeaturedProducts']);

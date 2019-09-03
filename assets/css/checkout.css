@@ -1,0 +1,51 @@
+#checkout {float: left;width: 100%;text-align: center;}
+.checkout_title span {font-family: Lato;font-size: 16px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;text-align: center;color: #3d3d3d;}
+#checkout .checkout_title {float: left;width: 100%;padding: 104px 0;border-bottom: 1px solid rgba(9, 7, 9, 0.08);padding-bottom: 21px;}
+#checkout .container {max-width: 600px;}
+.checkout_suptitle span {font-family: Open Sans;font-size: 10px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;text-align: center;color: #3d3d3d;}
+.checkout_suptitle {float: left;width: 100%;padding: 14px;border-bottom: 1px solid rgba(9, 7, 9, 0.08);padding-top: 13px;margin-bottom: 16px;}
+.col-xs-12.col-md-6.manage {float: left;width: 100%;padding: 15px 0;padding-bottom: 8px;}
+.checkout_form {float: left;width: 100%;}
+.checkout_form .cont-row {float: left;width: 100%;}
+.col-xs-12.col-md-6.manage .left-block {float: left;width: 98%;}
+.col-xs-12.col-md-6.manage .left-block .cont-label {float: left;width: 100%;text-align: -webkit-left;padding: 10px 0;}
+.col-xs-12.col-md-6.manage .left-block .cont-field {float: left;width: 100%;}
+.col-xs-12.col-md-6.manage .left-block .cont-field input[type="text"] {float: left;width: 100%;height: 34px;padding: 0 10px;    border: 1px solid rgba(9, 7, 9, 0.08);font-size: 13px;}
+.col-xs-12.col-md-6.manage .right-block {float: left;width: 100%;}
+.col-xs-12.col-md-6.manage .right-block .cont-label {float: left;width: 100%;text-align: -webkit-left;padding: 10px 0;}
+.col-xs-12.col-md-6.manage .right-block .cont-field {float: left;width: 100%;}
+.col-xs-12.col-md-6.manage .right-block .cont-field input[type="text"] {float: left;width: 100%;height: 34px;padding: 0 10px;/* padding: 0; */}
+.col-xs-12.col-md-6.manage .right-block .cont-field input[type="tel"] {float: left;width: 100%;height: 34px;padding: 0 10px;border: 1px solid rgba(9, 7, 9, 0.08);font-size: 13px;}
+.checkout_form .cont-row .full-block .cont-label {text-align: -webkit-left;float: left;width: 100%;padding: 10px 0;}
+.checkout_form .cont-row .full-block {float: left;width: 100%;}
+.checkout_form .cont-row .full-block .cont-field {float: left;width: 100%;}
+.checkout_form .cont-row .full-block .cont-field textarea {float: left;width: 100%;padding: 0 10px;border: 1px solid rgba(9, 7, 9, 0.08);font-size: 13px;}
+.cont-label {font-family: Lato;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;}
+.cont-row.main {border-bottom: 1px solid rgba(9, 7, 9, 0.08);}
+.checkout_form .cont-row .full-block .cont-field input[type="text"] {float: left;width: 100%;/* height: 14px; */padding: 7px 10px;padding-top: 4px;border:1px solid rgba(9, 7, 9, 0.08);font-size: 13px;}
+.checkout_form .cont-row .full-block .cont-field input[type="text"]::-webkit-input-placeholder 
+{font-family: Lato;font-size: 9px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;padding: 0 5px;}
+input.place {float: left;width: 100%;padding: 8px;font-family: Lato;font-size: 11px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: 1px;text-align: center;color: #ffffff;background-color: #4c4988;border: none;margin: 10px 0;cursor: pointer}
+.check_btn input.place:hover {
+    background-color: #3d3987;
+}
+th.sub_btn button:hover {
+    background-color: #3d3987;
+}
+input.back {float: left;width: 100%;height: 40px;font-family: Lato;font-size: 11px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: 1px;text-align: center;color: #ababab;background-color: #e7e7e7;border: none;border: 1px solid rgba(9, 7, 9, 0.08);}
+.check_btn {float: left;width: 100%;padding: 32px 0;}
+#checkout button.promo_code {margin: 8px 0;background-color: transparent;text-align: center;font-family: Open Sans;font-size: 10px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: 1px;text-align: center;color: #3d3d3d;}
+#checkout .panel {background-color: transparent;padding: 0;border-top: 1px solid rgba(9, 7, 9, 0.08);}
+#checkout .cont-field .form-group select {float: left;width: 100%;padding: 5px;border: 1px solid rgba(9, 7, 9, 0.08);font-size: 13px;
+-webkit-appearance: none;background: url(../images/arrow_down_black.svg) 96% / 3% no-repeat ;background-repeat: no-repeat;background-position-y: center;}
+#checkout .panel table.table img {height: 185px;width: 125px;}
+#checkout .panel table.table img:hover {opacity: 0.8;}
+table#checkto {font-family: Lato;font-size: 9px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;}
+th.sub_btn {font-family: Lato;font-size: 10px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: 1px;text-align: center;color: #ffffff;width: 100%;padding-top: 29px;}
+th.sub_btn button {float: left;width: 100%;margin-bottom: 35px;font-family: Lato;font-size: 10px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: 1px;text-align: center;color: #ffffff;background-color: #4c4988;border: none;padding: 7px;}
+button.ctn_shopping {background-color: transparent !important;color: #3d3d3d !important;border: 1px solid rgba(9, 7, 9, 0.08) !important;}
+th.sub_btn button {margin-bottom: 14px;font-family: Lato;font-size: 11px;font-weight: 900;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: 1px;text-align: center;color: #ffffff;cursor: pointer}
+.checkout_form .cont-row .full-block .cont-field input[type="text"]::placeholder {font-family: Lato;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;}
+#checkout .table thead th {vertical-align: bottom;border-bottom: 1px solid rgba(9, 7, 9, 0.08);font-size: 10px;padding-top: 7px;padding-bottom: 17px;padding-left: 0;padding-right: 0;}
+#checkout .table th, .table td {padding: 0.75rem;vertical-align: top;border-top: none;padding-left: 0;padding-right: 0;font-family: Open Sans;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;padding: 18px 0;padding-bottom: 19px;}
+#checkout button.promo_code.show:nth-child(2) {padding: 10px !important;}

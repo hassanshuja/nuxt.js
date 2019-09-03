@@ -32,14 +32,14 @@ class CatalogueController extends Controller
         $result = $query->latest('created_at')->with('product_images', 'product_brand', 'product_categories')->paginate(12);
         return $result;
     }
-    
+
     public function getProductColors () {
         $colors = AttributeValue::select('id', 'name', 'attribute_id')->where('attribute_id',2)->get();
-				return $colors;    	
-    }  
+        return $colors;
+    }
 
     public function getProductSizes () {
         $colors = AttributeValue::select('id', 'name', 'attribute_id')->where('attribute_id',1)->get();
-				return $colors;    	
-    }   
+        return $colors;
+    }
 }

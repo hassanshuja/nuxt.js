@@ -178,6 +178,21 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group kt-form__group">
+                                        <label class="form-control-label">Size:</label>
+                                        <select class="form-control"  id="attribute_value_size_id"  name="attribute_value_size_id">
+                                            <option value="0">Select Size</option>
+                                            @foreach($sizes as $key=>$v)
+                                                <option value="{!! $key !!}" @if($product['attribute_value_size_id'] == $key) selected @endif>{!! $v !!}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
