@@ -200,6 +200,9 @@
 		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
 		import AboutContent from "../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
+		if (process.client) {
+		  require('owl.carousel')
+		}
 		export default {
 				name: "index",
 				components: {AboutContent, BottomHeader},
@@ -221,7 +224,35 @@
 						return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
 				},*/
 
-				mounted(){},
+				mounted(){
+					setTimeout(function () {
+						$('.owl-carousel').owlCarousel({
+	                loop: true,
+	                margin: 10,
+	                responsiveClass: true,
+	                navigation : true,
+	                navText: ["<img src='images/arrow_left_new.svg'>","<img src='images/arrow_right_new.svg'>"],
+	    						loop: true,
+	                responsive: {
+	                  0: {
+	                    items: 2.5,
+	                    nav: true
+	                  },
+	                  600: {
+	                    items: 3.5,
+	                    nav: false
+	                  },
+	                  1000: {
+	                    items: 6,
+	                    nav: true,
+	                    loop: false,
+	                   
+	                  }
+	                }
+	              })
+					}, 3000);
+						
+				},
 				async asyncData ({ app,store }) {
 						/*const locale = store.state.locale
 						if (locale) {
@@ -233,6 +264,7 @@
 						let response2 = await app.$axios.$get('page/women');
 						let allProducts = await app.$axios.$get('women/allproducts');
 						let featuredProducts = await app.$axios.$get('women/featuredproducts');
+						console.log(allProducts);
 						return {
 								data: response2.data,
 								categoryList:response1.data,

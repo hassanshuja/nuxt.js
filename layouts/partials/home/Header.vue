@@ -68,7 +68,41 @@
                             <a href="#" data-toggle="modal" data-target="#login">REGISTER</a>
                         </div>
                         <div class="cart_icon">
-                            <a href="#"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> --></a>
+                            <a href="/mybag"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> --></a>
+                            <template v-if="carts.length > 0">
+                                <div class="dropdown-demo">
+                                 <div class="add_message">
+                                    <template v-if="carts.length > 0">
+                                        <span class="left">{{ carts.length }} items added to your bag!</span>
+                                    </template>
+                                  <span class="right">
+                                    <a href="#"><img src="~assets/images/close.svg"></a>
+                                    </span>
+                                 </div> 
+                                    <template v-for="cart in carts">
+                                        <span class="item_main">
+                                            <span class="item-left">
+                                            <template v-if="cart.images.length > 0">
+                                              <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
+                                            </template>
+                                            <span class="item-info">
+                                            <span class="addcart_name">{{ cart.modal }}</span>
+                                            <span class="addcart_color">{{ cart.name }}</span>
+                                            <span class="addcart_price">IDR {{ cart.price}}</span>
+                                            </span>
+                                            <span class="item_description">
+                                              <span>Color: {{ cart.selected_color.name }}</span>
+                                              <span>Size: {{ cart.selected_size.name }}</span>
+                                              <span>Qty: {{ cart.selected_quantity}}</span>
+                                             </span> 
+                                            </span>
+                                        </span>
+                                    </template>
+                               <div class="check_cart">
+                                <button @click="$router.push('/checkout')" type="button" class="check_cartpro">CHEKOUT</button>
+                               </div> 
+                            </div>
+                        </template>
                         </div>
                     </div>
                 </div>
@@ -430,10 +464,93 @@
 
 <script>
     export default {
-        name: "Home-Header"
+        name: "Home-Header",
+        computed:{
+          carts () {
+            return this.$store.state.carts.list
+          }
+        },
+        data: function () {
+          return {
+              IMAGE_URL: 'http://localhost:8000/',
+          }
+        }
     }
 </script>
 
 <style scoped>
-
+.dropdown-demo {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    margin: 38px 0;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    padding: 12px 16px;
+    z-index: 1;
+    border: 1px solid rgba(9, 7, 9, 0.08);
+    float: left;
+    width: 264px;
+    right: 10px;
+    height: auto;  
+    max-height: 350px;
+    overflow-y: scroll;
+}
+.dropdown-demo .add_message {font-family: Lato;font-size: 10px;font-weight: 900;
+font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;
+color: #4c4988;border-bottom: 1px solid rgba(9, 7, 9, 0.08);padding: 11px 0;
+padding-top: 0;}
+button.check_cartpro:hover {
+    background-color: #3d3987 !important;
+}
+.dropdown-demo .add_message span.right img { height: 10px;}
+.dropdown-demo .add_message span.right {float: right;}
+.check_cart button.check_cartpro {float: left;width: 100%;background-color: #4c4988;
+border: none;font-family: Lato;cursor: pointer;font-weight: 900;font-style: normal;
+font-stretch: normal;line-height: 2.67;letter-spacing: 1px;text-align: center;
+color: #ffffff;font-size: 10px;padding: 10px 0;} 
+.check_cart button.check_cartpro {float: left;width: 100%;}
+.check_cart {float: left;width: 100%;} 
+span.addcart_name {float: left;width: 150px;padding: 0 10px;font-weight: 900;}
+span.addcart_color {float: left;width: 150px;padding: 0 10px;}
+.dropdown-demo span.item_main span.item_description span {
+float: left;padding: 0px 9px;padding-bottom: 0;}
+.dropdown-demo span.item_main span.item_description span {float: left;
+width: 150px;padding: 0 17px;padding: 0px 10px !important;line-height: 1;}
+span.addcart_price {float: left;width: 150px;padding: 0 10px;padding-bottom: 16px;}
+.dropdown-demo span.item_main span.item_description {float: none;
+width: auto;font-size: 10px;font-family: open Sans;font-weight: normal;
+font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;
+color: #3d3d3d;}
+.dropdown-demo span.item_main span.item_description span {float: left;width: 61%;
+padding: 0 17px;}
+.cart_icon {position: relative;display: inline-block;}
+.dropdown-demo span.item_main span.item-info {
+float: none;font-size: 10px;width: auto;font-family: Lato;
+display: block;font-weight: normal;font-style: normal;font-stretch: normal;
+line-height: normal;letter-spacing: normal;color: #3d3d3d;}
+.dropdown-demo span.item_main span.item-left img {float: left;height: 93px;
+width: 62px;}
+.dropdown-demo span.item_main {float: left;width: 100%;padding-bottom: 15px;}
+.dropdown-demo span.item_main span.item-left {float: left;width: 100%;padding-top: 10px;
+}
+.dropdown-demo {display: none;position: absolute;background-color: #f9f9f9;
+margin: 38px 0;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+padding: 12px 16px;z-index: 1;left: 0;/* display: table-row; */float: left;
+width: 264px;left: -242px;}
+.dropdown-demo {display: none;position: absolute;background-color: #f9f9f9;
+margin: 38px 0;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);padding: 12px 16px;
+z-index: 1;border: 1px solid rgba(9, 7, 9, 0.08);}
+.cart_icon:hover .dropdown-demo {display: block;} 
+.select-selected:after {content: url(~assets/images/arrow_down_black.svg);
+float: right;width: 100%;margin-left: 5px;font-weight: 600;
+width: 14px;position: absolute; right: 10px;} 
+.quality_pro span {font-family: Open sans;font-size: 11px;font-weight: normal;
+font-style: normal;font-stretch: normal;line-height: 2.4;letter-spacing: normal;
+color: #3d3d3d;}
+.quality_pro {float: left;width: 100%;padding: 10px 0;padding-bottom: 0;} 
+svg.red path {fill: #4c4988;}
+.custom-drop {position: relative;font-family: Arial;}
+.custom-drop select {
+  display: none; /*hide original SELECT element:*/
+}
 </style>

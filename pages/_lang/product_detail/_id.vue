@@ -103,7 +103,6 @@
             <span>Quantity:</span>
             <div style="width:72px;">
               <select class="custom-drop" v-model="selected_quantity">
-                <option value="0">1</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -320,7 +319,7 @@
               sizes: [],
               brand: [],
               IMAGE_URL: 'http://localhost:8000/',
-              selected_quantity: null,
+              selected_quantity: 1,
               selected_color: null,
               selected_size: null
           }
