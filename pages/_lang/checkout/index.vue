@@ -7,7 +7,7 @@
 						<div class="checkout_title">
 							<span>CHECKOUT (Step 1 of 2)</span>
 						</div> 
-						<button class="promo_code show active selected">1. SHIPPING ADDRESS</button>
+						<button @click="openShipping" class="promo_code show active selected">1. SHIPPING ADDRESS</button>
 						<div class="panel" style="display: block; max-height: 0px;">
 							<div class="checkout_form">
 								<div class="cont-row">
@@ -99,7 +99,7 @@
 						 		<div class="check_btn">
 						 			<div class="cont-row">
 						 				<div class="full-block">
-						 					<input type="button" class="place" name="PLACE ORDER" value="PLACE ORDER">
+						 					<input @click="openOrder" type="button" class="place" name="PLACE ORDER" value="PLACE ORDER">
 						 				</div>
 						 			</div>
 						 			<div class="cont-row">
@@ -110,7 +110,7 @@
 						 		</div>
 						 	</div>
 					 	</div>
-		 				<button class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
+		 				<button @click="openOrder" class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
 			 			<div class="panel" style="border: medium none !important; display: none; max-height: 0px;">
 						 	<table class="table" id="checkto">
 						 		<thead>
@@ -283,6 +283,27 @@
 						app.$axios.setHeader('lang', store.state.locale);
 						// let featuredProducts = await app.$axios.$get('men/featuredproducts');
 						return {}
+				},
+				methods: {
+					openShipping() {
+						this.toggleTab();
+					},
+					openOrder() {
+						$('#checkout button.promo_code').click();
+						this.toggleTab();
+					},
+					toggleTab() {
+						$('#checkout button.promo_code').on('click', function(){
+					    $('#checkout button').removeClass('selected');
+					    $('#checkout .panel').css('display','none');
+					    $('#checkout .panel').css('max-height','0');
+					    
+					    $(this).addClass('selected');
+					    $(this).next().css('display', 'block');
+					    $(this).next().css('max-height','fit-content');
+					    $(this).next().css('max-height','-moz-fit-content');
+						});
+					}
 				}
 		}
 </script>
