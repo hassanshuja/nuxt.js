@@ -92,14 +92,14 @@
                                                 <label for="email" class="col-sm-12 control-label" >
                                                     Email</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="email" class="form-control" id="email1" v-model="email" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="password" class="col-sm-12 control-label">
                                                     Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="password" class="form-control" id="password" v-model="password" required/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-10">
@@ -107,14 +107,14 @@
                                                     <a href="#forgot_form" class="forgot_link" data-toggle="modal" data-target="#forgot_form">Forgot your password?</a>
                                                 </div>
                                             </div>
-                                            <div class="form-group" id="email_another">
+                                            <div class="form-group" id="email_another" v-if="login_err">
                                                 <div class="col-sm-12">
                                                     *Email and Password do not match.
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="button" class="login_submit">SIGN IN</button>
+                                                    <button type="button" class="login_submit" @click="login">SIGN IN</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -147,41 +147,41 @@
                                     <div class="tab-pane" id="Registration">
                                         <form role="form" class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="name" class="col-sm-12 control-label">
                                                     Name</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="name" class="form-control" id="name" v-model="name" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="emailReg" class="col-sm-12 control-label">
                                                     Email</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="emailReg" class="form-control" id="emailReg" v-model="emailReg" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="phone" class="col-sm-12 control-label">
                                                     Phone</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="phone" class="form-control" id="phone" v-model="phone" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="newpassword1" class="col-sm-12 control-label">
                                                     Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="newpassword1" class="form-control" id="newpassword1"  v-model="newpassword1" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="newpassword2" class="col-sm-12 control-label">
                                                     Confirm Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="newpassword2" class="form-control" id="newpassword2" v-model="newpassword2" required/>
                                                 </div>
                                             </div>
-                                            <div class="form-group" id="email_another">
+                                            <div class="form-group" id="email_another" v-if="reg_err">
                                                 <div class="col-sm-12">
                                                     *Another customer is already using this email. Please choose
                                                     another.
@@ -194,14 +194,14 @@
                                                             Sign me up for the newsletter, and yes I am over 16 years old. I accept the
                                                             <b>Privacy Notice</b>
                                                         </div>
-                                                        <input type="checkbox">
-                                                        <span class="checkmark"></span>
+                                                        <input type="checkbox" name="signup_newsletter" v-model="signup_newsletter">
+                                                        <span class="checkmark" ></span>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="login_submit">
+                                                    <button type="submit" class="login_submit" @click="register">
                                                         REGISTER</button>
                                                 </div>
                                                 <div class="gap_ttt">
@@ -234,13 +234,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -281,8 +277,6 @@
                         </div>
 
                         <!-- Modal footer -->
-
-
                     </div>
                 </div>
                 <!-- ----------------------------------End forgot Model ------------------------>
@@ -308,10 +302,7 @@
 
                             </div>
                         </div>
-
                         <!-- Modal footer -->
-
-
                     </div>
                 </div>
                 <!-- ---------------------------------End thamf Model ------------------------>
@@ -430,7 +421,29 @@
 
 <script>
     export default {
-        name: "Home-Header"
+        name: "Home-Header",
+        data: function () {
+          return {
+              email:'',
+              emailReg: '',
+              password: '',
+              newpassword1: '',
+              newpassword2: '',
+              phone: '',
+              signup_newsletter: '',
+              name: '',
+              login_err:'',
+              reg_err: ''
+          }
+        },
+        methods: {
+          login(){
+            console.log(this.email, this.password)
+          },
+          register() {
+            console.log('hiiiiiii')
+          }
+        }
     }
 </script>
 

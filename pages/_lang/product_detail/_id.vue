@@ -20,22 +20,22 @@
 
               <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9 product_slider_img ">
                 <div class="carousel-inner">
-                  
+
                   <template v-for="(item, index) in product.product_images">
                     <template v-if="index === 0">
                       <div class="carousel-item active">
                         <img :src="IMAGE_URL + item.image_url" alt="">
-                      </div>    
+                      </div>
                     </template>
                     <template v-else>
                       <div class="carousel-item">
                         <img :src="IMAGE_URL + item.image_url" alt="">
-                      </div> 
+                      </div>
                     </template>
                   </template>
                 </div>
               </div>
-              
+
               <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-9 product_slider_img" id="mobile_vi">
                 <div class="carousel-inner">
                   <template v-if="product.product_images.length > 0">
@@ -58,7 +58,7 @@
               </div>
             </div><!--row-->
           </div>
-          
+
         </div>
 
         <div class="col-sm-12 col-md-6">
@@ -334,6 +334,7 @@
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('categories');
             let response1 = await app.$axios.$get('products/'+id);
+            console.log(response1.colors)
             return {
                 categoryList: response.data,
                 product: response1.product,
@@ -413,7 +414,7 @@
                     $( ".outline p" ).html( "Color: <span style='color:" +
                     clas + ";font-weight:bold;'>" + clas + "</span>" );
                   }
-                    
+
               });
 
               $('.select_size_pro .btnsize').click(function(){
@@ -449,8 +450,8 @@
                   }
                   if(
                       (item.id == obj.id) &&
-                      (JSON.stringify(item.selected_color) == JSON.stringify(obj.selected_color)) && 
-                      (JSON.stringify(item.selected_size) == JSON.stringify(obj.selected_size)) 
+                      (JSON.stringify(item.selected_color) == JSON.stringify(obj.selected_color)) &&
+                      (JSON.stringify(item.selected_size) == JSON.stringify(obj.selected_size))
                     )
                   {
                     index1 = index
