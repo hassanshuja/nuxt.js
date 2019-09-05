@@ -78,7 +78,7 @@
                                   <span class="right">
                                     <a href="#"><img src="~assets/images/close.svg"></a>
                                     </span>
-                                 </div> 
+                                 </div>
                                     <template v-for="cart in carts">
                                         <span class="item_main">
                                             <span class="item-left">
@@ -94,13 +94,13 @@
                                               <span>Color: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></span>
                                               <span>Size: <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></span>
                                               <span>Qty: {{ cart.selected_quantity}}</span>
-                                             </span> 
+                                             </span>
                                             </span>
                                         </span>
                                     </template>
                                <div class="check_cart">
                                 <button @click="$router.push('/checkout')" type="button" class="check_cartpro">CHEKOUT</button>
-                               </div> 
+                               </div>
                             </div>
                         </template>
                         </div>
@@ -126,14 +126,14 @@
                                                 <label for="email" class="col-sm-12 control-label" >
                                                     Email</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="email" class="form-control" id="email1" v-model="email" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="password" class="col-sm-12 control-label">
                                                     Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="password" class="form-control" id="password" v-model="password" required/>
                                                 </div>
                                             </div>
                                             <div class="col-sm-10">
@@ -141,14 +141,14 @@
                                                     <a href="#forgot_form" class="forgot_link" data-toggle="modal" data-target="#forgot_form">Forgot your password?</a>
                                                 </div>
                                             </div>
-                                            <div class="form-group" id="email_another">
+                                            <div class="form-group" id="email_another" v-if="login_err">
                                                 <div class="col-sm-12">
                                                     *Email and Password do not match.
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="button" class="login_submit">SIGN IN</button>
+                                                    <button type="button" class="login_submit" @click="login">SIGN IN</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -181,41 +181,41 @@
                                     <div class="tab-pane" id="Registration">
                                         <form role="form" class="form-horizontal">
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="name" class="col-sm-12 control-label">
                                                     Name</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="name" class="form-control" id="name" v-model="name" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="emailReg" class="col-sm-12 control-label">
                                                     Email</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="emailReg" class="form-control" id="emailReg" v-model="emailReg" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email" class="col-sm-12 control-label">
+                                                <label for="phone" class="col-sm-12 control-label">
                                                     Phone</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="email1" required/>
+                                                    <input type="phone" class="form-control" id="phone" v-model="phone" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="newpassword1" class="col-sm-12 control-label">
                                                     Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="newpassword1" class="form-control" id="newpassword1"  v-model="newpassword1" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputPassword1" class="col-sm-12 control-label">
+                                                <label for="newpassword2" class="col-sm-12 control-label">
                                                     Confirm Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="email" class="form-control" id="exampleInputPassword1"  required/>
+                                                    <input type="newpassword2" class="form-control" id="newpassword2" v-model="newpassword2" required/>
                                                 </div>
                                             </div>
-                                            <div class="form-group" id="email_another">
+                                            <div class="form-group" id="email_another" v-if="reg_err">
                                                 <div class="col-sm-12">
                                                     *Another customer is already using this email. Please choose
                                                     another.
@@ -228,14 +228,14 @@
                                                             Sign me up for the newsletter, and yes I am over 16 years old. I accept the
                                                             <b>Privacy Notice</b>
                                                         </div>
-                                                        <input type="checkbox">
-                                                        <span class="checkmark"></span>
+                                                        <input type="checkbox" name="signup_newsletter" v-model="signup_newsletter">
+                                                        <span class="checkmark" ></span>
                                                     </label>
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="login_submit">
+                                                    <button type="submit" class="login_submit" @click="register">
                                                         REGISTER</button>
                                                 </div>
                                                 <div class="gap_ttt">
@@ -268,13 +268,9 @@
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -315,8 +311,6 @@
                         </div>
 
                         <!-- Modal footer -->
-
-
                     </div>
                 </div>
                 <!-- ----------------------------------End forgot Model ------------------------>
@@ -342,10 +336,7 @@
 
                             </div>
                         </div>
-
                         <!-- Modal footer -->
-
-
                     </div>
                 </div>
                 <!-- ---------------------------------End thamf Model ------------------------>
@@ -464,21 +455,40 @@
 
 <script>
     export default {
-        name: "Home-Header",
-        computed:{
-          carts () {
-            return this.$store.state.carts.list
-          }
-        },
-        data: function () {
-          return {
-              IMAGE_URL: 'http://localhost:8000/',
-          }
+      name: "Home-Header",
+      data: function () {
+        return {
+            email:'',
+            emailReg: '',
+            password: '',
+            newpassword1: '',
+            newpassword2: '',
+            phone: '',
+            signup_newsletter: '',
+            name: '',
+            login_err:'',
+            reg_err: '',
+            IMAGE_URL: 'http://localhost:8000/',
         }
+      },
+      methods: {
+        login(){
+          console.log(this.email, this.password)
+        },
+        register() {
+          console.log('hiiiiiii')
+        }
+      },
+      computed:{
+        carts () {
+          return this.$store.state.carts.list
+        }
+      }
     }
 </script>
 
 <style scoped>
+
 .dropdown-demo {
     display: none;
     position: absolute;
@@ -491,7 +501,7 @@
     float: left;
     width: 264px;
     right: 10px;
-    height: auto;  
+    height: auto;
     max-height: 350px;
     overflow-y: scroll;
 }
@@ -507,9 +517,9 @@ button.check_cartpro:hover {
 .check_cart button.check_cartpro {float: left;width: 100%;background-color: #4c4988;
 border: none;font-family: Lato;cursor: pointer;font-weight: 900;font-style: normal;
 font-stretch: normal;line-height: 2.67;letter-spacing: 1px;text-align: center;
-color: #ffffff;font-size: 10px;padding: 10px 0;} 
+color: #ffffff;font-size: 10px;padding: 10px 0;}
 .check_cart button.check_cartpro {float: left;width: 100%;}
-.check_cart {float: left;width: 100%;} 
+.check_cart {float: left;width: 100%;}
 span.addcart_name {float: left;width: 150px;padding: 0 10px;font-weight: 900;}
 span.addcart_color {float: left;width: 150px;padding: 0 10px;}
 .dropdown-demo span.item_main span.item_description span {
@@ -540,14 +550,14 @@ width: 264px;left: -242px;}
 .dropdown-demo {display: none;position: absolute;background-color: #f9f9f9;
 margin: 38px 0;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);padding: 12px 16px;
 z-index: 1;border: 1px solid rgba(9, 7, 9, 0.08);}
-.cart_icon:hover .dropdown-demo {display: block;} 
+.cart_icon:hover .dropdown-demo {display: block;}
 .select-selected:after {content: url(~assets/images/arrow_down_black.svg);
 float: right;width: 100%;margin-left: 5px;font-weight: 600;
-width: 14px;position: absolute; right: 10px;} 
+width: 14px;position: absolute; right: 10px;}
 .quality_pro span {font-family: Open sans;font-size: 11px;font-weight: normal;
 font-style: normal;font-stretch: normal;line-height: 2.4;letter-spacing: normal;
 color: #3d3d3d;}
-.quality_pro {float: left;width: 100%;padding: 10px 0;padding-bottom: 0;} 
+.quality_pro {float: left;width: 100%;padding: 10px 0;padding-bottom: 0;}
 svg.red path {fill: #4c4988;}
 .custom-drop {position: relative;font-family: Arial;}
 .custom-drop select {
