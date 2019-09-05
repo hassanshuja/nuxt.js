@@ -91,8 +91,8 @@
                                             <span class="addcart_price">IDR {{ cart.price}}</span>
                                             </span>
                                             <span class="item_description">
-                                              <span>Color: {{ cart.selected_color.name }}</span>
-                                              <span>Size: {{ cart.selected_size.name }}</span>
+                                              <span>Color: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></span>
+                                              <span>Size: <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></span>
                                               <span>Qty: {{ cart.selected_quantity}}</span>
                                              </span> 
                                             </span>

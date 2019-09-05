@@ -90,7 +90,7 @@
               <div class="best_saller_title">
                   BEST SELLER
               </div>
-
+							
               <template v-for="(item, index) in featuredList">
                 <div class="col-sm-6 col-md-3 res_two" :key="index">
                   <div class="best_saller_inner">
@@ -200,9 +200,7 @@
 		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
 		import AboutContent from "../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
-		if (process.client) {
-		  require('owl.carousel')
-		}
+
 		export default {
 				name: "index",
 				components: {AboutContent, BottomHeader},
@@ -225,32 +223,32 @@
 				},*/
 
 				mounted(){
-					setTimeout(function () {
-						$('.owl-carousel').owlCarousel({
-	                loop: true,
-	                margin: 10,
-	                responsiveClass: true,
-	                navigation : true,
-	                navText: ["<img src='images/arrow_left_new.svg'>","<img src='images/arrow_right_new.svg'>"],
-	    						loop: true,
-	                responsive: {
-	                  0: {
-	                    items: 2.5,
-	                    nav: true
-	                  },
-	                  600: {
-	                    items: 3.5,
-	                    nav: false
-	                  },
-	                  1000: {
-	                    items: 6,
-	                    nav: true,
-	                    loop: false,
+					// setTimeout(function () {
+					// 	$('.owl-carousel').owlCarousel({
+	    //             loop: true,
+	    //             margin: 10,
+	    //             responsiveClass: true,
+	    //             navigation : true,
+	    //             navText: ["<img src='images/arrow_left_new.svg'>","<img src='images/arrow_right_new.svg'>"],
+	    // 						loop: true,
+	    //             responsive: {
+	    //               0: {
+	    //                 items: 2.5,
+	    //                 nav: true
+	    //               },
+	    //               600: {
+	    //                 items: 3.5,
+	    //                 nav: false
+	    //               },
+	    //               1000: {
+	    //                 items: 6,
+	    //                 nav: true,
+	    //                 loop: false,
 	                   
-	                  }
-	                }
-	              })
-					}, 3000);
+	    //               }
+	    //             }
+	    //           })
+					// }, 3000);
 						
 				},
 				async asyncData ({ app,store }) {
