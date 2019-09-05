@@ -471,6 +471,7 @@
               toggle: 'carts/toggle'
             }),
             selectColor(index, item) {
+              console.log(index, item)
               var obj = {id: index, name: item}
               this.selected_color = obj
             },
