@@ -24,20 +24,36 @@ export default {
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
     ],
 
-    /*script: [
-        {
-            src: "/js/jquery.min.js",
-            type: "text/javascript"
+    script: [
+      {
+            src: "https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js",
+            type: "text/javascript",
+            body: true,
+            id: "midtrans-script",
+            'data-environment':"sandbox",
+            'data-client-key':"VT-client-kev115vEOPOwkRiV"
         },
         {
-            src:"/js/popper.min.js",
-            type: "text/javascript"
-        },
-        {
-            src:"/js/bootstrap.min.js",
-            type: "text/javascript"
-        }
-    ]*/
+          src: "https://app.sandbox.midtrans.com/snap/snap.js",
+          type: "text/javascript",
+          body: true,
+          'data-environment':"sandbox",
+          'data-client-key':"VT-client-kev115vEOPOwkRiV"
+      },
+
+        // {
+        //     src: "/js/jquery.min.js",
+        //     type: "text/javascript"
+        // },
+        // {
+        //     src:"/js/popper.min.js",
+        //     type: "text/javascript"
+        // },
+        // {
+        //     src:"/js/bootstrap.min.js",
+        //     type: "text/javascript"
+        // }
+    ]
   },
 
   /*
@@ -75,15 +91,33 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-      "nuxt-svg"
+      "nuxt-svg",
+      '@nuxtjs/proxy'
   ],
+
+   proxy: {
+    // Simple proxy
+    // '/api': ' https://api.sandbox.midtrans.com',
+    '/api/': { target: 'https://app.sandbox.midtrans.com', pathRewrite: {'^/api/': ''} },
+
+    // With options
+    '/api2/': { target: 'https://api.shipper.id',pathRewrite: {'^/api2/': ''} },
+
+    // // Proxy to backend unix socket
+    // '/api3': {
+    //   changeOrigin: false,
+    //   target: { socketPath: '/var/run/http-sockets/backend.sock' }
+    // }
+  },
   /*
   ** Axios module configuration
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
       baseURL: process.env.BASE_URL,
-      credentials: false
+      proxy: true,
+      credentials: false,
+      crossDomain: true
   },
 
   /*

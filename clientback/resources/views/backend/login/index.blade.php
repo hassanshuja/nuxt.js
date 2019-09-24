@@ -1,6 +1,14 @@
 @extends('backend.layout.login')
 
 @section('content')
+@php
+ // Test database connection
+try {
+    DB::connection()->getPdo();
+} catch (\Exception $e) {
+    dd("Could not connect to the database.  Please check your configuration. error:" . $e );
+}   
+@endphp
 <div class="kt-login__container">
     <div class="kt-login__logo">
         <a href="{!! ADMIN !!}">
