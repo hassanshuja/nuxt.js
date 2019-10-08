@@ -17,10 +17,10 @@
     export default {
         name: "AboutContent",
         props: {
-            common: {
-                required: true,
-                type: Array
-            }
+            // common: {
+            //     required: true,
+            //     type: Array
+            // }
         }
 
     }

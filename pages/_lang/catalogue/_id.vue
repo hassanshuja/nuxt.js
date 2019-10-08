@@ -206,7 +206,7 @@
 						</div>
 
 							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
-							<div id="Paris" class="tabcontent" style="display: block;">
+							<div id="Paris" class="tabcontent" style="display: block;" v-if="showEmptyMessage == false">
 								<template v-for="(item, index) in productsList">
 									<div :class="'col-sm-12 col-md-'+tabColumns +' colum_pro'" :key="index">
 										<div class="best_saller_inner">
@@ -214,16 +214,21 @@
 												<a :href="'/product_detail/'+item.id">
 													<!-- <img src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/> -->
 													<template v-if="item.product_images && item.product_images.length > 0">
-														<img width="300" height="450" :src="IMAGE_URL + item.product_images[0].image_url"/>
+														<img width="300" height="450" 
+														v-lazy="IMAGE_URL + item.product_images[0].image_url" 
+														/>
 													</template>
 													<template v-else>
-													<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'"/>
+													<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'" />
 													</template>
 													<div>{{ item.product_images.image_url}}</div>
 													<div class="brand_name">
 														<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
 														<div class="brand_category">{{ item.name }}</div>
-														<div class="productbrand_price"><div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div><span>IDR {{ item.price }}</span>
+														<div class="productbrand_price">
+															<!-- <div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div> -->
+															<!-- <span>IDR {{ item.price }}</span> -->
+															<div class="productbrand_price">IDR {{ item.price }}</div>
 														</div>
 													</div>
 												</a>
@@ -236,12 +241,27 @@
 									<paginate
 									  v-model="page"
 									  :page-range="5"
-									  :page-count="20"
+									  :page-count="page_count"
 									  :click-handler="searchCatalogue"
 									  :active-class="'page-active'"
 									  :container-class="'pagination'">
 									</paginate>
 								</template>
+							</div>
+							<div id="Paris" class="tabcontent" style="display: block;" v-else>
+								<div>
+									<section class="section-b-space light-layout">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="noproduct"><i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+														<h2>No Products Found !</h2>
+													</div>
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
 							</div>
 							<!-- TEMPLATE TO SHOW 4 COLUMNS EACH -->
 						</div>
@@ -261,7 +281,7 @@
 		import AboutContent from "../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
 		export default {
-				name: "index",
+				name: "catalogue-id",
 				components: {
 					AboutContent,
 					BottomHeader
@@ -282,7 +302,9 @@
 								searchTags: [],
 								colorSearch: [],
 								sizeSearch: [],
-								IMAGE_URL: 'http://localhost:8000/'
+								IMAGE_URL: 'http://18.217.178.147/',
+								baseURL: process.env.baseURL,
+								showEmptyMessage: false
 						}
 				},
 				watch: {
@@ -306,6 +328,7 @@
 
 				mounted(){
 					this.documentReady()
+					console.log(this.$route.params.id)
 				},
 				async asyncData ({ app,store }) {
 						/*const locale = store.state.locale
@@ -323,24 +346,33 @@
 								sizesList: productSizes,
 								colorsList: productColors,
 								page: response2.current_page,
-								page_count: response2.total,
+								page_count: response2.last_page,
 								categoryList:response1.data
 						}
 				},
 				methods: {
+					async checkimage(imgs) {
+						console.log(imgs)
+					},
 					async searchCatalogue() {
-						let searchUrl = 'page/catalogue?page='+this.page;
+						let baseURL = this.baseURL 
+						let searchUrl = this.baseURL+'/page/catalogue?page='+this.page;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = 'page/catalogue?page='+this.page+'&colors='+colors+'&size='+size;
+							searchUrl = this.baseURL+'/page/catalogue?page='+this.page+'&colors='+colors+'&size='+size;
 						}
 						let response2 = await this.$axios.$get(searchUrl);
-						console.log('search Url', searchUrl);
+						// console.log('search Url', searchUrl);
 						if(response2) {
+							if(response2.data.length == 0){
+								this.showEmptyMessage = true
+							}else{
+								this.showEmptyMessage = false
+							}
 							this.productsList = response2.data;
 							this.page = response2.current_page
-							this.page_count = response2.total
+							this.page_count = response2.last_page
 							window.scrollTo(0,0);
 						}
 					},

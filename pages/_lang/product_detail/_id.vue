@@ -41,7 +41,8 @@
                   <template v-if="product.product_images.length > 0">
                     <template v-for="(item, index) in product.product_images">
                       <a class="example-image-link" href="images/stylefour.jpg" data-lightbox="example-set">
-                        <div :class="'carousel-item '  + index === 0 ? 'active' : ''">
+                        <!-- <div :class="'carousel-item '  + index === 0 ? 'active' : ''"> -->
+                        <div :class="'carousel-item'  + index === 0 ? 'active' : ''">
                           <img :src="IMAGE_URL + item.image_url" alt="">
                         </div>
                       </a>
@@ -70,6 +71,8 @@
               <span>{{ product.modal }}</span><span class="name_or"> - {{ product.name }} </span><br><span class="blow_identi">IDR {{ product.price.toLocaleString() }}</span>
             </div>
             <div class="pickerWrapper">
+            <div class="alert alert-danger" v-if="color_error">{{color_error}}</div>
+
                <div class="outline">
                   <template v-if="selected_color">
                     <p>Color: <b>{{ selected_color.name }}</b> </p>
@@ -77,18 +80,19 @@
                 </div>
                 <template v-for="(item, index) in colors">
                   <ul class="bord">
-                    <li @click="selectColor(index, item)" class="inner_ga">
-                      <div :id="index" :class="item" id="squer" :style="'background-color:'+item.toLowerCase() +''"></div>
+                    <li @click="selectColor(productsId[index], item)" class="inner_ga">
+                      <div :id="productsId[index]" :class="item" id="squer" :style="'background-color:'+item.toLowerCase() +''"></div>
                     </li>
                   </ul>
                 </template>
             </div>
+            <div class="alert alert-danger" v-if="size_error">{{size_error}}</div>
             <div class="product_in_size">
               <span style="color:#3d3d3d">Size:</span>
-              <a href="#" data-toggle="modal" data-target="#sizemodel" style="color: #4c4988;font-family: Open Sans;font-size: 11px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing:normal;color: #4c4988;">(Not Sure? Get Your Size Suggestion)</a>
+              <!-- <a href="#" data-toggle="modal" data-target="#sizemodel" style="color: #4c4988;font-family: Open Sans;font-size: 11px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing:normal;color: #4c4988;">(Not Sure? Get Your Size Suggestion)</a> -->
               <div class="select_size_pro">
                 <template v-for="(item, index) in sizes">
-                  <button @click="selectSize(index, item)" :key="index" type="button" class="btnsize inactive">{{ item }}</button>
+                  <button @click="selectSize(index, item); myFilter" :key="index" type="button" :class="isActive + ' btnsize'">{{ item.name }}</button>
                 </template>
                 <!-- <button type="button" class="btnsize inactive">ALL SIZE</button>
                 <button type="button" class="btnsize inactive">XS</button>
@@ -141,18 +145,18 @@
           </div>
         </div>
        <!------------------- Model Popup ------------------------>
-      <div class="modal" id="sizemodel">
+      <!-- <div class="modal" id="sizemodel">
         <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
                       <button type="button" class="close in" data-dismiss="modal"><img src="images/close.svg" class="popup_cross"></button>
                       <h4>SMART SIZING</h4>
-                        <!-- Nav tabs -->
+
                         <ul class="nav nav-tabs">
                             <li class="active show"><a href="#body_mea" data-toggle="tab" class="active show">BODY MEASUREMENT</a></li>
                             <li><a href="#brand" data-toggle="tab">BRAND MEASUREMENT</a></li>
                         </ul>
-                        <!-- Tab panes -->
+                        
                         <div class="tab-content">
                             <div class="tab-pane active" id="body_mea">
                                 <form role="form" class="form-horizontal">
@@ -288,10 +292,10 @@
                     </div>
                 </div>
             </div>
-      </div>
+      </div> 
 
 
-       <!--------------------- End Model ------------------------>
+     ------------------------>
       </div>
     </div>
   </div>
@@ -318,10 +322,15 @@
               colors: [],
               sizes: [],
               brand: [],
-              IMAGE_URL: 'http://localhost:8000/',
+              IMAGE_URL: 'http://18.217.178.147/',
               selected_quantity: 1,
               selected_color: null,
-              selected_size: null
+              selected_size: null,
+              product_merchant: null,
+              productsId : [],
+              color_error: null,
+              size_error: null,
+              isActive: 'inactive'
           }
         },
         transition: 'bounce',
@@ -333,18 +342,32 @@
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('categories');
             let response1 = await app.$axios.$get('products/'+id);
-            console.log(response1.colors)
+            let brand_id = Object.keys(response1.brand).filter((items, index) => {
+              if(response1.product.brand_id == items){
+                return response1.brand[items];
+              }
+            })
+            console.log(response1)
+            
+            // console.log(response1.brand.filter(brands => brands == response1.product.brand_id))
             return {
                 categoryList: response.data,
                 product: response1.product,
+                productsId : response1.productsId,
                 category: response1.category,
                 colors: response1.colors,
                 sizes: response1.sizes,
-                brand: response1.brand
+                brand: response1.brand,
+                product_merchant: response1.brand[brand_id]
             }
+
 
         },
         methods: {
+          myFilter: function(){
+            this.isActive = 'active';
+            // some code to filter users
+          },
           documentReady() {
               $('.previews a').click(function(){
                 var largeImage = $(this).attr('data-full');
@@ -424,6 +447,19 @@
               console.log('document ready');
             },
             addToCart() {
+
+              if(this.selected_color === null){
+                this.color_error = 'Please select color'
+                return false;
+              }else{
+                this.color_error = null
+              }
+              if(this.selected_size === null){
+                this.size_error = 'Please select size'
+                return false;
+              }else{
+                this.size_error = null
+              }
               var product = this.product;
               var obj = {
                 id: product.id,
@@ -437,7 +473,8 @@
                 colors: this.colors,
                 sizes: this.sizes,
                 category: this.category,
-                total_price: product.price * this.selected_quantity
+                total_price: product.price * this.selected_quantity,
+                product_merchant: this.product_merchant
               };
               var vuex = JSON.parse(localStorage.getItem('vuex'))
               if(vuex) {
@@ -471,14 +508,37 @@
               toggle: 'carts/toggle'
             }),
             selectColor(index, item) {
-              console.log(index, item)
+              this.getUpdatedData(index)
               var obj = {id: index, name: item}
               this.selected_color = obj
             },
             selectSize(index, item) {
-              var obj = {id: index, name: item}
+              var obj =  item
               this.selected_size = obj
-            }
+              console.log(obj)
+            },
+            async getUpdatedData (id) {
+              this.$axios.setHeader('lang', this.$store.state.locale)
+              let response = await this.$axios.$get('http://18.217.178.147/api/categories');
+              let response1 = await this.$axios.$get('http://18.217.178.147/api/products/'+id);
+              let brand_id = Object.keys(response1.brand).filter((items, index) => {
+                if(response1.product.brand_id == items){
+                  return response1.brand[items];
+                }
+              })
+              
+              // console.log(response1.brand.filter(brands => brands == response1.product.brand_id))
+              
+                  this.categoryList = response.data,
+                  this.product = response1.product,
+                  this.productsId  = response1.productsId,
+                  this.category = response1.category,
+                  this.colors = response1.colors,
+                  this.sizes = response1.sizes,
+                  this.brand = response1.brand,
+                  this.product_merchant = response1.brand[brand_id]
+                  
+          }
         }
 
     }

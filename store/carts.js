@@ -1,6 +1,7 @@
 export const state = () => ({
   list: [],
-  sub_total: 0
+  sub_total: 0,
+  final_detail: []
 })
 
 export const mutations = {
@@ -23,6 +24,11 @@ export const mutations = {
   		state.sub_total += item.total_price
   	})
   	state.list.sub_total = state.sub_total
+  },
+  payment(state, payload) {
+	  console.log('payment')
+	state.final_detail = payload
+	console.log(payload, state)
   },
   remove (state, { cart }) {
     state.list.splice(state.list.indexOf(cart), 1)

@@ -258,11 +258,11 @@
 						}
 						const referrer = process.client ? window.document.referrer :  req.headers.referer*/
 						app.$axios.setHeader('lang', store.state.locale)
-						let response1 = await app.$axios.$get('women/category');
-						let response2 = await app.$axios.$get('page/women');
-						let allProducts = await app.$axios.$get('women/allproducts');
-						let featuredProducts = await app.$axios.$get('women/featuredproducts');
-						console.log(allProducts);
+						let response1 = await app.$axios.$get('/women/category');
+						let response2 = await app.$axios.$get('/page/women');
+						let allProducts = await app.$axios.$get('/women/allproducts');
+						let featuredProducts = await app.$axios.$get('/women/featuredproducts');
+						// console.log(allProducts);
 						return {
 								data: response2.data,
 								categoryList:response1.data,

@@ -25,9 +25,9 @@
                         <div class="header_menu_web">
                             <ul>
                                 <li><a href="#" data-toggle="modal" data-target="#login">SIGN IN / REGISTER</a></li>
-                                <li><nuxt-link :to="$i18n.path('men')"  exact>
+                                <li><a href="/men"  >
                                         {{ $t('menu.men') }}
-                                    </nuxt-link>
+                                    </a>
                                 </li>
                                 <li>
                                     <nuxt-link :to="$i18n.path('women')"  exact>
@@ -63,10 +63,37 @@
                             <a href="#" data-toggle="collapse" data-target=".search-input"><img src="~assets/images/search.svg"><span>SEARCH</span></a>
 
                         </div>
-                        <div class="sing_in">
+                        <div class="sing_in" v-if="!loggedIn">
                             <a href="#" data-toggle="modal" data-target="#login">SIGN IN</a>
                             <a href="#" data-toggle="modal" data-target="#login">REGISTER</a>
                         </div>
+                        <div class="sing_in dropdown" v-if="loggedIn">
+                          <div class="dropdown-toggle" data-toggle="dropdown"><span style="font-size:14px">{{ user.name }}</span>
+                          <span class="caret"></span></div>
+                          <ul class="dropdown-menu" style="border:1px solid #ccc">
+                            <li style="border-bottom:1px solid #ccc">
+                              <a href="#">My Account</a>
+                            </li>
+                            <li><a href="#" @click.prevent="logout">Logout</a></li>
+                          </ul>
+                        </div>
+                        <!-- <div class="sing_in" style="display:absolute;" >
+                             <a href="#" @click.prevent="logout" >Logout</a> 
+                            <div class="navbar-menu">
+                              <div class="navbar-end">
+                                <div class="navbar-item has-dropdown is-hoverable" >
+                                  <a class="navbar-link">
+                                    {{ user.name }}
+                                  </a>
+                                  <div class="navbar-dropdown">
+                                    <nuxt-link class="navbar-item" to="/profile">My Profile</nuxt-link>
+                                    <hr class="navbar-divider">
+                                    <a class="navbar-item">Logout</a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div> --> 
                         <div class="cart_icon">
                             <a href="/mybag"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> --></a>
                             <template v-if="carts.length > 0">
@@ -80,7 +107,7 @@
                                     </span>
                                  </div>
                                     <template v-for="cart in carts">
-                                        <span class="item_main">
+                                        <span v-bind:key="cart" class="item_main">
                                             <span class="item-left">
                                             <template v-if="cart.images.length > 0">
                                               <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
@@ -91,8 +118,8 @@
                                             <span class="addcart_price">IDR {{ cart.price}}</span>
                                             </span>
                                             <span class="item_description">
-                                              <span>Color: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></span>
-                                              <span>Size: <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></span>
+                                              <span>Color: {{ cart.selected_color.name }}</span>
+                                              <span>Size: {{ cart.selected_size.name }}</span>
                                               <span>Qty: {{ cart.selected_quantity}}</span>
                                              </span>
                                             </span>
@@ -106,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- ----------------------------------Login  & Register Model ------------------------>
                 <div class="modal" id="login">
                     <div class="modal-body">
@@ -191,7 +219,7 @@
                                                 <label for="emailReg" class="col-sm-12 control-label">
                                                     Email</label>
                                                 <div class="col-sm-12">
-                                                    <input type="emailReg" class="form-control" id="emailReg" v-model="emailReg" required/>
+                                                    <input type="email" class="form-control" id="emailReg" v-model="email" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -202,17 +230,17 @@
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="newpassword1" class="col-sm-12 control-label">
+                                                <label for="password" class="col-sm-12 control-label">
                                                     Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="newpassword1" class="form-control" id="newpassword1"  v-model="newpassword1" required/>
+                                                    <input type="password" class="form-control" id="password"  v-model="password" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="newpassword2" class="col-sm-12 control-label">
+                                                <label for="password_confirmation" class="col-sm-12 control-label">
                                                     Confirm Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="newpassword2" class="form-control" id="newpassword2" v-model="newpassword2" required/>
+                                                    <input type="password_confirmation" class="form-control" id="password_confirmation" v-model="password_confirmation" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group" id="email_another" v-if="reg_err">
@@ -235,7 +263,7 @@
                                             </div>
                                             <div class="col-sm-12">
                                                 <div class="form-group">
-                                                    <button type="submit" class="login_submit" @click="register">
+                                                    <button type="button" class="login_submit" @click="register">
                                                         REGISTER</button>
                                                 </div>
                                                 <div class="gap_ttt">
@@ -340,10 +368,8 @@
                     </div>
                 </div>
                 <!-- ---------------------------------End thamf Model ------------------------>
-                <div id="menu2" >
-
-                </div>
             </div>
+
             <div class="header_menu">
                 <!-- <form class="sidebar-search  sidebar-search-bordered" action="page_general_search_3.html" method="POST">
                                        <a href="javascript:;" class="remove">
@@ -425,12 +451,8 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
-
         </div>
         <div class="right_ctn">
             <div class="search_below">
@@ -445,38 +467,66 @@
                         <button type="Search" class="col-sm-2 col-md-3 col-lg-3 btn_search">SEARCH</button>
                     </form>
                 </div>
-
             </div>
-
         </div>
     </div>
-
 </template>
 
 <script>
     export default {
       name: "Home-Header",
+      middleware: 'guest',
+
       data: function () {
         return {
             email:'',
             emailReg: '',
             password: '',
-            newpassword1: '',
-            newpassword2: '',
+            password_confirmation: '',
             phone: '',
-            signup_newsletter: '',
+            signup_newsletter: 0,
             name: '',
             login_err:'',
             reg_err: '',
-            IMAGE_URL: 'http://localhost:8000/',
+            IMAGE_URL: process.env.baseURL,
         }
       },
       methods: {
-        login(){
-          console.log(this.email, this.password)
+        async login(){
+        // this.$axios.defaults.baseURL = 'http://localhost:8000/api';
+   
+             this.$toast.show('Logging in...').goAway(1000);
+            await this.$auth.login({
+                  data: { email : this.email, password : this.password}
+            }).then(data => {
+              this.$router.push({
+                path: '/'
+            });
+            // console.log('not working')
+
+              this.$toast.success('Successfully authenticated').goAway(1500);
+             
+            }).catch((e) => {
+              
+              this.login_err = 'Unable to authenticate';
+              this.$toast.error('Error while authenticating').goAway(1500)
+            })
+             
         },
-        register() {
-          console.log('hiiiiiii')
+        async register() {
+          await this.$axios.post('register', this.$data);
+            this.$auth.login({
+                data: {
+                    email: this.email,
+                    password: this.password
+                }
+            })
+            this.$router.push({
+                path: '/'
+            });
+        },
+        logout() {
+            this.$auth.logout();
         }
       },
       computed:{
@@ -520,13 +570,13 @@ font-stretch: normal;line-height: 2.67;letter-spacing: 1px;text-align: center;
 color: #ffffff;font-size: 10px;padding: 10px 0;}
 .check_cart button.check_cartpro {float: left;width: 100%;}
 .check_cart {float: left;width: 100%;}
-span.addcart_name {float: left;width: 150px;padding: 0 10px;font-weight: 900;}
-span.addcart_color {float: left;width: 150px;padding: 0 10px;}
+span.addcart_name {float: left;padding: 0 10px;font-weight: 900;}
+span.addcart_color {float: left;padding: 0 10px;}
 .dropdown-demo span.item_main span.item_description span {
 float: left;padding: 0px 9px;padding-bottom: 0;}
 .dropdown-demo span.item_main span.item_description span {float: left;
 width: 150px;padding: 0 17px;padding: 0px 10px !important;line-height: 1;}
-span.addcart_price {float: left;width: 150px;padding: 0 10px;padding-bottom: 16px;}
+span.addcart_price {float: left;padding: 0 10px;padding-bottom: 16px;}
 .dropdown-demo span.item_main span.item_description {float: none;
 width: auto;font-size: 10px;font-family: open Sans;font-weight: normal;
 font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;
@@ -543,14 +593,14 @@ width: 62px;}
 .dropdown-demo span.item_main {float: left;width: 100%;padding-bottom: 15px;}
 .dropdown-demo span.item_main span.item-left {float: left;width: 100%;padding-top: 10px;
 }
-.dropdown-demo {display: none;position: absolute;background-color: #f9f9f9;
-margin: 38px 0;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-padding: 12px 16px;z-index: 1;left: 0;/* display: table-row; */float: left;
-width: 264px;left: -242px;}
-.dropdown-demo {display: none;position: absolute;background-color: #f9f9f9;
-margin: 38px 0;box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);padding: 12px 16px;
-z-index: 1;border: 1px solid rgba(9, 7, 9, 0.08);}
-.cart_icon:hover .dropdown-demo {display: block;}
+
+
+.cart_icon:hover .dropdown-demo {display: block; cursor:grab;}
+
+.dropdown-demo:hover .dropdown-demo {
+    display:block;
+    cursor:grab;
+}
 .select-selected:after {content: url(~assets/images/arrow_down_black.svg);
 float: right;width: 100%;margin-left: 5px;font-weight: 600;
 width: 14px;position: absolute; right: 10px;}

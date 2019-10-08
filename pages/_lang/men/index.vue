@@ -218,7 +218,7 @@
 								categoryList:[],
 								featuredList:[],
 								productsList: [],
-								IMAGE_URL: 'http://localhost:8000/'
+								IMAGE_URL: 'http://18.217.178.147/'
 						}
 				},
 			 // transition: 'page',
@@ -234,6 +234,7 @@
 						let response2 = await app.$axios.$get('page/men');
 						let allProducts = await app.$axios.$get('men/allproducts');
 						let featuredProducts = await app.$axios.$get('men/featuredproducts');
+						// console.log(response1.data)
 						return {
 								data: response2.data,
 								categoryList:response1.data,

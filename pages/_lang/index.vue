@@ -61,7 +61,7 @@
                 data : []
             }
         },
-        transition: 'bounce',
+        // transition: 'bounce',
         mounted(){
             setTimeout(function () {
                 $('#mypopup').modal('show');
@@ -87,6 +87,7 @@
         async asyncData ({ app,store }) {
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('page/home');
+
             return {
                 data: response.data
             }
