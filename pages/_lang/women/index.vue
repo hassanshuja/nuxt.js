@@ -213,7 +213,7 @@
 								categoryList:[],
 								featuredList:[],
 								productsList: [],
-								IMAGE_URL: 'http://localhost:8000/'
+								IMAGE_URL: 'http://18.221.210.123/'
 						}
 				},
 				//transition: 'slide',
