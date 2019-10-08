@@ -1,37 +1,23 @@
 <template>
     <div class="modal show" id="mypopup" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div id="lorem">
                     <div class="left_pop">
-                        <img src="~assets/images/que.png">
+
+                        <a href="javascript:;" @click="pay_midtrans()" style="text-align: center;display: block;float: right;margin-top: 50px;border: 1px solid #ddd;">
+                            <img style="width: 90%; height: 173px;" src="~assets/images/Apoyo_US_03_cotiza-compra_medios-de-pago_tarjetas-credito.png">
+                        </a>
+                        <span style="display: inline-block;margin-left: 70px;margin-top: 20px;">{{ $t('checkout.Pay_credit_bank') }}</span>
                     </div>
                     <div class="right_pop">
-                        <button type="button" class="close in" data-dismiss="modal"><img src="~assets/images/close.svg" class="popup_cross"></button>
-                        <span>{{ $t('singup_newsletter.heading') }}</span>
-		                  </span>
-                      <div class="right_pop_div" v-if="successess.length">
-                            <div v-for="(success, index) in successess" v-bind:key="index">
-                              <div class="alert alert-success" role="alert">
-                                {{success}}
-                              </div>
-                            </div>
-                          </div>
-                      <div class="right_pop_div" v-if="errors.length">
-                            <div v-for="(error, index) in errors" v-bind:key="index">
-                              <div class="alert alert-danger" role="alert">
-                                {{error}}
-                              </div>
-                            </div>
-                          </div>
-                        <input type="text" name="email" placeholder="Email Address" v-model="email">
+                      <button type="button" class="close in" data-dismiss="modal"><img src="~assets/images/close.svg" class="popup_cross"></button>
 
-                        <div class="form-group">
-                            <button type="button" v-on:click="submit_newsletter" class="submit_btn">SUBMIT</button>
-                        </div>
-
+                       <a href="javascript:;" @click="pay_installments()" style="text-align: center;display: inline-block;margin-top: 50px;border: 1px solid rgb(221, 221, 221);">
+                            <img style="height: 173px;" src="~assets/images/installment_payment.webp">
+                        </a>
+                        <span style="margin: 0px;padding: 14px;margin-left: 40px;margin-bottom: 34px;">{{ $t('checkout.pay_installment') }}</span>
                     </div>
                 </div>
 
@@ -44,7 +30,7 @@
 <script>
 import axios from '@nuxtjs/axios'
     export default {
-        name: "Newsletter",
+        name: "PaymentOptions",
         data() {
           return {
             email: null,
@@ -52,7 +38,14 @@ import axios from '@nuxtjs/axios'
             successess: [],
           }
         },
+
         methods:{
+          pay_installments: function() {
+            this.$emit('kerdivo');
+        },
+        pay_midtrans: function(){
+          this.$emit('midtrans');
+        },
          submit_newsletter: function() {
            this.errors = [];
            this.successess = [];

@@ -19,6 +19,7 @@ export default {
     link: [
         { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i,900' },
+        { rel: 'stylesheet', href: 'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css' },
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i,700,700i,800,800i,900,900i' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
@@ -40,6 +41,9 @@ export default {
           'data-environment':"sandbox",
           'data-client-key':"VT-client-kev115vEOPOwkRiV"
       },
+      {
+        src: 'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js'
+      }
 
         // {
         //     src: "/js/jquery.min.js",
@@ -72,6 +76,7 @@ export default {
   */
   plugins: [
       '~/plugins/i18n.js',
+      '~plugins/mixins/user.js',
       { src: '~plugins/bootstrap.js' },
       { src: '~/plugins/after-each', mode: 'client' },
       { src: '~/plugins/slicknav.js',ssr:false},
@@ -79,7 +84,7 @@ export default {
       { src: '~/plugins/owl.carousel', ssr: false},
       { src: '~/plugins/vue-lazyload', ssr: false },
       { src: '~/plugins/infiniteloading', ssr: false },
-      { src: '~/plugins/axios', ssr: false },
+      { src: '~/plugins/axios', ssr: false , mode: 'server' },
       { src: '~/plugins/vuex-persist', ssr: false, mode: 'client' },
       { src: '~/plugins/vuejs-paginate', ssr: false, mode: 'client'},
       { src:'~plugins/vue-scrollto.js',ssr:false}
@@ -92,7 +97,10 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
       "nuxt-svg",
-      '@nuxtjs/proxy'
+      '@nuxtjs/proxy',
+      '@nuxtjs/auth',
+      '@nuxtjs/toast',
+
   ],
 
    proxy: {
@@ -102,8 +110,10 @@ export default {
 
     // With options
     '/api2/': { target: 'https://api.shipper.id',pathRewrite: {'^/api2/': ''} },
-
+    //with options
+    '/apii33/': {target: 'https://sandbox.kredivo.com', pathRewrite: {'^/apii33/': ''}},
     // // Proxy to backend unix socket
+
     // '/api3': {
     //   changeOrigin: false,
     //   target: { socketPath: '/var/run/http-sockets/backend.sock' }
@@ -115,11 +125,41 @@ export default {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
       baseURL: process.env.BASE_URL,
-      proxy: true,
-      credentials: false,
-      crossDomain: true
   },
-
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: '/',
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'login', method: 'post', propertyName: 'meta.token' },
+          user: { url: 'user', method: 'get', propertyName: 'data' },
+          logout: { url: 'logout', method: 'post' }
+        }
+      }
+    }
+  },
+  toast: {
+      position: 'top-right',
+      register: [ // Register custom toasts
+        {
+          name: 'my-error',
+          message: 'Oops...Something went wrong',
+          options: {
+            type: 'error'
+          }
+        }
+      ]
+  },
+  env: {
+    baseURL: process.env.BASE_URL,
+    proxy:true,
+    debug:true
+  },
   /*
   ** Build configuration
   */
@@ -135,10 +175,15 @@ export default {
               'window.jQuery': 'jquery'
           })
       ],
-      extend(config, options) {
-        return Object.assign({}, config, {
-          devtool: 'source-map'
-        })
+      // extend(config, options) {
+      //   return Object.assign({}, config, {
+      //     devtool: 'source-map'
+      //   })
+      // }
+      extend(config, ctx) {
+        if (ctx.isDev) {
+          config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map'
+        }
       }
   },
     router: {              // customize nuxt.js router (vue-router).

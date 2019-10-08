@@ -356,7 +356,7 @@ button.w3-button.w3-display-right.w3-black {opacity: 0.2;}
 .best_saller {float: left;width: 100%;padding-bottom: 30px;}
 .best_saller .best_saller_title {float: left;width: 100%;text-align: center;padding: 28px;
 padding-bottom: 28px;font-family: Lato;letter-spacing: 1px;font-size: 14px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;text-align: center;color: #3d3d3d;}
-.best_saller_inner .best_saller_main img {float: left;width: 100%;padding-bottom: 9px;}
+.best_saller_inner .best_saller_main img {float: left;width: 100%;padding-bottom: 9px;    height: 344px;}
 .best_saller_inner .best_saller_main img:hover {opacity: 0.8;}
 .best_saller_inner .best_saller_main {float: left;width: 100%;}
 .best_saller_inner {float: left;width: 100%;position: relative;}
@@ -1509,7 +1509,8 @@ button.remove-btn {background-color: transparent;border: none;}
 .content::-webkit-scrollbar-thumb:hover {background: #555; }
 .content ul li:hover {background-color: #4c4988;}
 .content ul li:hover button#btn1 {color: #fff;}
-.pagination {display: inline-block;font-family: Lato;font-size: 8px;font-weight: 300;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #9b9b9b;}
+.pagination {width:100%; font-weight: bold;
+  color: var(--greyish-brown-two);display: inline-block;font-family: Lato;font-size: 8px;font-weight: 300;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #9b9b9b;}
 .pagination a {color: black;float: left;padding: 8px 8px;text-decoration: none;}
 .pagination a.active {color: #3d3d3d;font-weight: 900;}
 
@@ -1621,11 +1622,11 @@ ul.bord li.inner_ga {float: left;width: auto;padding: 0 4px;list-style: none;}
 .product_in_size {float: left;width: 57%;padding-bottom: 8px;}
 .product_in_size span {float: none;width: 100%;font-family: Lato;font-size: 11px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: normal;color: #4c4988;}
 .select_size_pro {float: left;width: 100%;padding-bottom: 8px;}
-.select_size_pro button {float: none;width: auto;background-color: transparent;border: 1px solid #ccc;/* font-family: FiraSans; */font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: normal;text-align: center;color: #3d3d3d;  padding: 2px 11px;font-family: Open sans;}
-.select_size_pro button:nth-child(1) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;}
+.select_size_pro button {margin:0px 4px;float: none;width: auto;background-color: transparent;border: 1px solid #ccc;/* font-family: FiraSans; */font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: normal;text-align: center;color: #3d3d3d;  padding: 2px 11px;font-family: Open sans;}
+/* .select_size_pro button:nth-child(1) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;}
 .select_size_pro button:nth-child(2) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;}
 .select_size_pro button:nth-child(6) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;}
-.select_size_pro button:nth-child(7) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;}
+.select_size_pro button:nth-child(7) {opacity: 0.5;background-color: #d3cece;color: #3d3d3d;} */
 .product_qty .qty select {float: left;width: 72px;height: 32px;border: 1px solid rgba(9, 7, 9, 0.08);background-color: transparent;font-family: Open sans;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;letter-spacing: normal;text-align: center;color: #3d3d3d;;padding: 0 10px;/* float: left; *//* width: 100%; */-webkit-appearance: none !important;  -moz-appearance:none;
    appearance:none;
 -moz-appearance: none;background: url(../images/arrow_down_black.svg) 86% / 14% no-repeat;}
@@ -2871,4 +2872,8 @@ span.back_top input.col-sm-12.col-md-12 {border-bottom: 1px solid #4c4988;border
 .carousel-inner img {
   width: 100%;
   height: 632px;
+}
+
+input {
+  border: 1px solid;
 }

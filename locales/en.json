@@ -26,5 +26,9 @@
   },
   "singup_newsletter": {
     "heading" : "Sign up to our newsletter and receive 10% off your first order."
+  },
+  "checkout": {
+    "Pay_credit_bank": "Pay via Credit Card OR Bank",
+    "pay_installment": "Pay in Installments"
   }
 }

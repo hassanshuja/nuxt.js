@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<bottom-header :categoryList="categoryList" :url="'men/category/'"></bottom-header>
+		<bottom-header :categoryList="categoryList" :url="'women/category/'"></bottom-header>
 
 		<div class="container-fluid">
 			<div class="row" id="bor" style="margin:auto">
@@ -65,13 +65,63 @@
 
 									<div class="View_cloth">
 										<span>VIEW ALL CLOTHING</span>
-	
-										<div class="content_cat">
+										<button class="collapsible active">TOPS</button>
+										<div class="content_cat" style="display: block;">
 											<div class="memory">
 												<ul>
-													<template v-for="(item, index) in subcategory">
-														<li :key="index"><a href="#"  @click.prevent="setSubCatID(item.id);searchCatalogue(item.id)">{{item.name}}</a></li>
-													</template>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
+												</ul>
+											</div>
+										</div>
+									 <button class="collapsible">OUTERWEAR</button>
+										<div class="content_cat" style="display: none;">
+											<div class="memory">
+												<ul>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
+												</ul>
+											</div>
+										</div>
+										<button class="collapsible">PANTS</button>
+										<div class="content_cat" style="display: none;">
+											<div class="memory">
+												<ul>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
+												</ul>
+											</div>
+										</div>
+										<button class="collapsible">SPORTS</button>
+										<div class="content_cat" style="display: none;">
+											<div class="memory">
+											 <ul>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
+												</ul>
+											</div>
+										</div>
+										<button class="collapsible">UNDERWEAR</button>
+										<div class="content_cat" style="display: none;">
+											<div class="memory">
+												<ul>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
+												</ul>
+											</div>
+										</div>
+										<button class="collapsible">FABRIC CARE</button>
+										<div class="content_cat" style="display: none;">
+											<div class="memory">
+												 <ul>
+													<li><a href="#">Jeans</a></li>
+													<li><a href="#">Pants</a></li>
+													<li><a href="#">Trousers,</a></li>
 												</ul>
 											</div>
 										</div>
@@ -162,29 +212,29 @@
 										<div class="best_saller_inner">
 											<div class="best_saller_main">
 												<a :href="'/product_detail/'+item.id">
+													<!-- <img src="http://66.117.4.244/~creat502/apstrofi/images/styleonenew.jpg"/> -->
 													<template v-if="item.product_images && item.product_images.length > 0">
 														<img width="300" height="450" 
 														v-lazy="IMAGE_URL + item.product_images[0].image_url" 
 														/>
-														<div>{{ item.product_images.image_url}}</div>
-														<div class="brand_name">
-															<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
-															<div class="brand_category">{{ item.name }}</div>
-															<div class="productbrand_price">
-																<!-- <div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div> -->
-																<!-- <span>IDR {{ item.price }}</span> -->
-																<div class="productbrand_price">IDR {{ item.price }}</div>
-															</div>
-														</div>
 													</template>
 													<template v-else>
 													<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'" />
 													</template>
-													
+													<div>{{ item.product_images.image_url}}</div>
+													<div class="brand_name">
+														<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
+														<div class="brand_category">{{ item.name }}</div>
+														<div class="productbrand_price">
+															<!-- <div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div> -->
+															<!-- <span>IDR {{ item.price }}</span> -->
+															<div class="productbrand_price">IDR {{ item.price }}</div>
+														</div>
+													</div>
 												</a>
 											</div>
 										</div>
-									</div> 
+									</div>
 								</template>
 
 								<template v-if="page_count > 0">
@@ -227,11 +277,11 @@
 
 
 
-		import BottomHeader from "../../../../../layouts/partials/home/BottomHeader";
-		import AboutContent from "../../../../../components/Front/AboutContent";
+		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
+		import AboutContent from "../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
 		export default {
-				name: "index",
+				name: "catalogue-id",
 				components: {
 					AboutContent,
 					BottomHeader
@@ -242,7 +292,6 @@
 				data: function () {
 						return {
 								categoryList:[],
-								subcategory: [],
 								page: null,
 								per_page: 10,
 								page_count: null,
@@ -255,10 +304,7 @@
 								sizeSearch: [],
 								IMAGE_URL: 'http://18.217.178.147/',
 								baseURL: process.env.baseURL,
-								showEmptyMessage: false,
-								parent_id: null,
-								search: 'searchCatalogue',
-								subcategory_id: null
+								showEmptyMessage: false
 						}
 				},
 				watch: {
@@ -282,22 +328,17 @@
 
 				mounted(){
 					this.documentReady()
-					
+					console.log(this.$route.params.id)
 				},
-				created() {
-					console.log('route', this.$router.params);
-					this.parent_id = this.$route.params.slug
-					},
-				async asyncData ({ app,store, route }) {
+				async asyncData ({ app,store }) {
 						/*const locale = store.state.locale
 						if (locale) {
 								request.headers.common['lang'] = locale
 						}
 						const referrer = process.client ? window.document.referrer :  req.headers.referer*/
 						app.$axios.setHeader('lang', store.state.locale)
-						let response1 = await app.$axios.$get('men/category');
-						let subcategory = await app.$axios.$get('men/subcategory/'+route.params.slug);
-						let response2 = await app.$axios.$get('page/catalogue/'+route.params.slug+'?sizing_gender=men');
+						let response1 = await app.$axios.$get('women/category');
+						let response2 = await app.$axios.$get('page/catalogue');
 						let productColors = await app.$axios.$get('product/colors');
 						let productSizes = await app.$axios.$get('product/sizes');
 						return {
@@ -306,47 +347,20 @@
 								colorsList: productColors,
 								page: response2.current_page,
 								page_count: response2.last_page,
-								categoryList:response1.data,
-								parent_id : route.params.slug,
-								subcategory: subcategory.data
+								categoryList:response1.data
 						}
 				},
 				methods: {
-					async getsubcatItem() {
-						this.search = 'getsubcatItem';
-						let subcategory_id = this.subcategory_id
-
-						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=men&page=${this.page}&subcategory_id=${subcategory_id}`;
-						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
-							var colors =  JSON.stringify(this.colorSearch);
-							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=men&page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
-						}
-						console.log(searchUrl)
-						let	response2 =	await this.$axios.get(searchUrl);
-						if(response2) {
-							if(response2.data.length == 0){
-								this.showEmptyMessage = true
-							}else{
-								this.showEmptyMessage = false
-							}
-							this.productsList = response2.data.data;
-							this.page = response2.current_page
-							this.page_count = response2.last_page
-							window.scrollTo(0,0);
-						}
-					},
-					async setSubCatID(id) {
-						this.subcategory_id = id
+					async checkimage(imgs) {
+						console.log(imgs)
 					},
 					async searchCatalogue() {
 						let baseURL = this.baseURL 
-						let subcategory_id = this.subcategory_id
-						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=men&page=${this.page}&subcategory_id=${subcategory_id}`;
+						let searchUrl = this.baseURL+'/page/catalogue?page='+this.page;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = this.baseURL+'/page/catalogue/'+this.parent_id+'?sizing_gender=men&page='+this.page+'&colors='+colors+'&size='+size+'&subcategory_id='+subcategory_id;
+							searchUrl = this.baseURL+'/page/catalogue?page='+this.page+'&colors='+colors+'&size='+size;
 						}
 						let response2 = await this.$axios.$get(searchUrl);
 						// console.log('search Url', searchUrl);
