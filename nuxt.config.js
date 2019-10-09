@@ -112,6 +112,7 @@ export default {
     '/api2/': { target: 'https://api.shipper.id',pathRewrite: {'^/api2/': ''} },
     //with options
     '/apii33/': {target: 'https://sandbox.kredivo.com', pathRewrite: {'^/apii33/': ''}},
+    '/liveapi/': {target: 'http://18.217.178.147/api', pathRewrite: {'^/liveapi/': ''}},
     // // Proxy to backend unix socket
 
     // '/api3': {
@@ -124,7 +125,8 @@ export default {
   */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-      baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL,
+    proxy: true
   },
   auth: {
     redirect: {

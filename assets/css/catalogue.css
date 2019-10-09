@@ -215,6 +215,9 @@ button.collapsible {
 .noproduct {
 	text-align: center;
 }
+.noproduct-display{
+	display:block;
+}
 .noproduct i {
 	font-size: 50px;
 }
@@ -225,4 +228,18 @@ button.collapsible {
 }
 .v-lazy-image-loaded {
 	filter: blur(0);
+}
+.content ul li{
+	padding:0px;
+}
+
+.content ul li button#btn1{
+	cursor: pointer;
+}
+
+.heading-section {
+	float: left;
+    width: 100%;
+    padding: 135px 0;
+    padding-bottom: 0;
 }

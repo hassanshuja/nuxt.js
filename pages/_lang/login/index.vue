@@ -193,7 +193,7 @@
       methods: {
           
         async login(){
-            // this.$axios.defaults.baseURL = 'http://localhost:8000/api';
+             this.$axios.defaults.baseURL = process.env.baseURL;
             this.$toast.show('Logging in...').goAway(1000);
             await this.$auth.login({
                   data: { email : this.email, password : this.password}
