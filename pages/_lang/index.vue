@@ -85,6 +85,7 @@
             });
         },
         async asyncData ({ app,store }) {
+            app.$axios.defaults.baseURL = process.env.baseURL
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('page/home');
 

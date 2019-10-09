@@ -106,8 +106,8 @@
                                     <a href="#"><img src="~assets/images/close.svg"></a>
                                     </span>
                                  </div>
-                                    <template v-for="cart in carts">
-                                        <span v-bind:key="cart" class="item_main">
+                                    <template v-for="(cart,index) in carts">
+                                        <span v-bind:key="index" class="item_main">
                                             <span class="item-left">
                                             <template v-if="cart.images.length > 0">
                                               <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
@@ -469,6 +469,7 @@
                 </div>
             </div>
         </div>
+        <!-- <div style="display:none;">{{removeModal()}}</div> -->
     </div>
 </template>
 
@@ -493,7 +494,7 @@
       },
       methods: {
         async login(){
-        // this.$axios.defaults.baseURL = 'http://localhost:8000/api';
+            this.$axios.defaults.baseURL = process.env.baseURL;
    
              this.$toast.show('Logging in...').goAway(1000);
             await this.$auth.login({
@@ -527,6 +528,12 @@
         },
         logout() {
             this.$auth.logout();
+        },
+        removeModal(){
+        //     if(window.getElementById('#mypopup') == null){
+        //       console.log(window.getElementById('#mypopup'))
+        //         window.querySelector('.modal-backdrop').remove();
+        //   }
         }
       },
       computed:{
@@ -539,78 +546,6 @@
 
 <style scoped>
 
-.dropdown-demo {
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    margin: 38px 0;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    padding: 12px 16px;
-    z-index: 1;
-    border: 1px solid rgba(9, 7, 9, 0.08);
-    float: left;
-    width: 264px;
-    right: 10px;
-    height: auto;
-    max-height: 350px;
-    overflow-y: scroll;
-}
-.dropdown-demo .add_message {font-family: Lato;font-size: 10px;font-weight: 900;
-font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;
-color: #4c4988;border-bottom: 1px solid rgba(9, 7, 9, 0.08);padding: 11px 0;
-padding-top: 0;}
-button.check_cartpro:hover {
-    background-color: #3d3987 !important;
-}
-.dropdown-demo .add_message span.right img { height: 10px;}
-.dropdown-demo .add_message span.right {float: right;}
-.check_cart button.check_cartpro {float: left;width: 100%;background-color: #4c4988;
-border: none;font-family: Lato;cursor: pointer;font-weight: 900;font-style: normal;
-font-stretch: normal;line-height: 2.67;letter-spacing: 1px;text-align: center;
-color: #ffffff;font-size: 10px;padding: 10px 0;}
-.check_cart button.check_cartpro {float: left;width: 100%;}
-.check_cart {float: left;width: 100%;}
-span.addcart_name {float: left;padding: 0 10px;font-weight: 900;}
-span.addcart_color {float: left;padding: 0 10px;}
-.dropdown-demo span.item_main span.item_description span {
-float: left;padding: 0px 9px;padding-bottom: 0;}
-.dropdown-demo span.item_main span.item_description span {float: left;
-width: 150px;padding: 0 17px;padding: 0px 10px !important;line-height: 1;}
-span.addcart_price {float: left;padding: 0 10px;padding-bottom: 16px;}
-.dropdown-demo span.item_main span.item_description {float: none;
-width: auto;font-size: 10px;font-family: open Sans;font-weight: normal;
-font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;
-color: #3d3d3d;}
-.dropdown-demo span.item_main span.item_description span {float: left;width: 61%;
-padding: 0 17px;}
-.cart_icon {position: relative;display: inline-block;}
-.dropdown-demo span.item_main span.item-info {
-float: none;font-size: 10px;width: auto;font-family: Lato;
-display: block;font-weight: normal;font-style: normal;font-stretch: normal;
-line-height: normal;letter-spacing: normal;color: #3d3d3d;}
-.dropdown-demo span.item_main span.item-left img {float: left;height: 93px;
-width: 62px;}
-.dropdown-demo span.item_main {float: left;width: 100%;padding-bottom: 15px;}
-.dropdown-demo span.item_main span.item-left {float: left;width: 100%;padding-top: 10px;
-}
+.dropdown-demo{display:none;position:absolute;background-color:#f9f9f9;margin:38px 0;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);padding:12px 16px;z-index:1;border:1px solid rgba(9,7,9,.08);float:left;width:264px;right:10px;height:auto;max-height:350px;overflow-y:scroll}.dropdown-demo .add_message{font-family:Lato;font-size:10px;font-weight:900;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#4c4988;border-bottom:1px solid rgba(9,7,9,.08);padding:0 0 11px}button.check_cartpro:hover{background-color:#3d3987!important}.dropdown-demo .add_message span.right img{height:10px}.dropdown-demo .add_message span.right{float:right}.check_cart button.check_cartpro{background-color:#4c4988;border:none;font-family:Lato;cursor:pointer;font-weight:900;font-style:normal;font-stretch:normal;line-height:2.67;letter-spacing:1px;text-align:center;color:#fff;font-size:10px;padding:10px 0;float:left;width:100%}.check_cart{float:left;width:100%}span.addcart_name{font-weight:900}span.addcart_color,span.addcart_name{float:left;padding:0 10px}.dropdown-demo span.item_main span.item_description span{padding:0 9px;width:150px;padding:0 10px!important;line-height:1}span.addcart_price{float:left;padding:0 10px 16px}.dropdown-demo span.item_main span.item_description{float:none;width:auto;font-size:10px;font-family:open Sans;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item_description span{float:left;width:61%;padding:0 17px}.cart_icon{position:relative;display:inline-block}.dropdown-demo span.item_main span.item-info{float:none;font-size:10px;width:auto;font-family:Lato;display:block;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item-left img{float:left;height:93px;width:62px}.dropdown-demo span.item_main{float:left;width:100%;padding-bottom:15px}.dropdown-demo span.item_main span.item-left{float:left;width:100%;padding-top:10px}.cart_icon:hover .dropdown-demo,.dropdown-demo:hover .dropdown-demo{display:block;cursor:-webkit-grab;cursor:grab}.select-selected:after{content:url(/_nuxt/d0696ea4c4fce558b5b452230dc1054c.svg);float:right;width:100%;margin-left:5px;font-weight:600;width:14px;position:absolute;right:10px}.quality_pro span{font-family:Open sans;font-size:11px;font-weight:400;font-style:normal;font-stretch:normal;line-height:2.4;letter-spacing:normal;color:#3d3d3d}.quality_pro{float:left;width:100%;padding:10px 0 0}svg.red path{fill:#4c4988}.custom-drop{position:relative;font-family:Arial}.custom-drop select{display:none}
 
-
-.cart_icon:hover .dropdown-demo {display: block; cursor:grab;}
-
-.dropdown-demo:hover .dropdown-demo {
-    display:block;
-    cursor:grab;
-}
-.select-selected:after {content: url(~assets/images/arrow_down_black.svg);
-float: right;width: 100%;margin-left: 5px;font-weight: 600;
-width: 14px;position: absolute; right: 10px;}
-.quality_pro span {font-family: Open sans;font-size: 11px;font-weight: normal;
-font-style: normal;font-stretch: normal;line-height: 2.4;letter-spacing: normal;
-color: #3d3d3d;}
-.quality_pro {float: left;width: 100%;padding: 10px 0;padding-bottom: 0;}
-svg.red path {fill: #4c4988;}
-.custom-drop {position: relative;font-family: Arial;}
-.custom-drop select {
-  display: none; /*hide original SELECT element:*/
-}
 </style>
