@@ -392,7 +392,7 @@ const buildURLQuery = obj =>
               let mydata = new Set(cartData);
               this.merchants = Array.from(mydata);
 
-              fetch('http://18.217.178.147/api/merchantDetails', {
+              fetch('http://18.188.214.35/api/merchantDetails', {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -442,7 +442,7 @@ const buildURLQuery = obj =>
             cities: null,
             order_details: null,
             shippingRates: {},
-            IMAGE_URL: 'http://18.217.178.147/',
+            IMAGE_URL: 'http://18.188.214.35/',
             merchants: null,
             merchant_areas: [],
             selectedMerchant: null,
@@ -488,7 +488,7 @@ const buildURLQuery = obj =>
 				async asyncData ({ app, store }) {
             app.$axios.setHeader('lang', store.state.locale);
             
-            // let featuredProducts = await app.$axios.$get('http://18.217.178.147/api/men/featuredproducts');
+            // let featuredProducts = await app.$axios.$get('http://18.188.214.35/api/men/featuredproducts');
             // const ip = app.connection || app.socket
             // this.ip = ip
             // console.log('lskdf', this.ip)
@@ -701,7 +701,7 @@ const buildURLQuery = obj =>
                     "ip_address":"192.168.88.1",
                     "user_agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                 },
-                "push_uri":"http://18.217.178.147/orders/kredivo_push_uri",
+                "push_uri":"http://18.188.214.35/orders/kredivo_push_uri",
                 "back_to_store_uri":"https://18.221.210.123/mybag"
             }
 

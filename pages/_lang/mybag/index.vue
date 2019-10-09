@@ -101,7 +101,7 @@
         },
         data: function () {
           return {
-              IMAGE_URL: 'http://18.217.178.147/',
+              IMAGE_URL: 'http://18.188.214.35/',
           }
         },
         transition: 'bounce',

@@ -112,7 +112,7 @@ export default {
     '/api2/': { target: 'https://api.shipper.id',pathRewrite: {'^/api2/': ''} },
     //with options
     '/apii33/': {target: 'https://sandbox.kredivo.com', pathRewrite: {'^/apii33/': ''}},
-    '/liveapi/': {target: 'http://18.217.178.147/api', pathRewrite: {'^/liveapi/': ''}},
+    '/liveapi/': {target: 'http://18.188.214.35/api', pathRewrite: {'^/liveapi/': ''}},
     // // Proxy to backend unix socket
 
     // '/api3': {
