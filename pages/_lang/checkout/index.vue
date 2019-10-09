@@ -662,7 +662,7 @@ const buildURLQuery = obj =>
           // Full detail of order that needs to send to kredivo api
           // to get redirect url for payment
            var items = {
-              "server_key":"8tLHIx8V0N6KtnSpS9Nbd6zROFFJH7",
+              "server_key":"a592153585cde57ef34d32ba73390b1a",
                 "payment_type":"30_days",  
                 "tokenize_user": false,
                 "client_user_key": "hi@finaccel.co",
