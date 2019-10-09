@@ -252,6 +252,8 @@
 						
 				},
 				async asyncData ({ app,store }) {
+						app.$axios.defaults.baseURL = process.env.baseURL
+
 						/*const locale = store.state.locale
 						if (locale) {
 								request.headers.common['lang'] = locale
@@ -263,6 +265,7 @@
 						let allProducts = await app.$axios.$get('/women/allproducts');
 						let featuredProducts = await app.$axios.$get('/women/featuredproducts');
 						// console.log(allProducts);
+						console.log(response1)
 						return {
 								data: response2.data,
 								categoryList:response1.data,
