@@ -701,8 +701,8 @@ const buildURLQuery = obj =>
                     "ip_address":"192.168.88.1",
                     "user_agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                 },
-                "push_uri":"http://localhost:3000",
-                "back_to_store_uri":"http://localhost:3000"
+                "push_uri":"http://18.217.178.147/orders/kredivo_push_uri",
+                "back_to_store_uri":"https://18.221.210.123/mybag"
             }
 
 
