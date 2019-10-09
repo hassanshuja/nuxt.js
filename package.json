@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-  "#dev#": "node --inspect-brk=21453 node_modules/.bin/nuxt dev",
+    "#dev#": "node --inspect-brk=21453 node_modules/.bin/nuxt dev",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
