@@ -669,7 +669,7 @@ const buildURLQuery = obj =>
                 "user_token" : "XXXX-XXXX",
                 "transaction_details": {
                     "amount": cart.final_detail.grandTotal,
-                    "order_id": "AAA"+this.orderId,
+                    "order_id": this.orderId,
                     "items": myitem
                 },
                 "sellers" : sellers,
@@ -701,6 +701,7 @@ const buildURLQuery = obj =>
                     "ip_address":"192.168.88.1",
                     "user_agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                 },
+                "callback_url":"https://18.188.214.35/api/orders/kredivo_notify", 
                 "push_uri":"http://18.188.214.35/api/orders/kredivo_push_uri",
                 "back_to_store_uri":"https://18.221.210.123/mybag"
             }
@@ -724,7 +725,7 @@ const buildURLQuery = obj =>
               this.kredivo_paymentId = data.transaction_id
               this.kredivo_redirect_url = data.redirect_url
 
-              window.location = data.redirect_url
+              // window.location = data.redirect_url
 
               })
             //hiding popup of payment gateways options
