@@ -725,7 +725,7 @@ const buildURLQuery = obj =>
               this.kredivo_paymentId = data.transaction_id
               this.kredivo_redirect_url = data.redirect_url
 
-              // window.location = data.redirect_url
+              window.location = data.redirect_url
 
               })
             //hiding popup of payment gateways options
