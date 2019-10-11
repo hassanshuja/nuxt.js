@@ -322,7 +322,7 @@
               colors: [],
               sizes: [],
               brand: [],
-              IMAGE_URL: 'http://18.188.214.35/',
+              IMAGE_URL: 'http://localhost:8000/',
               selected_quantity: 1,
               selected_color: null,
               selected_size: null,
@@ -519,8 +519,8 @@
             },
             async getUpdatedData (id) {
               this.$axios.setHeader('lang', this.$store.state.locale)
-              let response = await this.$axios.$get('http://18.188.214.35/api/categories');
-              let response1 = await this.$axios.$get('http://18.188.214.35/api/products/'+id);
+              let response = await this.$axios.$get('http://localhost:8000/api/categories');
+              let response1 = await this.$axios.$get('http://localhost:8000/api/products/'+id);
               let brand_id = Object.keys(response1.brand).filter((items, index) => {
                 if(response1.product.brand_id == items){
                   return response1.brand[items];
