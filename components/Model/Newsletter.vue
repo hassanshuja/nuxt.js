@@ -59,7 +59,7 @@ import axios from '@nuxtjs/axios'
             // asyncData({ app,store })
 
             // console.log('store login ', username, password)
-            this.$axios.post('http://18.188.214.35/api/subscription', {email: this.email})
+            this.$axios.post('http://localhost:8000/api/subscription', {email: this.email})
             .then(res => {
               // commit('SET_USER', res.data)
               this.successess.push(res.data.message)
