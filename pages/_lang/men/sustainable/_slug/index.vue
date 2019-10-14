@@ -1,28 +1,26 @@
 <template>
-<div>
-		<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women'" ></bottom-header>
-				<div class="heading-section">
+	<div>
+		<bottom-header :categoryList="categoryList" :url="'men/category/'" :custom_url="'men'"></bottom-header>
+		<div class="heading-section">
 		<div class="container-fluid">
 			<div class="row" id="bor" style="margin:auto">
-					<div class="col-sm-12 col-md-6 border_spe">
-							<div class="content_main_header">
-									<div class="Shop_brand_title">SHOP BRAND</div>
-									<div class="bread_crumb">
-											<ul>
-													<li><a href="#">BRANDS</a></li>
-													<li>  /  TEES &amp; SCISSORS</li>
-											</ul>
-									</div>
-							</div>
+				<div class="col-sm-12 col-md-6 border_spe">
+					<div class="content_main_header">
+						<div class="Shop_brand_title">SHOP BRAND</div>
+							<div class="bread_crumb">
+								<ul>
+									<li><a href="#">BRANDS</a></li>
+									<li>  /  TEES &amp; SCISSORS</li>
+								</ul>
+						</div>
 					</div>
-
+				</div>
 					<div class="col-sm-12 col-md-6 border_spe">
 							<div class="brand_cat">
 									<form class="woocommerce-ordering">
 										 <div class="dropdown">
 												 <button class="dropbtn">SORT BY : <strong>{{sortby}}</strong></button>
 												 <div class="dropdown-content">
-													<a href="@">Sort by average rating</a>
 													<a href="#" @click.prevent="sortBy('latest');searchCatalogue();">Newest to Latest</a>
 													<a href="#" @click.prevent="sortBy('asc');searchCatalogue();">Sort by price: low to high</a>
 													<a href="#" @click.prevent="sortBy('desc');searchCatalogue();">Sort by price: high to low</a>
@@ -57,9 +55,9 @@
 			</div>
 		</div>
 		</div>
-		<div class="heading_section" style="padding-top:0px">
+		<div class="heading-section" style="padding:0">
 		<div class="container-fluid">
-					<div class="row">
+					<div class="row" >
 							<div class="col-sm-12 col-md-3 col-lg-3">
 								<div class="tab" id="mobile_hide">
 									<button class="tablinks" :style="tabColumns == 4 ? 'opacity:0.5' : ''" @click="changeColumns(4)" id="defaultOpen"><img src="/images/APSTROFIICONS_11.png"></button>
@@ -201,7 +199,7 @@
 									</paginate>
 								</template>
 							</div>
-							<div id="not_found"   v-else>
+							<div id="Paris" class="tabcontent" style="display: block;" v-else>
 								<div>
 									<section class="section-b-space light-layout">
 										<div class="container">
@@ -228,7 +226,10 @@
 </template>
 
 <script>
-    import BottomHeader from "../../../../../layouts/partials/home/BottomHeader";
+
+
+
+		import BottomHeader from "../../../../../layouts/partials/home/BottomHeader";
 		import AboutContent from "../../../../../components/Front/AboutContent";
 		import { mapGetters } from 'vuex';
 		export default {
@@ -267,10 +268,10 @@
 		        searchTags: {
 				      handler: function (val, oldVal) {
 				        if(val) {
-							this.searchCatalogue()
+				        	this.searchCatalogue()
 				        }
 				        if(oldVal && !val) {
-							this.searchCatalogue()
+				        	this.searchCatalogue()
 				        }
 				      },
 				      deep: true
@@ -291,18 +292,23 @@
 					this.parent_id = this.$route.params.slug
 					},
 				async asyncData ({ app,store, route }) {
-						app.$axios.defaults.baseURL = process.env.baseURL
 						/*const locale = store.state.locale
 						if (locale) {
 								request.headers.common['lang'] = locale
 						}
 						const referrer = process.client ? window.document.referrer :  req.headers.referer*/
+						app.$axios.defaults.baseURL = process.env.baseURL
 						app.$axios.setHeader('lang', store.state.locale)
-						let response1 = await app.$axios.$get('women/category');
-						let subcategory = await app.$axios.$get('women/subcategory/'+route.params.slug);
-						let response2 = await app.$axios.$get('page/catalogue/'+route.params.slug+'?sizing_gender=women');
+						let response1 = await app.$axios.$get('men/category');
+						let subcategory = await app.$axios.$get('men/subcategory/'+route.params.slug);
+						let response2 = await app.$axios.$get('page/catalogue/'+route.params.slug+'?sizing_gender=men&sustainable=1');
 						let productColors = await app.$axios.$get('product/colors');
 						let productSizes = await app.$axios.$get('product/sizes');
+						if(response2.data.length == 0){
+							var showEmptyMessage  = true;
+						}else{
+							var showEmptyMessage  = false;
+						}
 						return {
 								productsList: response2.data,
 								sizesList: productSizes,
@@ -311,7 +317,8 @@
 								page_count: response2.last_page,
 								categoryList:response1.data,
 								parent_id : route.params.slug,
-								subcategory: subcategory.data
+								subcategory: subcategory.data,
+								showEmptyMessage: showEmptyMessage
 						}
 				},
 				methods: {
@@ -319,11 +326,12 @@
 						this.search = 'getsubcatItem';
 						let subcategory_id = this.subcategory_id
 
-						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=women&page=${this.page}&subcategory_id=${subcategory_id}`;
+						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
+										?sizing_gender=men&sustainable=1page=${this.page}&subcategory_id=${subcategory_id}`;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=women&page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
+							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=men&sustainable=1page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
 						}
 						console.log(searchUrl)
 						let	response2 =	await this.$axios.get(searchUrl);
@@ -354,12 +362,12 @@
 						let sortby = this.sortby;
 						console.log(sortby)
 						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
-						?sizing_gender=women&page=${this.page}&subcategory_id=${subcategory_id}&sortby=${sortby}`;
+						?sizing_gender=men&sustainable=1&page=${this.page}&subcategory_id=${subcategory_id}&sortby=${sortby}`;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
 							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
-							?sizing_gender=women&page=${this.page}&colors=${colors}&size=${size}
+							?sizing_gender=men&sustainable=1&page=${this.page}&colors=${colors}&size=${size}
 							&subcategory_id=${subcategory_id}&sortby=${sortby}`;
 						}
 						let response2 = await this.$axios.$get(searchUrl);
@@ -440,5 +448,6 @@
 				}
 		}
 </script>
+
 
 <style src="~/assets/css/catalogue.css"></style>

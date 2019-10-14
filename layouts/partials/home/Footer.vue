@@ -18,11 +18,11 @@
                     <div class="footer_about">
                         About Apstrofi
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Smart Sizing</a></li>
-                            <li><a href="#">Partnership</a></li>
-                            <li><a href="#">Membership</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><nuxt-link :to="'info#aboutus'">About Us</nuxt-link></li>
+                            <li><nuxt-link :to="'info#smartsizing'">Smart Sizing</nuxt-link></li>
+                            <li><nuxt-link :to="'info#partnership'">Partnership</nuxt-link></li>
+                            <li><nuxt-link :to="'#'">Membership</nuxt-link></li>
+                            <li><nuxt-link :to="'info#privacypolicy'">Privacy Policy</nuxt-link></li>
                         </ul>
                         <div class="asp">
                             Apstrofi © 2019
@@ -33,11 +33,11 @@
                     <div class="footer_about">
                         Customer Care
                         <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Orders & Shipping</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Terms & Conditions</a></li>
+                            <li><nuxt-link :to="'info#contactus'">Contact Us</nuxt-link></li>
+                            <li><nuxt-link :to="'info#ordershipping'">Orders & Shipping</nuxt-link></li>
+                            <li><nuxt-link :to="'info#returnexchange'">Return & Exchanges</nuxt-link></li>
+                            <li><nuxt-link :to="'info#paymentmethod'">Payment Methods</nuxt-link></li>
+                            <li><nuxt-link :to="'info#termscondition'">Terms & Conditions</nuxt-link></li>
                         </ul>
                     </div>
                 </div>

@@ -6,7 +6,6 @@ export const state = () => ({
 
 export const mutations = {
   add (state, obj) {
-  	console.log('add method')
   	state.list.push(obj)
 		/* SUBTOTAL VALUE */
   	state.sub_total = 0
@@ -16,8 +15,11 @@ export const mutations = {
   	state.list.sub_total = state.sub_total
   },
   replace(state, payload) {
-  	console.log('replace method')
-		state.list[payload.index] = payload.obj
+	
+	
+	state.list.splice(payload.index)
+	state.list[payload.index] = payload.obj
+	console.log(payload.obj)
 		/* SUBTOTAL VALUE */
   	state.sub_total = 0
   	state.list.map(item => {

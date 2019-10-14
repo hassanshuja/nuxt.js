@@ -25,9 +25,10 @@
                         <div class="header_menu_web">
                             <ul>
                                 <li><a href="#" data-toggle="modal" data-target="#login">SIGN IN / REGISTER</a></li>
-                                <li><a href="/men"  >
+                                <li>
+                                    <nuxt-link :to="$i18n.path('men')"  exact>
                                         {{ $t('menu.men') }}
-                                    </a>
+                                    </nuxt-link>
                                 </li>
                                 <li>
                                     <nuxt-link :to="$i18n.path('women')"  exact>
@@ -93,9 +94,11 @@
                                 </div>
                               </div>
                             </div>
-                        </div> --> 
+                        </div> -->
+                          
+
                         <div class="cart_icon">
-                            <a href="/mybag"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> --></a>
+                              <a href="/mybag"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> -->
                             <template v-if="carts.length > 0">
                                 <div class="dropdown-demo">
                                  <div class="add_message">
@@ -130,7 +133,9 @@
                                </div>
                             </div>
                         </template>
+                         </a>
                         </div>
+                       
                     </div>
                 </div>
 
@@ -489,7 +494,7 @@
             name: '',
             login_err:'',
             reg_err: '',
-            IMAGE_URL: process.env.baseURL,
+            IMAGE_URL: process.env.IMAGE_URL,
         }
       },
       methods: {
@@ -504,7 +509,6 @@
                 path: '/'
             });
             // console.log('not working')
-
               this.$toast.success('Successfully authenticated').goAway(1500);
              
             }).catch((e) => {

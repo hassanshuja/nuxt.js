@@ -1,6 +1,6 @@
 <template>
 		<div>
-				<bottom-header :categoryList="categoryList" :url="'men/category/'"></bottom-header>
+				<bottom-header :categoryList="categoryList" :url="'men/category/'" :custom_url="'men'"></bottom-header>
 				<div id="section_part" style="padding-top: 0;" class="section_style">
 
 						<div class="container-fluid">
@@ -218,7 +218,7 @@
 								categoryList:[],
 								featuredList:[],
 								productsList: [],
-								IMAGE_URL: 'http://localhost:8000/'
+								IMAGE_URL: process.env.IMAGE_URL
 						}
 				},
 			 // transition: 'page',
@@ -227,14 +227,15 @@
 						return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
 				},*/
 
+
 				mounted(){},
 				async asyncData ({ app,store }) {
+             			app.$axios.defaults.baseURL = process.env.baseURL;
 						app.$axios.setHeader('lang', store.state.locale);
 						let response1 = await app.$axios.$get('men/category');
 						let response2 = await app.$axios.$get('page/men');
 						let allProducts = await app.$axios.$get('men/allproducts');
 						let featuredProducts = await app.$axios.$get('men/featuredproducts');
-						// console.log(response1.data)
 						return {
 								data: response2.data,
 								categoryList:response1.data,

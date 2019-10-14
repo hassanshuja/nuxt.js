@@ -302,7 +302,7 @@
 								searchTags: [],
 								colorSearch: [],
 								sizeSearch: [],
-								IMAGE_URL: 'http://localhost:8000/',
+								IMAGE_URL: process.env.IMAGE_URL,
 								baseURL: process.env.baseURL,
 								showEmptyMessage: false
 						}

@@ -5,6 +5,16 @@
                 <div class="col-sm-12 col-md-12">
                     <div class="header_menu_cat">
                         <ul>
+                            <li>
+                                <nuxt-link  :to="$i18n.path(custom_url+'/newarrivals/1')" exact>
+                                New Arrivals
+                                </nuxt-link>
+                            </li>
+                            <li>
+                                <nuxt-link  :to="$i18n.path(custom_url+'/sustainable/1')" exact>
+                                Sustainable products
+                                </nuxt-link>
+                            </li>
                             <template v-for="(category,index) in categoryList">
                             <li  v-bind:key="index">
                                 <nuxt-link  :to="$i18n.path(url+category.parent_id)" exact>
@@ -23,7 +33,7 @@
 <script>
     export default {
         name: "BottomHeader",
-        props:['categoryList','url']
+        props:['categoryList','url', 'custom_url']
     }
 </script>
 

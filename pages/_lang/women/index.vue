@@ -1,6 +1,6 @@
 <template>
 		<div>
-				<bottom-header :categoryList="categoryList" :url="'women/category/'"></bottom-header>
+				<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women'"></bottom-header>
 				<div id="section_part" style="padding-top: 0;" class="section_style">
 
 						<div class="container-fluid">
@@ -264,8 +264,6 @@
 						let response2 = await app.$axios.$get('/page/women');
 						let allProducts = await app.$axios.$get('/women/allproducts');
 						let featuredProducts = await app.$axios.$get('/women/featuredproducts');
-						// console.log(allProducts);
-						console.log(response1)
 						return {
 								data: response2.data,
 								categoryList:response1.data,

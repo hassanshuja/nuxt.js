@@ -442,7 +442,7 @@ const buildURLQuery = obj =>
             cities: null,
             order_details: null,
             shippingRates: {},
-            IMAGE_URL: 'http://localhost:8000/',
+            IMAGE_URL: process.env.IMAGE_URL,
             merchants: null,
             merchant_areas: [],
             selectedMerchant: null,
