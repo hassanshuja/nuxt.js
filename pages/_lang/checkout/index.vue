@@ -703,7 +703,7 @@ const buildURLQuery = obj =>
                 },
                 // "callback_url":"https://localhost:8000/api/orders/kredivo_notify", 
                 "push_uri":"http://localhost:8000/api/orders/kredivo_push_uri",
-                "back_to_store_uri":"https://18.221.210.123/thankyou"
+                "back_to_store_uri":"http://18.221.210.123/thankyou"
             }
 
 
