@@ -330,7 +330,8 @@
               productsId : [],
               color_error: null,
               size_error: null,
-              isActive: 'inactive'
+              isActive: 'inactive',
+              baseURL: process.env.baseURL
           }
         },
         transition: 'bounce',
@@ -525,8 +526,8 @@
             },
             async getUpdatedData (id) {
               this.$axios.setHeader('lang', this.$store.state.locale)
-              let response = await this.$axios.$get('http://localhost:8000/api/categories');
-              let response1 = await this.$axios.$get('http://localhost:8000/api/products/'+id);
+              let response = await this.$axios.$get(this.baseURL+'/categories');
+              let response1 = await this.$axios.$get(this.baseURL+'/products/'+id);
               let brand_id = Object.keys(response1.brand).filter((items, index) => {
                 if(response1.product.brand_id == items){
                   return response1.brand[items];

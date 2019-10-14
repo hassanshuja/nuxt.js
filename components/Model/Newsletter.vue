@@ -50,6 +50,7 @@ import axios from '@nuxtjs/axios'
             email: null,
             errors: [],
             successess: [],
+            baseURL: process.env.baseURL,
           }
         },
         methods:{
@@ -59,7 +60,7 @@ import axios from '@nuxtjs/axios'
             // asyncData({ app,store })
 
             // console.log('store login ', username, password)
-            this.$axios.post('http://localhost:8000/api/subscription', {email: this.email})
+            this.$axios.post(this.baseURL+'/subscription', {email: this.email})
             .then(res => {
               // commit('SET_USER', res.data)
               this.successess.push(res.data.message)

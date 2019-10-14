@@ -392,7 +392,7 @@ const buildURLQuery = obj =>
               let mydata = new Set(cartData);
               this.merchants = Array.from(mydata);
 
-              fetch('http://localhost:8000/api/merchantDetails', {
+              fetch('http://18.188.214.35/api/merchantDetails', {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -702,7 +702,7 @@ const buildURLQuery = obj =>
                     "user_agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                 },
                 // "callback_url":"https://localhost:8000/api/orders/kredivo_notify", 
-                "push_uri":"http://localhost:8000/api/orders/kredivo_push_uri",
+                "push_uri":"http://18.188.214.35/api/orders/kredivo_push_uri",
                 "back_to_store_uri":"http://18.221.210.123/thankyou"
             }
 
