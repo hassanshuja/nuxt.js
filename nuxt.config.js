@@ -159,6 +159,7 @@ export default {
   },
   env: {
     baseURL: process.env.BASE_URL,
+    IMAGE_URL: process.env.IMAGE_URL,
     proxy:true,
     debug:true
   },

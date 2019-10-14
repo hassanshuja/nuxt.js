@@ -322,7 +322,7 @@
               colors: [],
               sizes: [],
               brand: [],
-              IMAGE_URL: 'http://localhost:8000/',
+              IMAGE_URL: process.env.IMAGE_URL,
               selected_quantity: 1,
               selected_color: null,
               selected_size: null,
@@ -497,12 +497,18 @@
                 });
                 if(index1 || index1 == 0 ) {
                   this.$store.commit('carts/replace',{obj: obj, index: index1})
+                  this.$toast.success('Item Updated to Cart Successfully').goAway(1500);
                 } else {
                   this.$store.commit('carts/add', obj)
+                  this.$toast.success('Item Added to Cart Successfully').goAway(1500);
                 }
               } else {
                 this.$store.commit('carts/add', obj)
+                this.$toast.success('Item Added to Cart Successfully').goAway(1500);
               }
+              
+              
+
             },
             ...mapMutations({
               toggle: 'carts/toggle'

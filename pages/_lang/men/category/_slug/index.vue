@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<bottom-header :categoryList="categoryList" :url="'men/category/'"></bottom-header>
+		<bottom-header :categoryList="categoryList" :url="'men/category/'" :custom_url="'men/'"></bottom-header>
 		<div class="heading-section">
 		<div class="container-fluid">
 			<div class="row" id="bor" style="margin:auto">
@@ -257,7 +257,7 @@
 								searchTags: [],
 								colorSearch: [],
 								sizeSearch: [],
-								IMAGE_URL: 'http://localhost:8000/',
+								IMAGE_URL: process.env.IMAGE_URL,
 								baseURL: process.env.baseURL,
 								showEmptyMessage: false,
 								parent_id: null,

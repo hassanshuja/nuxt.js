@@ -356,7 +356,7 @@ button.w3-button.w3-display-right.w3-black {opacity: 0.2;}
 .best_saller {float: left;width: 100%;padding-bottom: 30px;}
 .best_saller .best_saller_title {float: left;width: 100%;text-align: center;padding: 28px;
 padding-bottom: 28px;font-family: Lato;letter-spacing: 1px;font-size: 14px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: 1.8;text-align: center;color: #3d3d3d;}
-.best_saller_inner .best_saller_main img {float: left;width: 100%;padding-bottom: 9px;    height: 344px;}
+.best_saller_inner .best_saller_main img {float: left;width: 100%;padding-bottom: 9px;    height: auto;}
 .best_saller_inner .best_saller_main img:hover {opacity: 0.8;}
 .best_saller_inner .best_saller_main {float: left;width: 100%;}
 .best_saller_inner {float: left;width: 100%;position: relative;}
