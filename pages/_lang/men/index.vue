@@ -1,6 +1,6 @@
 <template>
 		<div>
-				<bottom-header :categoryList="categoryList" :url="'men/category/'" :custom_url="'men'"></bottom-header>
+				<bottom-header :categoryList="categoryList" :url="'men/category/'" :custom_url="'men/'"></bottom-header>
 				<div id="section_part" style="padding-top: 0;" class="section_style">
 
 						<div class="container-fluid">
@@ -66,29 +66,32 @@
 
 				</div>
 				<div class="dis_your">
-						<div class="container-fluid">
-								<div class="row">
-										<div class="dis_title">DISCOVER YOUR STYLE</div>
-
-										<div class="col-md-12 bot">
-											<div class="owl-carousel owl-theme">
-													<template v-for="(item, index) in productsList">
-															<div class="item" :key="index">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="dis_title">DISCOVER YOUR STYLE</div>
+								<div class="col-md-12 bot">
+									<no-ssr> <!-- important to add no-ssr-->
+										<carousel :items="7">
+												<template v-for="(item, index) in productsList">
+														<div :key="index">
+															<div class="item" >
 																<a :href="'/product_detail/'+item.id">
-																	<template v-if="item.product_images && item.product_images.length > 0">
-																			<img width="300" height="450" :src="IMAGE_URL+item.product_images[0].image_url"/>
-																	</template>
-																	<template v-else>
-																	<img width="300" height="450" :src="IMAGE_URL+'images/nopreview.png'"/>
-																	</template>
+																<template v-if="item.product_images && item.product_images.length > 0">
+																	<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
+																</template>
+																<template v-else>
+																	<img  :src="'/images/nopreview.png'"/>
+																</template>
 																</a>
 															</div>
+														</div>
 													</template>
-											</div>
-										</div>
+										</carousel>
+									</no-ssr>
 								</div>
+							</div>
 						</div>
-				</div>
+					</div>
 
 				<div class="best_saller">
 						<div class="container-fluid">
@@ -228,7 +231,9 @@
 				},*/
 
 
-				mounted(){},
+				mounted(){
+					
+				},
 				async asyncData ({ app,store }) {
              			app.$axios.defaults.baseURL = process.env.baseURL;
 						app.$axios.setHeader('lang', store.state.locale);
@@ -245,6 +250,10 @@
 				},
 				methods: {}
 		}
+
+
+            
+          
 </script>
 
 

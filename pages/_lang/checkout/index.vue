@@ -131,7 +131,7 @@
                             <template v-if="areas">
                                 <option
                                 v-for="(area, index) in areas"
-                                v-bind:key="index" :value="{id:area.id, name: area.name}">
+                                v-bind:key="index" :value="{id:area.id, name: area.name, postcode: area.postcode}">
                                   {{area.name}}
                                 </option>
                                 </template>
@@ -151,7 +151,7 @@
 						 						Zip Code
 						 					</div>
 						 					<div class="cont-field" style="padding-bottom: 10px;">
-						 						<input v-model="shipping_details.zipcode" type="text" name="zipcode">
+						 						<input v-model="shipping_details.zipcode" type="text" name="zipcode" disabled>
 						 					</div>
 						 				</div>
 						 			</div>
@@ -215,6 +215,22 @@
 						 		</div>
 						 	</div>
 					 	</div>
+             <div v-if="isLoading">
+               <div 
+                style="position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 1040;
+                background-color: #000;
+                opacity: 0.2;"
+                >
+               </div>
+                 <span class="refCount">Loading</span>
+                 <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+               </div>
+              </div>
 		 				<button @click="openOrder" class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
 			 			<div class="panel" style="border: medium none !important; display: none; max-height: 0px;">
 						 	<table class="table" id="checkto">
@@ -227,7 +243,7 @@
 						 		</thead>
 						 		<tbody>
 						 			<template v-for="(cart, index) in carts">
-					 					<tr>
+					 					<tr :key="index">
 							 				<td class="text-left" style="width:25px;">
 							 					<a href="#">
 							 						<template v-if="cart.images.length > 0">
@@ -244,7 +260,7 @@
 							 				<td class="text-right" colspan="2">IDR {{ cart.price}}
 							 					<p style="text-decoration: line-through;color: #ababab;">IDR {{ cart.price}}</p>
 							 				</td>
-							 				<td class="text-right">IDR {{ cart.total_price}}
+							 				<td class="text-right">IDR {{ cart.price * cart.selected_quantity}}
 							 					<p style="text-decoration: line-through;color: #ababab;">IDR {{ cart.total_price}}</p>
 							 				</td>
 					 					</tr>
@@ -315,23 +331,28 @@
 			 						</tr>
 			 					</tbody>
 			 					<tfoot>
+                  <template v-if="shipping_discount > 0">
+                    <tr  style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
+                      <th colspan="3" class="text-left" style="color:#4c4988">SHIPPING DISCOUNT</th>
+                      <th colspan="3" class="text-right" style="color:#4c4988">IDR ({{shipping_discount}})</th>
+                    </tr>
+                  </template>
 			 						<tr style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
 			 							<th colspan="3" class="text-left">SHIPPING</th>
-			 							<th colspan="3" class="text-right">{{shipping_total}}</th>
+			 							<th colspan="3" class="text-right">IDR {{shipping_total_after_discount}}</th>
 			 						</tr>
 			 						<tr style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
 			 							<th colspan="3" class="text-left" style="color:#4c4988">PROMO CODE</th>
-			 							<th colspan="3" class="text-right" style="color:#4c4988">IDR 100,000</th>
+			 							<th colspan="3" class="text-right" style="color:#4c4988">IDR ({{ promototal }}) </th>
 			 						</tr>
-                   <template v-if="shipping_discount > 0">
-                  <tr  style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
-			 							<th colspan="3" class="text-left" style="color:#4c4988">SHIPPING DISCOUNT</th>
-			 							<th colspan="3" class="text-right" style="color:#4c4988">IDR ({{shipping_discount}})</th>
+                   <tr style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
+			 							<th colspan="3" class="text-left" style="color:#4c4988">OTHER DISCOUNT</th>
+			 							<th colspan="3" class="text-right" style="color:#4c4988">IDR ({{ other_discount }}) </th>
 			 						</tr>
-                   </template>
+                  
 			 						<tr style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">
 			 							<th colspan="3" class="text-left" style="font-weight: 900">TOTAL</th>
-			 							<th colspan="3" class="text-right" style="font-weight: 900">IDR {{subtotal + shipping_total}}</th>
+			 							<th colspan="3" class="text-right" style="font-weight: 900">IDR {{subtotal_after_discount}}</th>
 			 						</tr>
 			 						<tr>
 			 							<th colspan="12" class="sub_btn">
@@ -365,7 +386,7 @@
 		import BottomHeader from "../../../layouts/partials/home/BottomHeader";
     import AboutContent from "../../../components/Front/AboutContent";
     import PaymentOptions from "../../../components/Model/PaymentOptions";
-    import { mapGetters } from 'vuex';
+    import { mapGetters, mapState } from 'vuex';
 
 const buildURLQuery = obj =>
       Object.entries(obj)
@@ -377,6 +398,7 @@ const buildURLQuery = obj =>
         middleware: 'auth',
 				components: {AboutContent, BottomHeader, PaymentOptions},
 				computed:{
+            ...mapState(['isLoading', 'refCount', 'ship_discount_methods']),
             ...mapGetters(['common']),
             
 						carts(){
@@ -409,14 +431,35 @@ const buildURLQuery = obj =>
             .then(data => {
                 this.merchant_areas = data
               })
-
               this.cart = this.$store.state.carts.list
 							return this.$store.state.carts.list
             },
+          subtotal_after_discount() {
+            if(this.$store.state.carts.discount){
+                return this.$store.state.carts.discount.subtotal_after_discount
+             }else{
+               return 0
+             }
+          },
            subtotal() {
               return this.$store.state.carts.sub_total
-            }
-            
+            },
+           promototal() {
+             if(this.$store.state.carts.discount){
+                return this.$store.state.carts.discount.promo_total
+             }else{
+               return 0
+             }
+             
+           },
+           other_discount() {
+             if(this.$store.state.carts.discount){
+                return this.$store.state.carts.discount.grand_without_promo
+             }else{
+               return 0
+             }
+             
+           }
 				},
 				data: function () {
           return {
@@ -451,16 +494,18 @@ const buildURLQuery = obj =>
             cart: null,
             shippingtext: '',
             shipping_total: 0,
+            shipping_total_after_discount: 0,
             shipping_discount: 0,
             baseURL: process.env.baseURL,
             user_ip: null,
             orderId: null,
             shippers_allowed : ['TIKI', 'JNE', 'SiCepat'],
             kredivo_paymentId : null,
-            kredivo_redirect_url : null
+            kredivo_redirect_url : null,
           }
 				},
 				mounted(){
+          this.$axios.defaults.baseURL = 'http://localhost:3000'
           
           var url = '/api2/prod/public/v1/';
           var cities = 'provinces';
@@ -486,21 +531,21 @@ const buildURLQuery = obj =>
             // console.log('merchants', this.merchants.entries())
         },
 				async asyncData ({ app, store }) {
-            app.$axios.setHeader('lang', store.state.locale);
+            app.$axios.defaults.baseURL = process.env.baseURL
             
-            // let featuredProducts = await app.$axios.$get('http://localhost:8000/api/men/featuredproducts');
-            // const ip = app.connection || app.socket
-            // this.ip = ip
-            // console.log('lskdf', this.ip)
-						return {}
+            app.$axios.setHeader('lang', store.state.locale);
+            let shipping_api_data = await app.$axios.$get('/discount/shipping');
+
+						return {
+              shipping_api_data: shipping_api_data
+            }
         },
 				methods: {
           showPaymentOptions(){
+
             setTimeout(function () {
                 $('#mypopup').modal('show');
             },1000);
-
-            console.log()
 
             this.$axios.$get(this.baseURL+'/orders/getorderid', {
             headers: {
@@ -545,6 +590,7 @@ const buildURLQuery = obj =>
                   //resultData.innerHTML = JSON.stringify(data);
                 }
 
+
                 snap.pay(data, {
                   
                   onSuccess: function(result){
@@ -568,18 +614,11 @@ const buildURLQuery = obj =>
 
           },
           payment_installment(){
-
-            
             var myitem =[]
             let cart  = this.$store.state.carts
-
-
             //store order in db
-  
             let baseURL = this.baseURL 
-
-
-              this.$axios.$post(baseURL+'/orders', cart,{
+            this.$axios.$post(baseURL+'/orders', cart,{
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -590,24 +629,20 @@ const buildURLQuery = obj =>
               },
               redirect: 'follow', // manual, *follow, error
               referrer: 'no-referrer', // no-referrer, *client
-            }
-            )
-            .then(data => {
+            }).then(data => {
               console.log(data)
-
-              })  
+            })  
             // creating items array purchased by customer
             cart.list.forEach((item, index) => {
               var arr = {};
               arr = {
                 "id": item.id.toString(),
                 "name":item.name,
-                "price":item.price,
+                "price": parseInt(item.price),
                 "type":item.modal,
                 "url":"http://localhost:3000/product_detail/"+item.id,
                 "quantity": parseInt(item.selected_quantity)
-            }
-
+              }
               myitem.push(arr)
             })
 
@@ -651,7 +686,7 @@ const buildURLQuery = obj =>
                var discount = {
                     "id":"discount",
                     "name":"Discount",
-                    "price":cart.final_detail.shipping_discount,
+                    "price": parseInt(cart.final_detail.shipping_discount),
                     "quantity":1
                 }
 
@@ -682,7 +717,7 @@ const buildURLQuery = obj =>
                 "billing_address": {
                     "first_name":this.shipping_details.name,
                     "last_name":"",
-                    "address":this.shipping_details.name.address,
+                    "address":this.shipping_details.address,
                     "city": this.shipping_details.city_name,
                     "postal_code":this.shipping_details.zipcode,
                     "phone":this.shipping_details.phone,
@@ -691,7 +726,7 @@ const buildURLQuery = obj =>
                 "shipping_address": {
                     "first_name":this.shipping_details.name,
                     "last_name":"",
-                    "address":this.shipping_details.name.address,
+                    "address":this.shipping_details.address,
                     "city": this.shipping_details.city_name,
                     "postal_code":this.shipping_details.zipcode,
                     "phone":this.shipping_details.phone,
@@ -702,10 +737,11 @@ const buildURLQuery = obj =>
                     "user_agent":"Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0"
                 },
                 // "callback_url":"https://localhost:8000/api/orders/kredivo_notify", 
-                "push_uri":"http://18.188.214.35/api/orders/kredivo_push_uri",
-                "back_to_store_uri":"http://18.221.210.123/thankyou"
+                "push_uri":"https://3a272c1f.ngrok.io/api/orders/kredivo_push_uri",
+                "back_to_store_uri":"http://localhost:3000/thankyou"
             }
 
+          this.$axios.defaults.baseURL = 'http://localhost:3000'
 
             //Kredivo api pos request          
             this.$axios.$post('/apii33/kredivo/v2/checkout_url', items,{
@@ -719,14 +755,20 @@ const buildURLQuery = obj =>
               },
               redirect: 'follow', // manual, *follow, error
               referrer: 'no-referrer', // no-referrer, *client
-            }
-            )
-            .then(data => {
+              "async": true,
+              "crossDomain": true,
+            }).then(data => {
               this.kredivo_paymentId = data.transaction_id
               this.kredivo_redirect_url = data.redirect_url
 
-              window.location = data.redirect_url
+              if(data.redirect_url)
+                // console.log(data.redirect_url)
+                  window.location = data.redirect_url
+              else
+                  alert('There is some error in Payment Processing ')
 
+              }).catch((error) => {
+                console.log(error)
               })
             //hiding popup of payment gateways options
               setTimeout(function () {
@@ -734,72 +776,88 @@ const buildURLQuery = obj =>
             },1000);
           },
           gettext(item, index){
-            console.log(item, index)
+            // console.log(item, index)
           },
           getcity() {
             this.shipping_details.province_name = this.shipping_details.province.name
-
+            this.areas = null
+            this.suburbs = null
             this.cities = null
+            this.shippingRates = {}
+            this.shipping_details.zipcode = null
+
+            this.$store.commit('loading', true);
+
             var url = '/api2/prod/public/v1/';
             var cities = 'cities';
             var param = '&province=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
             let getprovinces = this.$axios.$get(url+cities+apikey+param+this.shipping_details.province.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
             }}).then(res => {
               this.cities = res.data.rows
-              console.log(this.cities)
+              this.$store.commit('loading', false);
+
+            }).catch((error) => {
+            this.$store.commit('loading', false);
             });
 
           },
           getsuburbs() {
-            this.suburbs = null
-            this.shipping_details.city_name = this.shipping_details.city.name
+            this.suburbs = {}
+            this.areas = {}
+            this.shippingRates = {}
+            this.shipping_details.zipcode = null
 
+
+            this.shipping_details.city_name = this.shipping_details.city.name
             var url = '/api2/prod/public/v1/';
             var suburbs = 'suburbs';
             var param = '&city=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
            this.$axios.$get(url+suburbs+apikey+param+this.shipping_details.city.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
             }}).then(res => {
               this.suburbs = res.data.rows
-              console.log(this.suburbs)
             });
 
           },
           getareas() {
-            this.areas = null
+            this.areas = {}
+            this.shippingRates = {}
+            this.shipping_details.zipcode = null
+            
             this.shipping_details.suburbs_name = this.shipping_details.suburbs.name
-
             var url = '/api2/prod/public/v1/';
             var areas = 'areas';
             var param = '&suburb=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
             this.$axios.$get(url+areas+apikey+param+this.shipping_details.suburbs.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
             }}).then(res => {
               this.areas = res.data.rows
-              console.log(this.areas)
             });
 
 
           },
            async getDomesticRates() {
-
             var rawdata = {}
+            this.shippingRates = {}
+
             var shipping_details_area = this.shipping_details.area;
             this.shipping_details.area_name = this.shipping_details.area.name
-
+            this.shipping_details.zipcode = this.shipping_details.area.postcode
 
             var url = '/api2/prod/public/v1/';
-
             var domesticRates = 'domesticRates';
             this.pushShippingrate = []
-             this.merchant_areas.map((item, index) => {
+            this.merchant_areas.map((item, index) => {
                 var params = {
                 o:item.area_id,
                 d:shipping_details_area.id,
@@ -809,37 +867,34 @@ const buildURLQuery = obj =>
                 h:10,
                 v:10000
               }
-  
 
             const searchParams = buildURLQuery(params);
             var shipping_rates = new Array();
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f&';
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
             this.$axios.$get(url+domesticRates+apikey+searchParams,{
                 headers: {
                   'Access-Control-Allow-Origin': '*'
-                }})
-
-                .then(response =>{
-            
+                }}).then(response =>{
                 // let express = response.data.rates.logistic.express.filter(exp => shippers_allowed.includes(exp.name))
                 // let regular = response.data.rates.logistic.regular.filter(reg => shippers_allowed.includes(reg.name))
-
                 rawdata = response.data.rates.logistic
                 rawdata.name = item.name
-                
                 // rawdata.express = express;
                 // rawdata.regular = regular;
                 this.pushShippingrate.push(rawdata)
-                console.log('shippingraates', this.pushShippingrate)
-
                 }).then(() => {
                     this.shippingRates = this.pushShippingrate
+                }).catch((error) => {
+                  alert(error)
                 })
               })
+          
+          this.$store.commit('getshipping')
 
           },
         checkmerchant(){
-          console.log(this.shipping_details);
+          // console.log(this.shipping_details);
         },
         validate() {
           this.formErrors = []
@@ -858,66 +913,90 @@ const buildURLQuery = obj =>
           // })
         },
 
-					openShipping() {
-						this.toggleTab();
-					},
-					openOrder() {
-            // if(!this.validate()){
-            //   return false;
-            // }
-            this.shippingtext = this.shipping_details.method
-            this.shipping_total = 0
-            this.shipping_details.method.forEach((item, index) => {
-              this.shipping_total += item.rate
-              
-            })
+        openShipping() {
+          this.toggleTab();
+        },
+        openOrder() {
+          // if(!this.validate()){
+          //   return false;
+          // }
+
+
+          this.shippingtext = this.shipping_details.method
+          this.shipping_total = 0
+          this.shipping_details.method.forEach((item, index) => {
+            this.shipping_total += item.rate
             
-            console.log(this.shipping_total, 'shioing total')
-            if(this.subtotal > 900000 && this.subtotal < 1000000){
-              this.shipping_total = this.shipping_total - 18000
-              this.shipping_discount = 18000
-            }else if(this.subtotal >= 1000000){
-              this.shipping_total = this.shipping_total - 35000
-              this.shipping_discount = 35000
+          })
+
+          // console.log(this.$store.state.ship_discount_methods, 'sfaskdfshdfklhj')
+          this.ship_discount_methods.map((item, index) => {
+            if(item.title == 'shipping1'){
+              if(this.subtotal >= item.min_order_amount){
+                if(this.shipping_total < item.max_discount_amount){
+                  this.shipping_discount = this.shipping_total
+                  this.shipping_total_after_discount = 0
+                }else{
+                    this.shipping_total_after_discount = this.shipping_total - item.max_discount_amount
+                    this.shipping_discount = item.max_discount_amount
+                }
+                
+              }
             }
-            
-            var obj = {
-                shippingtext: this.shippingtext,
-                shipping_total: this.shipping_total,
-                shipping_discount: this.shipping_discount,
-                subtotal: this.subtotal,
-                shipping_details: this.shipping_details,
-                merchants: this.merchants,
-                grandTotal: this.subtotal + this.shipping_total
-              };
-              // var vuex = JSON.parse(localStorage.getItem('vuex'))
-             this.$store.commit('carts/payment', obj)
+            if(item.title == 'shipping2'){
+              if(this.subtotal > item.min_order_amount && this.subtotal < 1000000){
+                if(this.shipping_total < item.max_discount_amount){
+                  this.shipping_discount = this.shipping_total
+                   this.shipping_total_after_discount = 0
+                }else{
+                    this.shipping_total_after_discount = this.shipping_total - item.max_discount_amount
+                    this.shipping_discount = item.max_discount_amount
+                }
+              }
+            }
+          })
+          
+          
+          var obj = {
+              shippingtext: this.shippingtext,
+              shipping_total: this.shipping_total,
+              shipping_total_after_discount: this.shipping_total_after_discount,
+              shipping_discount: this.shipping_discount,
+              subtotal: this.subtotal,
+              shipping_details: this.shipping_details,
+              merchants: this.merchants,
+              grandTotal: this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
+            };
 
-						$('#checkout button.promo_code').click();
-            this.toggleTab();
+            this.$store.state.carts.discount.subtotal_after_discount = this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
+            // var vuex = JSON.parse(localStorage.getItem('vuex'))
+            this.$store.commit('carts/payment', obj)
 
-					},
-					toggleTab() {
-						$('#checkout button.promo_code').on('click', function(){
-					    $('#checkout button').removeClass('selected');
-					    $('#checkout .panel').css('display','none');
-					    $('#checkout .panel').css('max-height','0');
+          $('#checkout button.promo_code').click();
+          this.toggleTab();
 
-					    $(this).addClass('selected');
-					    $(this).next().css('display', 'block');
-					    $(this).next().css('max-height','fit-content');
-					    $(this).next().css('max-height','-moz-fit-content');
-						});
-          },
-          async getToken() {
-         
+        },
+        toggleTab() {
+          $('#checkout button.promo_code').on('click', function(){
+            $('#checkout button').removeClass('selected');
+            $('#checkout .panel').css('display','none');
+            $('#checkout .panel').css('max-height','0');
+
+            $(this).addClass('selected');
+            $(this).next().css('display', 'block');
+            $(this).next().css('max-height','fit-content');
+            $(this).next().css('max-height','-moz-fit-content');
+          });
+        },
+        async getToken() {
+        
 
 
-          },
-          dopayment(token){
+        },
+        dopayment(token){
 
-          }
-				}
+        }
+      }
 		}
 </script>
 

@@ -1,4 +1,10 @@
 {
+  "global": {
+    "men": "MEN",
+    "women": "WOMEN",
+    "mix": "MIX",
+    "gender": "GENDER"
+  },
   "links": {
     "home": "Home",
     "about": "About",
@@ -30,5 +36,10 @@
   "checkout": {
     "Pay_credit_bank": "Pay via Credit Card OR Bank",
     "pay_installment": "Pay in Installments"
+  },
+  "search": {
+    "result_for": "Result For",
+    "categories": "Categories",
+    "most_popular": "POPULAR RIGHT NOW"
   }
 }

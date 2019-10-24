@@ -1,6 +1,6 @@
 <template>
 <div>
-		<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women'" ></bottom-header>
+		<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women/'" ></bottom-header>
 				<div class="heading-section">
 		<div class="container-fluid">
 			<div class="row" id="bor" style="margin:auto">
@@ -62,8 +62,12 @@
 					<div class="row">
 							<div class="col-sm-12 col-md-3 col-lg-3">
 								<div class="tab" id="mobile_hide">
-									<button class="tablinks" :style="tabColumns == 4 ? 'opacity:0.5' : ''" @click="changeColumns(4)" id="defaultOpen"><img src="/images/APSTROFIICONS_11.png"></button>
-									 <button class="tablinks" :style="tabColumns == 3 ? 'opacity:0.5' : ''" @click="changeColumns(3)"><img src="/images/APSTROFIICONS_10.png"></button>
+									<button class="tablinks active" :style="tabColumns == 4 ? 'opacity:0.5' : ''" @click="changeColumns(4)" id="defaultOpen">
+										<img src="/images/APSTROFIICONS_11.png">
+									</button>
+									 <button class="tablinks" :style="tabColumns == 3 ? 'opacity:0.5' : ''" @click="changeColumns(3)">
+										 <img src="/images/APSTROFIICONS_10.png">
+									</button>
 								</div>
 
 									<div class="View_cloth">
@@ -71,11 +75,11 @@
 	
 										<div class="content_cat">
 											<div class="memory">
-												<ul>
-													<template v-for="(item, index) in subcategory">
-														<li :key="index"><a href="#"  @click.prevent="setSubCatID(item.id);searchCatalogue(item.id)">{{item.name}}</a></li>
-													</template>
-												</ul>
+												<template v-for="(item, index) in subcategory">
+													<button class="uncollapsible" :key="index" @click.prevent="setSubCatID(item.id);searchCatalogue(item.id)">
+														{{item.name}}
+													</button>
+												</template>
 											</div>
 										</div>
 									</div>
@@ -164,7 +168,7 @@
 									<div :class="'col-sm-12 col-md-'+tabColumns +' colum_pro'" :key="index">
 										<div class="best_saller_inner">
 											<div class="best_saller_main">
-												<a :href="'/product_detail/'+item.id">
+												<!-- <a :href="'/product_detail/'+item.id">
 													<template v-if="item.product_images && item.product_images.length > 0">
 														<img width="300" height="450" 
 														v-lazy="IMAGE_URL + item.product_images[0].image_url" 
@@ -174,8 +178,7 @@
 															<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
 															<div class="brand_category">{{ item.name }}</div>
 															<div class="productbrand_price">
-																<!-- <div style="text-decoration: line-through;display: inline;">IDR {{ item.price }}</div> -->
-																<!-- <span>IDR {{ item.price }}</span> -->
+																
 																<div class="productbrand_price">IDR {{ item.price }}</div>
 															</div>
 														</div>
@@ -184,7 +187,40 @@
 													<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'" />
 													</template>
 													
-												</a>
+												</a> -->
+												<nuxt-link :to="'/product_detail/'+item.id">
+													<template v-if="item.product_images && item.product_images.length > 0">
+														<img width="300" height="450" 
+														v-lazy="IMAGE_URL + item.product_images[0].image_url" 
+														/>
+														<div>{{ item.product_images.image_url}}</div>
+														<div class="brand_name">
+															<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
+															<div class="brand_category">{{ item.name }}</div>
+															
+															<template v-if="item.product_discount.length > 0">
+																<div class="productbrand_price"  v-if="item.product_discount[0].discount" >
+																	<div style="text-decoration: line-through;display: inline;">
+																		IDR {{ item.price }}
+																	</div>
+																	<!-- <span>IDR {{ item.price }}</span> -->
+																	<span v-if="item.product_discount[0].discount.type == 'PERCENTAGE'">
+																		IDR {{ item.price - (item.price * item.product_discount[0].discount.amount/100) }}
+																	</span>
+																</div>
+																<div class="productbrand_price"  v-else>
+																	IDR {{ item.price }}
+																</div>
+															</template>
+															<template  v-else>
+																<div class="productbrand_price">IDR {{ item.price }}</div>
+															</template>
+														</div>
+													</template>
+													<template v-else>
+														<img width="300" height="450" :src="IMAGE_URL + 'images/nopreview.png'" />
+													</template>
+												</nuxt-link>
 											</div>
 										</div>
 									</div> 

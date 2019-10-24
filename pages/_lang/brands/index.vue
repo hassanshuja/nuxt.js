@@ -159,22 +159,27 @@
                             </div>
                         </div>
                         <!------------endpopup-------------------------->
-                        <div class="show_brand" :id="'element_'+alpha" v-for="(alpha,index) in alphabet">
-                            <div class="title_caption_brand">
-                                {{alpha}}
-                            </div>
-                            <div class="col-sm-6 col-md-3 col-lg-3" v-if="alpha == brand.key" v-for="(brand,index) in brands">
-                                <div class="first_brand_show">
-                                    <nuxt-link :to="$i18n.path('brands/'+brand.slug)"  exact>
-                                        <img v-lazy="brand.image">
-                                        <div class="brand_pro_in">
-                                            <div class="brand_name_pro">
-                                                {{brand.name}}
-                                            </div>
-                                        </div>
-                                    </nuxt-link>
-
+                        <div v-if="brands.length > 0">
+                            <div class="show_brand" :id="'element_'+alpha" v-for="(alpha,index) in alphabet" v-bind:key="index">
+                                <div class="title_caption_brand" >
+                                    {{alpha}}
                                 </div>
+                                
+                                <template v-for="(brand,index) in brands" >
+                                <div class="col-sm-6 col-md-3 col-lg-3" v-if="alpha == brand.key" v-bind:key="index">
+                                    <div class="first_brand_show">
+                                        <nuxt-link :to="$i18n.path('brands/'+brand.slug)"  exact>
+                                            <img v-lazy="brand.image">
+                                            <div class="brand_pro_in">
+                                                <div class="brand_name_pro">
+                                                    {{brand.name}}
+                                                </div>
+                                            </div>
+                                        </nuxt-link>
+
+                                    </div>
+                                </div>
+                                </template>
                             </div>
                         </div>
                     </div>
@@ -185,28 +190,15 @@
 
 
                     </div>
+                    <div id="fasionbrand" class="tabcontent">
+
+                        <h3>FASHION BRAND</h3>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -216,9 +208,10 @@
         name: "brand-index",
         data(){
             return{
-                alphabet:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z']
+                alphabet:['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','W','X','Y','Z'],
+                mybrands: []
             }
-        },
+        },  
         computed:{
             ...mapGetters(['brands'])
         },
@@ -226,8 +219,10 @@
             document.getElementById("defaultOpen").click();
         },
         async fetch ({app,store}) {
+            app.$axios.defaults.baseURL = process.env.baseURL
             let response = await app.$axios.$get('brands');
             store.dispatch('setBrands',response.data);
+           
         },
         methods:{
             sidemenu(e,val){

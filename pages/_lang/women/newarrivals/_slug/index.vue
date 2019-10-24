@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women'"></bottom-header>
+		<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women/'"></bottom-header>
 		<div class="heading-section">
 		<div class="container-fluid">
 			<div class="row" id="bor" style="margin:auto">
@@ -44,11 +44,11 @@
 												 </li>
 											 </ul>
 										</div>
-													<input type="hidden" name="paged" value="1">
-													<input type="hidden" name="WordApp_launch" value="">
-													<input type="hidden" name="WordApp_mobile_site" value="">
-													<input type="hidden" name="WordApp_demo" value="">
-													<input type="hidden" name="WordApp_mobile_app" value="">
+										<input type="hidden" name="paged" value="1">
+										<input type="hidden" name="WordApp_launch" value="">
+										<input type="hidden" name="WordApp_mobile_site" value="">
+										<input type="hidden" name="WordApp_demo" value="">
+										<input type="hidden" name="WordApp_mobile_app" value="">
 									</form>
 							</div>
 					</div>
@@ -60,7 +60,7 @@
 					<div class="row" >
 							<div class="col-sm-12 col-md-3 col-lg-3">
 								<div class="tab" id="mobile_hide">
-									<button class="tablinks" :style="tabColumns == 4 ? 'opacity:0.5' : ''" @click="changeColumns(4)" id="defaultOpen"><img src="/images/APSTROFIICONS_11.png"></button>
+									<button class="tablinks active" :style="tabColumns == 4 ? 'opacity:0.5' : ''" @click="changeColumns(4)" id="defaultOpen"><img src="/images/APSTROFIICONS_11.png"></button>
 									 <button class="tablinks" :style="tabColumns == 3 ? 'opacity:0.5' : ''" @click="changeColumns(3)"><img src="/images/APSTROFIICONS_10.png"></button>
 								</div>
 
@@ -69,11 +69,11 @@
 	
 										<div class="content_cat">
 											<div class="memory">
-												<ul>
-													<template v-for="(item, index) in subcategory">
-														<li :key="index"><a href="#"  @click.prevent="setSubCatID(item.id);searchCatalogue(item.id)">{{item.name}}</a></li>
-													</template>
-												</ul>
+												<template v-for="(item, index) in subcategory">
+													<button class="uncollapsible" :key="index" @click.prevent="setSubCatID(item.id);searchCatalogue(item.id)">
+														{{item.name}}
+													</button>
+												</template>
 											</div>
 										</div>
 									</div>
@@ -164,9 +164,19 @@
 											<div class="best_saller_main">
 												<a :href="'/product_detail/'+item.id">
 													<template v-if="item.product_images && item.product_images.length > 0">
-														<img width="300" height="450" 
-														v-lazy="IMAGE_URL + item.product_images[0].image_url" 
-														/>
+														<div class="marqu">
+															<img  
+															v-lazy="IMAGE_URL + item.product_images[0].image_url" 
+															/>
+															<div class="marquee-new" style="">
+																<ul>
+																	<li>New Arrivals</li>
+																	<li>New Arrivals</li>
+																	<li>New Arrivals</li>
+																	<li>New Arrivals</li>
+																</ul>                      
+															</div>
+														</div>
 														<div>{{ item.product_images.image_url}}</div>
 														<div class="brand_name">
 															<div class="brand_title"><b>{{ item.product_brand.name }}</b></div>
@@ -328,12 +338,12 @@
 						this.search = 'getsubcatItem';
 						let subcategory_id = this.subcategory_id
 
-						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
+						let searchUrl = `${this.baseURL}/page/catalogue/2
 										?sizing_gender=women&newarrivals=1page=${this.page}&subcategory_id=${subcategory_id}`;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=women&newarrivals=1page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
+							searchUrl = `${this.baseURL}/page/catalogue/2?sizing_gender=women&newarrivals=1page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
 						}
 						console.log(searchUrl)
 						let	response2 =	await this.$axios.get(searchUrl);
@@ -363,12 +373,12 @@
 						let subcategory_id = this.subcategory_id
 						let sortby = this.sortby;
 						console.log(sortby)
-						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
+						let searchUrl = `${this.baseURL}/page/catalogue/2
 						?sizing_gender=women&newarrivals=1&page=${this.page}&subcategory_id=${subcategory_id}&sortby=${sortby}`;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
 							var colors =  JSON.stringify(this.colorSearch);
 							var size =  JSON.stringify(this.sizeSearch);
-							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
+							searchUrl = `${this.baseURL}/page/catalogue/2
 							?sizing_gender=women&newarrivals=1&page=${this.page}&colors=${colors}&size=${size}
 							&subcategory_id=${subcategory_id}&sortby=${sortby}`;
 						}

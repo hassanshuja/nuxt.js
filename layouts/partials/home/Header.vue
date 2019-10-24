@@ -61,8 +61,10 @@
                            </ul>
                          </div> -->
                         <div class="search_box">
-                            <a href="#" data-toggle="collapse" data-target=".search-input"><img src="~assets/images/search.svg"><span>SEARCH</span></a>
-
+                            <a href="#" class="search" id="search">
+                                <img src="~assets/images/search.svg">
+                                <span>SEARCH</span>
+                            </a>
                         </div>
                         <div class="sing_in" v-if="!loggedIn">
                             <a href="#" data-toggle="modal" data-target="#login">SIGN IN</a>
@@ -98,7 +100,9 @@
                           
 
                         <div class="cart_icon">
-                              <a href="/mybag"><img src="~assets/images/bag_aps.svg"><!-- <i class="fa fa-shopping-bag" aria-hidden="true"></i> -->
+                            <nuxt-link :to="$i18n.path('mybag')" ><img src="~assets/images/bag_aps.svg">
+                            <span style="position:absolute; font-size: 12px; color:red">{{carts.length  == 0 ? 0 : ''}}</span>
+                            </nuxt-link>
                             <template v-if="carts.length > 0">
                                 <div class="dropdown-demo">
                                  <div class="add_message">
@@ -133,7 +137,7 @@
                                </div>
                             </div>
                         </template>
-                         </a>
+                        
                         </div>
                        
                     </div>
@@ -148,8 +152,12 @@
                                 <button type="button" class="close in" data-dismiss="modal" ><img src="~assets/images/close.svg" class="popup_cross"></button>
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs">
-                                    <li class="active show"><a href="#Login" data-toggle="tab" class="active show">SIGN IN</a></li>
-                                    <li><a href="#Registration" data-toggle="tab">REGISTER</a></li>
+                                    <li class="active show">
+                                        <a href="#Login" data-toggle="tab" class="active show">SIGN IN</a>
+                                    </li>
+                                    <li>
+                                        <a href="#Registration" data-toggle="tab" class="show">REGISTER</a>
+                                    </li>
                                 </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content">
@@ -217,7 +225,7 @@
                                                 <label for="name" class="col-sm-12 control-label">
                                                     Name</label>
                                                 <div class="col-sm-12">
-                                                    <input type="name" class="form-control" id="name" v-model="name" required/>
+                                                    <input type="text" class="form-control" id="name" v-model="name" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group">
@@ -245,7 +253,7 @@
                                                 <label for="password_confirmation" class="col-sm-12 control-label">
                                                     Confirm Password</label>
                                                 <div class="col-sm-12">
-                                                    <input type="password_confirmation" class="form-control" id="password_confirmation" v-model="password_confirmation" required/>
+                                                    <input type="password" class="form-control" id="password_confirmation" v-model="password_confirmation" required/>
                                                 </div>
                                             </div>
                                             <div class="form-group" id="email_another" v-if="reg_err">
@@ -377,20 +385,20 @@
 
             <div class="header_menu">
                 <!-- <form class="sidebar-search  sidebar-search-bordered" action="page_general_search_3.html" method="POST">
-                                       <a href="javascript:;" class="remove">
-                                           <i class="icon-close"></i>
-                                       </a>
-                                       <img src="~assets/images/APSTROFIICONS_09.png">
+                    <a href="javascript:;" class="remove">
+                        <i class="icon-close"></i>
+                    </a>
+                    <img src="~assets/images/APSTROFIICONS_09.png">
 
-                                       <div class="input-group">
-                                           <input type="text" class="form-control" placeholder="Search...">
-                                           <span class="input-group-btn">
-                                               <a href="javascript:;" class="btn submit">
-                                                   <i class="icon-magnifier"></i>
-                                               </a>
-                                           </span>
-                                       </div>
-                                   </form> -->
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <a href="javascript:;" class="btn submit">
+                                <i class="icon-magnifier"></i>
+                            </a>
+                        </span>
+                    </div>
+                </form> -->
                 <ul>
                     <li><a href="#" data-toggle="modal" data-target="#login">SIGN IN / REGISTER</a></li>
                     <li><a href="#">MEN</a>
@@ -459,13 +467,23 @@
                 </div>
             </div>
         </div>
-        <div class="right_ctn">
+        <div class="right_ctn search-panel" style="display: none;">
             <div class="search_below">
 
-                <div class="collapse search-input">
-                    <form class="row border_search" id="demo-2" onsubmit="return false"  style="margin-right: 0px;
-    margin-left: 0px;">
-                        <img src="~assets/images/APSTROFIICONS_09.png" class="hide_forres"><!-- <i class="fa fa-search" aria-hidden="true"></i> --><span class="back_top"><input class="col-sm-12 col-md-12" type="search" placeholder="" ></span>
+                <div class="search-input" >
+                    <form class="row border_search" 
+                        id="demo-2"  
+                        method="GET"
+                        @submit.prevent="checkForm"
+                        style="margin-right: 0px;
+                        margin-left: 0px;"
+                        ref="form"
+                    >
+                        <img src="~assets/images/APSTROFIICONS_09.png" class="hide_forres">
+                        <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
+                        <span class="back_top">
+                            <input class="col-sm-12 col-md-12" type="search" placeholder="" v-model="search_query">
+                        </span>
                         <button type="close" class="close">
                             <!-- × --><img src="~assets/images/APSTROFIICONS_02.png">
                         </button>
@@ -479,6 +497,8 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
+
     export default {
       name: "Home-Header",
       middleware: 'guest',
@@ -495,9 +515,42 @@
             login_err:'',
             reg_err: '',
             IMAGE_URL: process.env.IMAGE_URL,
+            search_query:null,
+            search_action:'search'
         }
       },
+      mounted() {
+           $("#search").click(function(e) {
+                $(".search-panel").toggle();
+                e.stopPropagation();
+            });
+
+            $(document).click(function(e) {
+                if (!$(e.target).is('.search-panel, .search-panel *')) {
+                    $(".search-panel").hide();
+                }
+            });
+      },
       methods: {
+        checkForm: function (e) {
+
+            var params = { query: this.search_query}
+            history.pushState(
+                {},
+                null,
+                '/search' +
+                '?' +
+                Object.keys(params)
+                    .map(key => {
+                    return (
+                        encodeURIComponent(key) + '=' + encodeURIComponent(params[key])
+                    )
+                    })
+                    .join('&')
+            )
+            // this.$router.push({ path: 'search', query: params })
+            location.reload()
+        },
         async login(){
             this.$axios.defaults.baseURL = process.env.baseURL;
    
@@ -505,6 +558,7 @@
             await this.$auth.login({
                   data: { email : this.email, password : this.password}
             }).then(data => {
+              $('#login').modal('hide')
               this.$router.push({
                 path: '/'
             });
@@ -526,6 +580,8 @@
                     password: this.password
                 }
             })
+            $('#login').modal('hide')
+
             this.$router.push({
                 path: '/'
             });

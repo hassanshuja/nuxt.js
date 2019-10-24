@@ -3,14 +3,14 @@ div#inner_pro .col-sm-12.col-md-4.col-lg-4 {padding: 0;}
  .Shipping_dem .col-sm-12.col-md-4.col-lg-4 { padding: 0;} 
 .Shipping_term .col-sm-12.col-md-4.col-lg-4 {padding: 0;}  
 .proccesd_btn .col-sm-12.col-md-4.col-lg-4 {padding: 0;}
-.continue_btn .col-sm-12.col-md-4.col-lg-4 {padding: 0;} 
+.continue_btn .col-sm-12.col-md-4.col-lg-4 {padding: 0; margin-bottom:30px} 
 .table th, .table td {
    
     border-top: 1px solid rgba(9, 7, 9, 0.08);
 }
 .modal-open .modal {
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 .select-selected:after {
 content: url(~assets/images/arrow_down_black.svg);
@@ -148,10 +148,10 @@ text-align: center;color: #ffffff;cursor: pointer;color: #fff !important;}
 .title_productdetails {float: left;width: 100%;}
 .product_in_size {float: left;width: 100%;padding-bottom: 8px;}
 .select_size_pro button {float: none !important;width: auto !important;
-background-color: transparent !important;border: 1px solid #ccc !important;
+background-color: transparent;border: 1px solid #ccc !important;
 /* font-family: FiraSans; */font-size: 10px !important;font-weight: normal !important;
 font-style: normal !important;font-stretch: normal !important;line-height: 2.4 !important;
-letter-spacing: normal !important;text-align: center !important;color: #3d3d3d !important;
+letter-spacing: normal !important;text-align: center !important;color: #3d3d3d ;
 padding: 2px 11px !important;}
 .red {color: #4c4988;}
 .select_size_pro button:hover {background-color: #4c4988 !important;color: #fff !important;}
@@ -161,6 +161,7 @@ padding: 2px 11px !important;}
 background-color: #d3cece !important;color: #3d3d3d !important;}
 .select_size_pro button:nth-child(7) {opacity: 0.5 !important;
 background-color: #d3cece !important;color: #3d3d3d !important;}
+button.btnsize.active {background-color: #4c4988;color: #fff;}
 .owl-carousel.owl-theme.owl-loaded.owl-drag .owl-prev img{
 width: 38px !important;height: 7%;position: absolute !important;top: 43% !important;
 left: 9px;display: block !important;border: 0px solid black !important;
@@ -391,3 +392,44 @@ table.mobile_acc td img {
 }
 
 }
+
+.section-b-space {
+    padding-bottom: 70px;
+}
+.section-t-space, section {
+    padding-top: 70px;
+}
+
+section {
+    display: block;
+}
+
+.text-center {
+    text-align: center!important;
+}
+
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+}
+
+.img-fluid, .img-thumbnail {
+    max-width: 100%;
+    height: auto;
+}
+
+img {
+    vertical-align: middle;
+    border-style: none;
+}
+
+h5, h6 {
+    font-weight: 400;
+    letter-spacing: .03em;
+}
+
+h6 {
+    font-size: 18px;
+    text-transform: capitalize;
+    line-height: 1;
+}
+

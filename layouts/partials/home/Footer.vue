@@ -18,11 +18,11 @@
                     <div class="footer_about">
                         About Apstrofi
                         <ul>
-                            <li><nuxt-link :to="'info#aboutus'">About Us</nuxt-link></li>
-                            <li><nuxt-link :to="'info#smartsizing'">Smart Sizing</nuxt-link></li>
-                            <li><nuxt-link :to="'info#partnership'">Partnership</nuxt-link></li>
+                            <li><nuxt-link :to="'/info#aboutus'">About Us</nuxt-link></li>
+                            <li><nuxt-link :to="'/info#smartsizing'">Smart Sizing</nuxt-link></li>
+                            <li><nuxt-link :to="'/info#partnership'">Partnership</nuxt-link></li>
                             <li><nuxt-link :to="'#'">Membership</nuxt-link></li>
-                            <li><nuxt-link :to="'info#privacypolicy'">Privacy Policy</nuxt-link></li>
+                            <li><nuxt-link :to="'/info#privacypolicy'">Privacy Policy</nuxt-link></li>
                         </ul>
                         <div class="asp">
                             Apstrofi © 2019

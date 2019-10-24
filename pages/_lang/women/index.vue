@@ -1,6 +1,6 @@
 <template>
 		<div>
-				<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women'"></bottom-header>
+				<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women/'"></bottom-header>
 				<div id="section_part" style="padding-top: 0;" class="section_style">
 
 						<div class="container-fluid">
@@ -65,20 +65,24 @@
 												DISCOVER YOUR STYLE
 										</div>
 										<div class="col-md-12 bot">
-												<div class="owl-carousel owl-theme">
-													<template v-for="(item, index) in productsList">
-														<div class="item" :key="index">
-																<a :href="'/product_detail/'+item.id">
-																	<template v-if="item.product_images && item.product_images.length > 0">
-																		<img width="300" height="450" :src="IMAGE_URL+item.product_images[0].image_url"/>
-																	</template>
-																	<template v-else>
-																	<img width="300" height="450" :src="IMAGE_URL+'images/nopreview.png'"/>
-																	</template>
-																</a>
-														</div>
-													</template>
-												</div>
+											<no-ssr> <!-- important to add no-ssr-->
+												<carousel :items="7">
+														<template v-for="(item, index) in productsList">
+																<div :key="index">
+																	<div class="item" >
+																		<a :href="'/product_detail/'+item.id">
+																		<template v-if="item.product_images && item.product_images.length > 0">
+																			<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
+																		</template>
+																		<template v-else>
+																			<img  :src="'~/assets/images/men_new.jpg'"/>
+																		</template>
+																		</a>
+																	</div>
+																</div>
+															</template>
+												</carousel>
+											</no-ssr>
 										</div>
 								</div>
 						</div>
@@ -203,7 +207,8 @@
 
 		export default {
 				name: "index",
-				components: {AboutContent, BottomHeader},
+        components: {AboutContent, BottomHeader},
+        
 				computed:{
 						...mapGetters(['common'])
 				},

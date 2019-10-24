@@ -8,7 +8,7 @@
                         <div class="product_img">
                             <div class="pro_first">
                                 <nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
-                                    <img v-lazy="data.section_1.image_url">
+                                    <img :src="data.section_1.image_url">
                                 </nuxt-link>
                                 <div class="top_shop">
                                     <nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact><button class="shop_now_men">{{data.section_1.button_text}}</button></nuxt-link>
@@ -20,7 +20,7 @@
                     <div class="col-sm-12 col-md-6">
                         <div class="product_img">
                             <div class="pro_first">
-                                <nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact><img v-lazy="data.section_2.image_url"></nuxt-link>
+                                <nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact><img :src="data.section_2.image_url"></nuxt-link>
                                 <div class="top_shop">
                                     <nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact><button class="shop_now_men">{{data.section_2.button_text}}</button></nuxt-link>
                                 </div>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-sm-12 col-md-12 right_content">
                     <div class="banner_below">
-                        <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact><img v-lazy="data.section_3.image_url"></nuxt-link>
+                        <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact><img :src="data.section_3.image_url"></nuxt-link>
                         <div class="top_in_shop">
                             <button class="shop_brand">{{data.section_3.button_text}}</button>
                         </div>

@@ -1,3 +1,5 @@
+
+
 let actions = {
     createpayment({commit}, data) {
         axios.post('/api/posts', post)

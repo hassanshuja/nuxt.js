@@ -1,62 +1,41 @@
 <template>
     <div class="blog_main">
         <div class="container-fluid">
-
             <div class="row infinite-scroll-list">
-
                 <div class="main_blog" v-for="(blog,index) in blogs" :key="index">
                     <div class="col-sm-12 col-md-5 border_btm_in">
-
                         <div class="blog_left">
-
                             <img v-lazy="blog.images[0].thumb_image_url">
-
                         </div>
-
                     </div>
-
                     <div class="col-sm-12 col-md-7">
-
                         <div class="blog_right">
-
                             <div class="cat_blog">
                                 <nuxt-link :to="$i18n.path('blog/category/'+blog.category_url)"  exact>
                                     {{blog.category_name}}
                                 </nuxt-link>
-
                             </div>
-
                             <div class="blog_name">
                                 <nuxt-link :to="$i18n.path('blog/detail/'+blog.slug)" exact>
                                     {{blog.title}}
                                 </nuxt-link>
-
                             </div>
-
                             <div class="blog_content">
-
                                 <p>{{blog.subtitle}}</p>
-
                                 <span>By {{blog.author}} / {{blog.date}}</span>
-
                                 <span class="right_mobile">{{blog.category_name}}</span>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
-            <no-ssr>
+            <client-only>
             <infinite-loading
                     ref="infiniteLoading"
                     @infinite="infiniteHandler">
             </infinite-loading>
-            </no-ssr>
+            </client-only>
         </div>
-
     </div>
 </template>
 

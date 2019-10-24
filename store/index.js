@@ -8,9 +8,37 @@ export const state = () => ({
     blog:[],
     brands:[],
     menCategory:[],
-    womenCategory:[]
+    womenCategory:[],
+    isLoading: false,
+    refCount: 0,
+    ship_discount_methods : []
 });
 export const mutations = {
+
+    getshipping(state) {
+        this.$axios.defaults.baseURL = process.env.baseURL
+        this.$axios.$get('discount/shipping')
+            .then(res => {
+               state.ship_discount_methods = res
+            //    console.log(res)
+            }).catch(err => {
+            // console.log(err, 'ererere')
+        })
+
+        console.log(state.ship_discount_methods)
+    },
+
+    loading(state, isLoading) {
+        // console.log({isLoading})
+        if (isLoading) {
+            state.refCount++;
+            state.isLoading = true;
+        } else if (state.refCount > 0) {
+            state.refCount--;
+            state.isLoading = (state.refCount > 0);
+        }
+    },
+
     SET_LANG(state, locale) {
         if (state.locales.indexOf(locale) !== -1) {
             state.locale = locale
@@ -24,7 +52,12 @@ export const mutations = {
     SET_COMMON (state, common) {
         state.common = common
     },
+    SET_FEATURED_PRODUCTS (state, featuredProducts){
+        state.featuredProducts = featuredProducts
+    },
+    
     SET_BLOGS (state, common) {
+        console.log(common)
         state.blogs = common
     },
     SET_BLOG (state, common) {
@@ -33,6 +66,9 @@ export const mutations = {
     SET_BRANDS(state,brands){
         state.brands = brands
     },
+    SET_BRAND(state,brand){
+        state.brand = brand
+    },
     SET_MEN_CATEGORY(state,category){
         state.menCategory = category
     },
@@ -40,6 +76,7 @@ export const mutations = {
         state.womenCategory = category
     }
 }
+
 
 export const actions = {
     async nuxtServerInit({ commit, dispatch }) {
@@ -52,6 +89,9 @@ export const actions = {
         /*if (this.$auth.loggedIn) {
             await dispatch('cart/getCart')
         }*/
+    },
+    setfeaturedProducts({commit, dispatch}, setfeaturedProducts){
+        commit('SET_FEATURED_PRODUCTS', setfeaturedProducts)
     },
     setBlogs({commit,dispatch},blog){
         commit('SET_BLOGS', blog);
@@ -67,6 +107,10 @@ export const actions = {
     },
     setBrands({commit,dispatch},brands){
         commit('SET_BRANDS', brands);
+    },
+    setBrand({commit,dispatch},brand){
+        console.log(brand, 'cmoadifnalsdflaskdjf;')
+        commit('SET_BRAND', brand);
     },
     setMenCategory({commit,dispatch},category){
         commit('SET_MEN_CATEGORY', category);
@@ -87,6 +131,9 @@ export const getters = {
     womenCategories (state) {
         return state.womenCategory
     },
+    featuredProducts (state) {
+        return state.featuredProducts
+    },
     blogs (state) {
         return state.blogs
     },
@@ -95,6 +142,9 @@ export const getters = {
     },
     brands(state){
         return state.brands
+    },
+    brand(state){
+        return state.brand
     },
     common(state){
         return state.common

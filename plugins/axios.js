@@ -27,15 +27,41 @@ export default function ({$axios,store,app,redirect}) {
 
         /*// Get token from auth.js store
         const token = store.state.token
-
+        store
         // Update token axios header
         if (token) {
             request.headers.common['Authorization'] = token
         }*/
+
+        store.commit('loading', true)
         const locale = store.state.locale
         if (locale) {
             request.headers.common['lang'] = locale
         }
         return request
-    })
+    }, (error) => {
+        store.commit('loading', false);
+        return Promise.reject(error);
+      });
+  
+
+    $axios.interceptors.response.use(response => {
+
+        // request.baseURL = 'https://api.com/api/'
+ 
+         /*// Get token from auth.js store
+         const token = store.state.token
+         store
+         // Update token axios header
+         if (token) {
+             request.headers.common['Authorization'] = token
+         }*/
+ 
+         store.commit('loading', false)
+         
+         return response
+     }, (error) => {
+        store.commit('loading', false);
+        return Promise.reject(error);
+      });
 }

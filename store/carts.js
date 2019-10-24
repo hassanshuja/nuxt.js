@@ -19,7 +19,7 @@ export const mutations = {
 	
 	state.list.splice(payload.index)
 	state.list[payload.index] = payload.obj
-	console.log(payload.obj)
+	state.list[payload.index].total_price = parseInt(state.list[payload.index].selected_quantity) * parseInt(payload.obj.price)
 		/* SUBTOTAL VALUE */
   	state.sub_total = 0
   	state.list.map(item => {
@@ -28,12 +28,20 @@ export const mutations = {
   	state.list.sub_total = state.sub_total
   },
   payment(state, payload) {
-	  console.log('payment')
+	//   console.log('payment')
 	state.final_detail = payload
-	console.log(payload, state)
+	// console.log(payload, state)
   },
-  remove (state, { cart }) {
-    state.list.splice(state.list.indexOf(cart), 1)
+  cart_discount(state, payload){
+	console.log('discount')
+	state.discount = payload
+  },
+  remove (state,  cart) {
+	// var oldbag = state.list
+	var newbag = state.list.splice(state.list.indexOf(cart), 1)
+	// console.log(state.list, cart, state.list.indexOf(cart))
+
+	state.list.cart = newbag
     /* SUBTOTAL VALUE */
   	state.sub_total = 0
   	state.list.map(item => {
@@ -41,4 +49,11 @@ export const mutations = {
   	})
   	state.list.sub_total = state.sub_total
   }
+}
+
+export const getters = {
+    carts (state) {
+		console.log(state.list)
+        return state.list
+    }
 }

@@ -2,8 +2,16 @@
     <div>
 <div class="wrapper fadeInDown heading-section">
   <div class="jumbotron text-center">
-  <h2 class="display-5">Thank You! for Your Order</h2>
-  <p class="lead"><strong>Please check your email</strong> for further instructions.</p>
+   <template v-if="tr_status == 'settlement'">
+    <h2 class="display-5">Thank You! We are Processing Your Order</h2>
+    <p class="lead"><strong>Your Order ID No #</strong> {{this.order_id}}.</p>
+    <p class="lead">Please check your email for reference.</p>
+  </template> 
+  <template v-else>
+    <h2 class="display-5">Sorry Your Order is Cancelled</h2>
+    <p class="lead"><strong>Your Order ID No #</strong> {{this.order_id}}.</p>
+    <p class="lead">Please Contact Admin with this Order ID.</p>
+  </template> 
   <hr>
   <p>
     Having trouble? <a href="">Contact us</a>
@@ -19,9 +27,31 @@
 <script scoped>
 
 		export default {
-            name: "login",
-            middleware: 'guest',
-            
+            name: "index",
+            // middleware: 'guest',
+            data: function(){
+              return {
+                order_id: null,
+                tr_status: null
+              }
+            },
+            mounted() {
+                this.updateOrder()
+            },
+            methods: {
+              updateOrder(){
+                this.order_id  = this.$route.query.order_id
+                this.tr_status = this.$route.query.tr_status
+
+                let obj = {
+                    order_id: this.order_id,
+                    transaction_status: this.tr_status
+                }
+                this.$axios.defaults.baseURL = process.env.baseURL
+                this.$axios.$put('/payment/'+this.order_id, obj)
+                
+              }
+            }
         }
 </script>
 

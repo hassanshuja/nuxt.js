@@ -6,12 +6,12 @@
                     <div class="header_menu_cat">
                         <ul>
                             <li>
-                                <nuxt-link  :to="$i18n.path(custom_url+'/newarrivals/1')" exact>
+                                <nuxt-link  :to="$i18n.path(custom_url+'newarrivals/-1')" >
                                 New Arrivals
                                 </nuxt-link>
                             </li>
                             <li>
-                                <nuxt-link  :to="$i18n.path(custom_url+'/sustainable/1')" exact>
+                                <nuxt-link  :to="$i18n.path(custom_url+'sustainable/-2')" >
                                 Sustainable products
                                 </nuxt-link>
                             </li>
@@ -33,7 +33,14 @@
 <script>
     export default {
         name: "BottomHeader",
-        props:['categoryList','url', 'custom_url']
+        props:['categoryList','url', 'custom_url'],
+        watch:{
+            $route(to, from ){
+                $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            }
+            
+        }
     }
 </script>
 

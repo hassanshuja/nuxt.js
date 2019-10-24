@@ -43,7 +43,7 @@ export default {
       },
       {
         src: 'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js'
-      }
+      },
 
         // {
         //     src: "/js/jquery.min.js",
@@ -81,13 +81,16 @@ export default {
       { src: '~/plugins/after-each', mode: 'client' },
       { src: '~/plugins/slicknav.js',ssr:false},
       { src: '~/plugins/custom.js',ssr:false },
-      { src: '~/plugins/owl.carousel', ssr: false},
+      { src: '~/plugins/owl.js', ssr: false},
       { src: '~/plugins/vue-lazyload', ssr: false },
       { src: '~/plugins/infiniteloading', ssr: false },
       { src: '~/plugins/axios', ssr: false , mode: 'server' },
       { src: '~/plugins/vuex-persist', ssr: false, mode: 'client' },
       { src: '~/plugins/vuejs-paginate', ssr: false, mode: 'client'},
-      { src:'~plugins/vue-scrollto.js',ssr:false}
+      { src:'~plugins/vue-scrollto.js',ssr:false},
+      { src: '~/plugins/localStorage.js', ssr: false },
+      // { src: '~/plugins/owl.carousel.js', ssr: false }
+      
   ],
 
   /*
@@ -100,6 +103,7 @@ export default {
       '@nuxtjs/proxy',
       '@nuxtjs/auth',
       '@nuxtjs/toast',
+      '@nuxtjs/ngrok',
 
   ],
 
