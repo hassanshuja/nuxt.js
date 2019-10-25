@@ -144,3 +144,7 @@ button.owl-prev:focus {
         background: transparent !important;
     }
 }
+
+.dis_your .item {
+    margin-right: 10px;
+}

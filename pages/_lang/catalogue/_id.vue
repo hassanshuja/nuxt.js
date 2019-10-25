@@ -338,7 +338,7 @@
 						const referrer = process.client ? window.document.referrer :  req.headers.referer*/
 						app.$axios.setHeader('lang', store.state.locale)
 						let response1 = await app.$axios.$get('women/category');
-						let response2 = await app.$axios.$get('page/catalogue');
+						let response2 = await app.$axios.$get('page/catalogue/1');
 						let productColors = await app.$axios.$get('product/colors');
 						let productSizes = await app.$axios.$get('product/sizes');
 						return {

@@ -33,7 +33,7 @@
                     <div class="banner_below">
                         <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact><img :src="data.section_3.image_url"></nuxt-link>
                         <div class="top_in_shop">
-                            <button class="shop_brand">{{data.section_3.button_text}}</button>
+                            <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact><button class="shop_brand">{{data.section_3.button_text}}</button></nuxt-link>
                         </div>
 
                     </div>
@@ -88,7 +88,6 @@
             app.$axios.defaults.baseURL = process.env.baseURL
             app.$axios.setHeader('lang', store.state.locale)
             let response = await app.$axios.$get('page/home');
-
             return {
                 data: response.data
             }

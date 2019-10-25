@@ -75,14 +75,14 @@
 												<template v-for="(item, index) in productsList">
 														<div :key="index">
 															<div class="item" >
-																<a :href="'/product_detail/'+item.id">
+																<nuxt-link :to="'/catalogue/men/'+item.tags.tag_id">
 																<template v-if="item.product_images && item.product_images.length > 0">
 																	<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
 																</template>
 																<template v-else>
-																	<img  :src="'/images/nopreview.png'"/>
+																	<img  :src="IMAGE_URL+'/images/nopreview.png'"/>
 																</template>
-																</a>
+																</nuxt-link>
 															</div>
 														</div>
 													</template>
@@ -232,7 +232,7 @@
 
 
 				mounted(){
-					
+					this.$store.dispatch('setGender', 'men');
 				},
 				async asyncData ({ app,store }) {
              			app.$axios.defaults.baseURL = process.env.baseURL;
@@ -248,7 +248,9 @@
 								productsList: allProducts
 						}
 				},
-				methods: {}
+				methods: {
+
+				}
 		}
 
 

@@ -92,7 +92,6 @@ export default {
       // { src: '~/plugins/owl.carousel.js', ssr: false }
       
   ],
-
   /*
   ** Nuxt.js modules
   */

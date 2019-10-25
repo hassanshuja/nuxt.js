@@ -97,11 +97,11 @@
                               </div>
                             </div>
                         </div> -->
-                          
+                            
 
                         <div class="cart_icon">
                             <nuxt-link :to="$i18n.path('mybag')" ><img src="~assets/images/bag_aps.svg">
-                            <span style="position:absolute; font-size: 12px; color:red">{{carts.length  == 0 ? 0 : ''}}</span>
+                            <span style="position:absolute; font-size: 12px;">{{carts.length  == 0 ? 0 : ''}}</span>
                             </nuxt-link>
                             <template v-if="carts.length > 0">
                                 <div class="dropdown-demo">
@@ -193,7 +193,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="spocial_mediapopup">
+                                        <!-- <div class="spocial_mediapopup">
 
                                             <div class="container">
                                                 <div class="row">
@@ -217,7 +217,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                     <div class="tab-pane" id="Registration">
                                         <form role="form" class="form-horizontal">
@@ -284,7 +284,7 @@
                                             </div>
 
                                         </form>
-                                        <div class="spocial_mediapopup">
+                                        <!-- <div class="spocial_mediapopup">
 
                                             <div class="container">
                                                 <div class="row">
@@ -308,7 +308,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>

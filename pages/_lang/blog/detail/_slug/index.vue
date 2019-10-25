@@ -316,7 +316,6 @@
         width: 100%;
         height: auto;
         float: left;
-        position: absolute;
         bottom: 10px;
     }
 

@@ -11,7 +11,8 @@ export const state = () => ({
     womenCategory:[],
     isLoading: false,
     refCount: 0,
-    ship_discount_methods : []
+    ship_discount_methods : [],
+    gender: null
 });
 export const mutations = {
 
@@ -74,6 +75,9 @@ export const mutations = {
     },
     SET_WOMEN_CATEGORY(state,category){
         state.womenCategory = category
+    },
+    SET_GENDER(state, gender){
+        state.gender = gender
     }
 }
 
@@ -117,6 +121,9 @@ export const actions = {
     },
     setWomenCategory({commit,dispatch},category){
         commit('SET_WOMEN_CATEGORY', category);
+    },
+    setGender({commit, dispatch}, gender){
+        commit('SET_GENDER', gender)
     }
 
 }
@@ -148,5 +155,8 @@ export const getters = {
     },
     common(state){
         return state.common
+    },
+    gender(state){
+        return state.gender
     }
 }

@@ -35,7 +35,6 @@
 										<div class="page_redirect">
 											 <ul>
 												 <li>
-													
 													<a href="#" v-if="page > 29" class="active" @click.prevent="paging(30);searchCatalogue(); ">30</a>
 													<a href="#" v-if="page > 39" @click.prevent="paging(40);searchCatalogue();">40</a>
 													<a href="#" v-if="page > 59" @click.prevent="paging(60);searchCatalogue();">60</a>
@@ -94,7 +93,7 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in sizesList">
-														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<button class="uncollapsible" :key="index" @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button>
 													</template>
 												</ul>
 											</div>
@@ -105,7 +104,7 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in colorsList">
-														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<button class="uncollapsible" :key="index" @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button>
 													</template>
 												</ul>
 											</div>
@@ -363,7 +362,6 @@
 					this.documentReady()
 				},
 				created() {
-					console.log('route', this.$router.params);
 					this.parent_id = this.$route.params.slug
 					},
 				async asyncData ({ app,store, route }) {

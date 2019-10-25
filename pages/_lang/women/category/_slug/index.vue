@@ -91,7 +91,7 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in sizesList">
-														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<button class="uncollapsible" :key="index" @click="selectFilter(item.name, item.id, index, 'size')" id="btn1" :data-id="item.id">{{ item.name }}</button>
 													</template>
 												</ul>
 											</div>
@@ -102,7 +102,7 @@
 											<div class="content">
 												<ul>
 													<template v-for="(item, index) in colorsList">
-														<li :key="index"><button @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button></li>
+														<button class="uncollapsible" :key="index" @click="selectFilter(item.name, item.id, index, 'color')" id="btn1" :data-id="item.id">{{ item.name }}</button>
 													</template>
 												</ul>
 											</div>
@@ -323,7 +323,6 @@
 					
 				},
 				created() {
-					console.log('route', this.$router.params);
 					this.parent_id = this.$route.params.slug
 					},
 				async asyncData ({ app,store, route }) {

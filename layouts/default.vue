@@ -16,3 +16,4 @@
         components: {HomeTopOffer, HomeFooter, HomeHeader, BottomHeader}
     }
 </script>
+

@@ -23,7 +23,7 @@
     "dotenv": "^8.0.0",
     "jquery": "^3.4.1",
     "midtrans-client": "^1.0.3",
-    "nuxt": "^2.4.0",
+    "nuxt": "^2.10.2",
     "nuxt-svg": "^0.1.4",
     "owl.carousel": "^2.3.4",
     "popper.js": "^1.15.0",

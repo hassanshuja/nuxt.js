@@ -280,6 +280,13 @@ transform: translate3d(0, 100% 0);
 transform: translate3d(0,-100%, 0);
 }
 
-.description_product div ul {
-    list-style: none
+.description_product .desc {
+    font-family: Open Sans;
+    font-size: 10px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.8;
+    letter-spacing: normal;
+    color: #3d3d3d;
 }

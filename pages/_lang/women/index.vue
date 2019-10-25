@@ -70,14 +70,14 @@
 														<template v-for="(item, index) in productsList">
 																<div :key="index">
 																	<div class="item" >
-																		<a :href="'/product_detail/'+item.id">
+																		<nuxt-link :to="'/product_detail/'+item.id">
 																		<template v-if="item.product_images && item.product_images.length > 0">
 																			<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
 																		</template>
 																		<template v-else>
-																			<img  :src="'~/assets/images/men_new.jpg'"/>
+																			<img  :src="IMAGE_URL+'images/nopreview.png'"/>
 																		</template>
-																		</a>
+																		</nuxt-link>
 																	</div>
 																</div>
 															</template>
@@ -218,7 +218,7 @@
 								categoryList:[],
 								featuredList:[],
 								productsList: [],
-								IMAGE_URL: 'http://18.221.210.123/'
+								IMAGE_URL: 'http://18.188.214.35/'
 						}
 				},
 				//transition: 'slide',
@@ -228,6 +228,7 @@
 				},*/
 
 				mounted(){
+					this.$store.dispatch('setGender', 'women');
 					// setTimeout(function () {
 					// 	$('.owl-carousel').owlCarousel({
 	    //             loop: true,

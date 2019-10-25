@@ -1,5 +1,7 @@
 <template>
 <div>
+		<bottom-header :categoryList="categoryList" :url="gender+'/category/'" :custom_url="gender+'/'"></bottom-header>
+
   <div class="vertical_slider">
     <div class="container-fluid clearfix">
       <div class="row">
@@ -65,10 +67,10 @@
         <div class="col-sm-12 col-md-6">
           <div class="product_view">
             <div class="product_inline">
-              {{ category[0].parent.name }} / {{ category[0].name }} / {{ product.modal }} - {{ product.name }}
+              {{ category[0].parent.name }} / {{ category[0].name }} / {{ product_merchant }} - {{ product.name }}
             </div>
             <div class="title_productdetails">
-              <span>{{ product.modal }}</span><span class="name_or"> - {{ product.name }} </span>
+              <span>{{ product_merchant }}</span><span class="name_or"> - {{ product.name }} </span>
               <br>
               <span class="blow_identi" >
                 <span v-if="product.product_discount.length > 0 && product.product_discount[0].qty >= selected_quantity">
@@ -99,7 +101,7 @@
                 <template v-for="(item, index) in colors">
                   <ul v-bind:key="index" class="bord">
                     <li @click="selectColor(item.pivot['id'], item.name)" class="inner_ga">
-                      <div :id="item.pivot['id']"  :class="[item.pivot['id'] == routeId ? item.name+' active' : '']" id="squer"  :style="'background-color:'+item.name.toLowerCase() +''"></div>
+                      <div :id="item.pivot['id']"  :class="item.name" id="squer"  :style="'background-color:'+item.name.toLowerCase() +''"></div>
                     </li>
                   </ul>
                 </template>
@@ -163,14 +165,14 @@
               <!-- <i class="fa fa-heart" id="heart" ></i> -->
             </div>
             <div class="description_product">
-              <button class="collapsible active">Description</button>
-              <div class="" style="display: block;" v-html="product.description">
+              <button class="collapsible">Description</button>
+              <div class="desc" style="display: block;" v-html="product.description">
               </div>
               <button class="collapsible active">Detail &amp; Sizing</button>
-              <div class="" style="display: none;" v-html="product.sizing_detail">
+              <div class="desc" style="display: none;" v-html="product.sizing_detail">
               </div>
               <button class="collapsible active">Shipping &amp; Return</button>
-              <div class="" style="display: none;" v-html="product.shipping_return_detail">
+              <div class="desc" style="display: none;" v-html="product.shipping_return_detail">
               </div>
             </div>
           </div>
@@ -334,8 +336,9 @@
 </template>
 
 <script>
+
     import BottomHeader from "../../../layouts/partials/home/BottomHeader";
-    import { mapMutations } from 'vuex'
+    import { mapMutations, mapGetters } from 'vuex'
 
     export default {
         name: "index",
@@ -343,7 +346,8 @@
         computed:{
           carts () {
             return this.$store.state.carts.list
-          }
+          },
+          ...mapGetters(['gender'])
         },
         data: function () {
           return {
@@ -365,7 +369,7 @@
               product_price_discount:null,
               product_discount: null,
               my_color: {},
-              routeId: null
+              routeId: null,
           }
         },
         transition: 'fade',
@@ -378,14 +382,19 @@
           var id = params.id;
           app.$axios.defaults.baseURL = process.env.baseURL
           app.$axios.setHeader('lang', store.state.locale)
-          let response = await app.$axios.$get('categories');
+          // let response = await app.$axios.$get('categories');
+          var response = []
+          var gender = store.getters.gender
+          if(gender){
+					  response= await app.$axios.$get(gender+'/category');
+          }
+
           let response1 = await app.$axios.$get('products/'+id);
           let brand_id = Object.keys(response1.brand).filter((items, index) => {
             if(response1.product.brand_id == items){
               return response1.brand[items];
             }
           })
-          // console.log(response1.product.product_color)
           // console.log(response1.brand.filter(brands => brands == response1.product.brand_id))
           return {
               categoryList: response.data,
@@ -395,7 +404,7 @@
               colors: response1.product.product_color,
               sizes: response1.sizes,
               brand: response1.brand,
-              product_merchant: response1.brand[brand_id]
+              product_merchant: response1.brand[brand_id],
           }
         },
         methods: {

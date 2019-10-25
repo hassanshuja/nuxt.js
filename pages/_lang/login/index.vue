@@ -42,7 +42,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="spocial_mediapopup">
+                                        <!-- <div class="spocial_mediapopup">
 
                                             <div class="container">
                                                 <div class="row">
@@ -65,12 +65,12 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="tab-pane" id="Registration">
                                         
-                                        <div class="spocial_mediapopup">
+                                        <!-- <div class="spocial_mediapopup">
 
                                             <div class="container">
                                                 <div class="row">
@@ -94,7 +94,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -228,18 +228,20 @@
 }
 
 #formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  /* -webkit-border-radius: 10p x 10px 10px 10px; */
+  /* border-radius: 10px 10px 10px 10px; */
   background: #fff;
   padding: 30px;
   width: 90%;
   max-width: 450px;
   position: relative;
   padding: 0px;
-  border: 1px solid rgba(211, 208, 208, 0.3);
+  border: 1px solid rgba(4, 4, 4, 19.42);
   /* -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3); */
-  text-align: center;
+  text-align: left;
+  text-align: left;
+  padding-bottom: 20px;
 }
 
 #formFooter {
