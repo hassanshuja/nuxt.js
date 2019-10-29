@@ -338,17 +338,6 @@
 			 					</tfoot>
 			 				</table>
 	 					</div>
-            
-            
-
-
-
-
-
-
-
-
-
             <!-- This code is repeated for small screen size like mobile -->
           
 	 			</div>
@@ -377,12 +366,42 @@ const buildURLQuery = obj =>
 				components: {AboutContent, BottomHeader, PaymentOptions},
 				computed:{
             ...mapState(['isLoading', 'refCount', 'ship_discount_methods']),
-            ...mapGetters(['common']),
+            // ...mapGetters(['common']),
             
-						// carts(){
+						carts(){
 
-              
-            // },
+              //mapping all the merchants using map function with duplicates
+              // console.log(this.$store.state.carts.list)
+              this.merchants = this.$store.state.carts.list.map(function(item , index){
+                return item.product_merchant
+              })
+
+              let cartData = this.merchants;
+              //removing duplicates of merchants using set function of ES6
+              let mydata = new Set(cartData);
+              this.merchants = Array.from(mydata);
+
+              fetch('http://18.188.214.35/api/merchantDetails', {
+              method: 'POST', // *GET, POST, PUT, DELETE, etc.
+              mode: 'cors', // no-cors, *cors, same-origin
+              cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+              credentials: 'same-origin', // include, *same-origin, omit
+              headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              redirect: 'follow', // manual, *follow, error
+              referrer: 'no-referrer', // no-referrer, *client
+              body: JSON.stringify({merchants: this.merchants})}
+            )
+            .then( response => response.json())
+            .then(data => {
+                this.merchant_areas = data
+              })
+              this.cart = this.$store.state.carts.list
+
+							this.carts =  this.$store.state.carts.list
+            },
           subtotal_after_discount() {
             if(this.$store.state.carts.discount){
                 return this.$store.state.carts.discount.subtotal_after_discount
@@ -451,7 +470,7 @@ const buildURLQuery = obj =>
             shippers_allowed : ['TIKI', 'JNE', 'SiCepat'],
             kredivo_paymentId : null,
             kredivo_redirect_url : null,
-            carts : []
+            // carts : []
           }
 				},
 				mounted(){
@@ -479,7 +498,7 @@ const buildURLQuery = obj =>
           });
           
             // console.log('merchants', this.merchants.entries())
-            this.getcart()
+            // this.getcart()
         },
 				async asyncData ({ app, store }) {
             app.$axios.defaults.baseURL = process.env.baseURL
@@ -948,8 +967,6 @@ const buildURLQuery = obj =>
               merchants: this.merchants,
               grandTotal: this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
             };
-          console.log(obj)
-          return false
 
             this.$store.state.carts.discount.subtotal_after_discount = this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
             // var vuex = JSON.parse(localStorage.getItem('vuex'))

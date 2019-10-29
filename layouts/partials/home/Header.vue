@@ -424,11 +424,17 @@
       name: "Home-Header",
       middleware: 'guest',
      components: { MobileMenu },
-        watch: {
-            '$route.hash':function(hash){
-            this.getCart();
-            }
-        },  
+     computed: {
+         carts(){
+         return this.$store.state.carts.list
+            
+         }
+     },
+        // watch: {
+        //     '$route.hash':function(hash){
+        //     this.getCart();
+        //     }
+        // },  
       data: function () {
         return {
             email:'',
@@ -443,7 +449,7 @@
             IMAGE_URL: process.env.IMAGE_URL,
             search_query:null,
             search_action:'search',
-            carts: []
+            // carts: []
         }
       },
       mounted() {
@@ -465,7 +471,7 @@
                 }
             });
 
-            this.getCart()
+            // this.getCart()
             
       },
       methods: {
