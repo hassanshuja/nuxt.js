@@ -60,7 +60,7 @@
                                     <img  :src="IMAGE_URL+item.product_images[0].image_url"/>
                                   </template>
                                   <template v-else>
-                                    <img  :src="'http://localhost:8000/images/nopreview.jpg'"/>
+                                    <img  :src="IMAGE_URL+'/images/nopreview.jpg'"/>
                                   </template>
                                   <div class="brand_name">
                                      	<div class="brand_title"><b>LECATHVA</b></div>
