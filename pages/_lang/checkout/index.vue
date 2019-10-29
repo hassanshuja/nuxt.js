@@ -1,5 +1,6 @@
 <template>
 	<div>
+          <client-only>
 
 		<div id="checkout">
 			<div class="container">
@@ -231,6 +232,7 @@
                  <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                </div>
               </div>
+         
 		 				<button @click="openOrder" class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
               <div class="panel col-md-12 col-sm-12" style="position: relative;
                 width: 100%;
@@ -245,6 +247,7 @@
 						 				<th class="text-right" colspan="2">Total</th>
 						 			</tr>
 						 		</thead>
+              
 						 		<tbody>
 						 			<template v-for="(cart, index) in carts">
 					 					<tr :key="index">
@@ -343,6 +346,7 @@
 	 			</div>
  			</div>
 		</div>
+     </client-only>
 	</div>
 </template>
 
