@@ -17,6 +17,7 @@
           </thead>
 
           <tbody>
+            <client-only>
             <template v-for="(cart, index) in carts">
               <tr :key="index">
                 <td class="text-left">
@@ -51,6 +52,7 @@
                 </td>
               </tr>
             </template>
+            </client-only>
           </tbody>
          </table>
       </div>
@@ -235,9 +237,9 @@
             carts: 'carts/carts'
           }),
 
-          // carts () {
-          //   return this.$store.state.carts.list
-          // },
+          carts () {
+            return this.$store.state.carts.list
+          },
           discount() {
             let disarr = this.$store.state.carts.list
             return disarr.reduce((total, item) => total + item.product_discount, '');
@@ -265,7 +267,7 @@
               promo_failed: false,
               prev_subtotals: null,
               promo_total: 0,
-              subtotal_before_discount: 0,
+              subtotal_before_discount: 0
           }
         },
         mounted(){

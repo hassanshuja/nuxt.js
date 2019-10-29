@@ -233,10 +233,10 @@
               </div>
 		 				<button @click="openOrder" class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
               <div class="panel col-md-12 col-sm-12" style="position: relative;
-    width: 100%;
-    min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;">
+                width: 100%;
+                min-height: 1px;
+                padding-right: 15px;
+                padding-left: 15px;">
 						 	<table class="table" id="checkto">
 						 		<thead>
 						 			<tr>
@@ -379,39 +379,10 @@ const buildURLQuery = obj =>
             ...mapState(['isLoading', 'refCount', 'ship_discount_methods']),
             ...mapGetters(['common']),
             
-						carts(){
+						// carts(){
 
-              //mapping all the merchants using map function with duplicates
-              // console.log(this.$store.state.carts.list)
-              this.merchants = this.$store.state.carts.list.map(function(item , index){
-                return item.product_merchant
-              })
-
-              let cartData = this.merchants;
-              //removing duplicates of merchants using set function of ES6
-              let mydata = new Set(cartData);
-              this.merchants = Array.from(mydata);
-
-              fetch('http://18.188.214.35/api/merchantDetails', {
-              method: 'POST', // *GET, POST, PUT, DELETE, etc.
-              mode: 'cors', // no-cors, *cors, same-origin
-              cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-              credentials: 'same-origin', // include, *same-origin, omit
-              headers: {
-                'Content-Type': 'application/json'
-                // 'Content-Type': 'application/x-www-form-urlencoded',
-              },
-              redirect: 'follow', // manual, *follow, error
-              referrer: 'no-referrer', // no-referrer, *client
-              body: JSON.stringify({merchants: this.merchants})}
-            )
-            .then( response => response.json())
-            .then(data => {
-                this.merchant_areas = data
-              })
-              this.cart = this.$store.state.carts.list
-							return this.$store.state.carts.list
-            },
+              
+            // },
           subtotal_after_discount() {
             if(this.$store.state.carts.discount){
                 return this.$store.state.carts.discount.subtotal_after_discount
@@ -480,6 +451,7 @@ const buildURLQuery = obj =>
             shippers_allowed : ['TIKI', 'JNE', 'SiCepat'],
             kredivo_paymentId : null,
             kredivo_redirect_url : null,
+            carts : []
           }
 				},
 				mounted(){
@@ -507,6 +479,7 @@ const buildURLQuery = obj =>
           });
           
             // console.log('merchants', this.merchants.entries())
+            this.getcart()
         },
 				async asyncData ({ app, store }) {
             app.$axios.defaults.baseURL = process.env.baseURL
@@ -519,6 +492,39 @@ const buildURLQuery = obj =>
             }
         },
 				methods: {
+          async getcart() {
+          //mapping all the merchants using map function with duplicates
+              // console.log(this.$store.state.carts.list)
+              this.merchants = this.$store.state.carts.list.map(function(item , index){
+                return item.product_merchant
+              })
+
+              let cartData = this.merchants;
+              //removing duplicates of merchants using set function of ES6
+              let mydata = new Set(cartData);
+              this.merchants = Array.from(mydata);
+
+              fetch('http://18.188.214.35/api/merchantDetails', {
+              method: 'POST', // *GET, POST, PUT, DELETE, etc.
+              mode: 'cors', // no-cors, *cors, same-origin
+              cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+              credentials: 'same-origin', // include, *same-origin, omit
+              headers: {
+                'Content-Type': 'application/json'
+                // 'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              redirect: 'follow', // manual, *follow, error
+              referrer: 'no-referrer', // no-referrer, *client
+              body: JSON.stringify({merchants: this.merchants})}
+            )
+            .then( response => response.json())
+            .then(data => {
+                this.merchant_areas = data
+              })
+              this.cart = this.$store.state.carts.list
+
+							this.carts =  this.$store.state.carts.list
+        },
           showPaymentOptions(){
 
             setTimeout(function () {
@@ -538,9 +544,7 @@ const buildURLQuery = obj =>
            let mydata  = this.$store.state.carts
             // let baseURL = this.baseURL 
             // this.$axios.defaults.baseURL = 'http://localhost:8000/api';
-            let baseURL = this.baseURL 
-
-
+              let baseURL = this.baseURL 
               this.$axios.$post(baseURL+'/snaptokenization', mydata,{
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
@@ -934,7 +938,6 @@ const buildURLQuery = obj =>
             }
           })
           
-          
           var obj = {
               shippingtext: this.shippingtext,
               shipping_total: this.shipping_total,
@@ -945,6 +948,8 @@ const buildURLQuery = obj =>
               merchants: this.merchants,
               grandTotal: this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
             };
+          console.log(obj)
+          return false
 
             this.$store.state.carts.discount.subtotal_after_discount = this.subtotal  + this.shipping_total_after_discount - this.$store.state.carts.discount.grand_discount_with_promo
             // var vuex = JSON.parse(localStorage.getItem('vuex'))

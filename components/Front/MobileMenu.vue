@@ -6,7 +6,9 @@
 
                 <ul>
                     <li>
+                        <client-only>
                         <a href="#" data-toggle="modal" data-target="#login" v-if="!loggedIn">SIGN IN / REGISTER</a>
+                        </client-only>
                         <!-- <a href="#" v-on:click.prevent="logout" v-else>Logout</a> -->
                     </li>
                     <li>

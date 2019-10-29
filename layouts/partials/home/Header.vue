@@ -53,6 +53,7 @@
                             </ul>
                         </div>
                     </div>
+                    <client-only>
                     <div class="col-sm-4 col-md-4 in_line">
                         <!--  <div class="language_head">
                            <ul>
@@ -138,6 +139,7 @@
                         </template>
                         </div>
                     </div>
+                    </client-only>
                 </div>
 
                 <!-- ----------------------------------Login  & Register Model ------------------------>
@@ -422,8 +424,11 @@
       name: "Home-Header",
       middleware: 'guest',
      components: { MobileMenu },
-    
-
+        watch: {
+            '$route.hash':function(hash){
+            this.getCart();
+            }
+        },  
       data: function () {
         return {
             email:'',
@@ -460,23 +465,13 @@
                 }
             });
 
-            this.carts = this.$store.state.carts.list
-            // $(document).on('click', '.slicknav_btn', function() {
-            // // $('body').toggleClass("overflow");
-
-            // // var header = $('div#header .container-fluid').height();
-            // // var header_top = $('div#header_top').height();
-            // // var new_height = parseInt(header) + parseInt(header_top);
-            // // var win_height = $(window).height();
-            // // var final_height = parseInt(win_height) - parseInt(new_height) + parseInt(7);
-
-            // // setInterval(function(){ 
-            // // $('.slicknav_nav').css('height', final_height);
-            // // }, 300);
-            // });
-
+            this.getCart()
+            
       },
       methods: {
+        getCart(){
+            this.carts = this.$store.state.carts.list
+        },
         checkForm: function (e) {
 
             var params = { query: this.search_query}
