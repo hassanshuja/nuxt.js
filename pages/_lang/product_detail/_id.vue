@@ -164,7 +164,7 @@
               <!-- <label for="toggle-heart" ><img src="images/heart_product.svg" id="heart"> --><!-- <i class="fa fa-heart" id="heart" ></i> --><!-- ♡ --><!-- </label>  -->
               <!-- <i class="fa fa-heart" id="heart" ></i> -->
             </div>
-            <div class="description_product">
+            <!-- <div class="description_product">
               <button class="collapsible">Description</button>
               <div class="desc" style="display: block;" v-html="product.description">
               </div>
@@ -174,7 +174,7 @@
               <button class="collapsible active">Shipping &amp; Return</button>
               <div class="desc" style="display: none;" v-html="product.shipping_return_detail">
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
        <!------------------- Model Popup ------------------------>

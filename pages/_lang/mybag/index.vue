@@ -265,7 +265,7 @@
               promo_failed: false,
               prev_subtotals: null,
               promo_total: 0,
-              subtotal_before_discount: 0
+              subtotal_before_discount: 0,
           }
         },
         mounted(){

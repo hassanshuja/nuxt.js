@@ -98,10 +98,9 @@
                             </div>
                         </div> -->
                             
-
                         <div class="cart_icon">
                             <nuxt-link :to="$i18n.path('mybag')" ><img src="~assets/images/bag_aps.svg">
-                            <span style="position:absolute; font-size: 12px;">{{carts.length  == 0 ? 0 : ''}}</span>
+                                <span style="position:absolute; font-size: 12px;">{{carts.length  == 0 ? 0 : ''}}</span>
                             </nuxt-link>
                             <template v-if="carts.length > 0">
                                 <div class="dropdown-demo">
@@ -116,30 +115,28 @@
                                     <template v-for="(cart,index) in carts">
                                         <span v-bind:key="index" class="item_main">
                                             <span class="item-left">
-                                            <template v-if="cart.images.length > 0">
-                                              <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
-                                            </template>
-                                            <span class="item-info">
-                                            <span class="addcart_name">{{ cart.modal }}</span>
-                                            <span class="addcart_color">{{ cart.name }}</span>
-                                            <span class="addcart_price">IDR {{ cart.price}}</span>
-                                            </span>
-                                            <span class="item_description">
-                                              <span>Color: {{ cart.selected_color.name }}</span>
-                                              <span>Size: {{ cart.selected_size.name }}</span>
-                                              <span>Qty: {{ cart.selected_quantity}}</span>
-                                             </span>
+                                                <template v-if="cart.images.length > 0">
+                                                    <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
+                                                </template>
+                                                <span class="item-info">
+                                                    <span class="addcart_name">{{ cart.modal }}</span>
+                                                    <span class="addcart_color">{{ cart.name }}</span>
+                                                    <span class="addcart_price">IDR {{ cart.price}}</span>
+                                                </span>
+                                                <span class="item_description">
+                                                    <span>Color: {{ cart.selected_color.name }}</span>
+                                                    <span>Size: {{ cart.selected_size.name }}</span>
+                                                    <span>Qty: {{ cart.selected_quantity}}</span>
+                                                </span>
                                             </span>
                                         </span>
                                     </template>
                                <div class="check_cart">
-                                <button @click="$router.push('/checkout')" type="button" class="check_cartpro">CHEKOUT</button>
+                                    <button @click="$router.push('/checkout')" type="button" class="check_cartpro">CHEKOUT</button>
                                </div>
                             </div>
                         </template>
-                        
                         </div>
-                       
                     </div>
                 </div>
 
@@ -440,7 +437,8 @@
             reg_err: '',
             IMAGE_URL: process.env.IMAGE_URL,
             search_query:null,
-            search_action:'search'
+            search_action:'search',
+            carts: []
         }
       },
       mounted() {
@@ -462,7 +460,7 @@
                 }
             });
 
-
+            this.carts = this.$store.state.carts.list
             // $(document).on('click', '.slicknav_btn', function() {
             // // $('body').toggleClass("overflow");
 
@@ -543,11 +541,11 @@
         //   }
         }
       },
-      computed:{
-        carts () {
-          return this.$store.state.carts.list
-        }
-      }
+    //   computed:{
+    //     carts () {
+    //       return this.$store.state.carts.list
+    //     }
+    //   }
     }
 </script>
 
