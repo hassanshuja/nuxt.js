@@ -1,5 +1,5 @@
 <template>
-    <div class="modal show" id="mypopup" role="dialog">
+    <div class="modal hidden-sm hidden-xs" id="mypopup" role="dialog">
         <div class="modal-dialog">
 
             <!-- Modal content-->

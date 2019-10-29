@@ -35,14 +35,10 @@
                         <div class="top_in_shop">
                             <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact><button class="shop_brand">{{data.section_3.button_text}}</button></nuxt-link>
                         </div>
-
                     </div>
-
-
                 </div>
             </div>
         </div>
-        <about-content ></about-content>
     </div>
 </template>
 
@@ -63,23 +59,27 @@
         },
         // transition: 'bounce',
         mounted(){
-            setTimeout(function () {
-                $('#mypopup').modal('show');
-            },2000);
+            console.log($(document).width())
+            if($(document).width() > 769){
+                setTimeout(function () {
+                    $('#mypopup').modal('show');
+                },2000);
+            }
+            
 
-            $(document).on('click', '.slicknav_btn', function() {
-                $('body').toggleClass("overflow");
+            // $(document).on('click', '.slicknav_btn', function() {
+            //     $('body').toggleClass("overflow");
 
-                var header = $('div#header .container').height();
-                var header_top = $('div#header_top').height();
-                var new_height = parseInt(header) + parseInt(header_top);
-                var win_height = $(window).height();
-                var final_height = parseInt(win_height) - parseInt(new_height) + parseInt(7);
+            //     var header = $('div#header .container').height();
+            //     var header_top = $('div#header_top').height();
+            //     var new_height = parseInt(header) + parseInt(header_top);
+            //     var win_height = $(window).height();
+            //     var final_height = parseInt(win_height) - parseInt(new_height) + parseInt(7);
 
-                setInterval(function(){
-                    $('.slicknav_nav').css('height', final_height);
-                }, 300);
-            });
+            //     setInterval(function(){
+            //         $('.slicknav_nav').css('height', final_height);
+            //     }, 300);
+            // });
             $(document).on('click','.close',function(){
                 $('.search-input').removeClass('show');
             });

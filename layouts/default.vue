@@ -13,7 +13,15 @@
     import HomeTopOffer from "./partials/home/TopOffer";
     import BottomHeader from "./partials/home/BottomHeader";
     export default {
-        components: {HomeTopOffer, HomeFooter, HomeHeader, BottomHeader}
+        components: {HomeTopOffer, HomeFooter, HomeHeader, BottomHeader},
+        mounted(){
+          this.setCookie()
+        },
+        methods: {
+          setCookie(){
+            document.cookie = 'same-site-cookie=samesite; SameSite=None; Secure';
+          }
+        }
     }
 </script>
 

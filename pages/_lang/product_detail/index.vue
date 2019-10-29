@@ -152,7 +152,6 @@
             <div class="description_product">
                  <button class="collapsible">Description</button>
                 <div class="content">
-
                   <span v-html="product.description"></span>
                 </div>
                 <button class="collapsible">Detail &amp; Sizing</button>

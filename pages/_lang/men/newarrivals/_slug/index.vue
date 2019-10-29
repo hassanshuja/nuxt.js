@@ -123,7 +123,7 @@
 										</button>
 									</div>
 								</div>
-								<div class="filter_mobile">
+								<!-- <div class="filter_mobile">
 									<div class="col-sm-12 col-md-12">
 											<select>
 												<option value="volvo">FILTER</option>
@@ -141,8 +141,33 @@
 												<option value="audi">Audi</option>
 											</select>
 									</div>
-								</div>
+								</div> -->
+								<div class="filter_mobile">
+									<button @click="listfilter" class="duo_mobile">FILTER</button>
+									<div class="col-sm-12 col-md-12 filtered-div" v-if="filter_mobile_size">
+										<ul>
+											<!-- <li @click="selectFilter()" >Filter</li> -->
+											<template v-for="(item, index) in sizesList">
+												<li :key="index" @click="selectFilter(item.name, item.id, index, 'size')" >{{item.name}}</li>
+											</template>
+										</ul>
+									</div>
 
+									<div class="col-sm-12 col-md-12 border_sorting">
+										<div class="brand_cat">
+											<form class="woocommerce-ordering">
+												<div class="dropdown">
+													<button class="dropbtn"><strong>{{sortby}}</strong></button>
+													<div class="dropdown-content">
+														<a href="#" @click.prevent="sortBy('latest');searchCatalogue();">Newest to Latest</a>
+														<a href="#" @click.prevent="sortBy('asc');searchCatalogue();">Sort by price: low to high</a>
+														<a href="#" @click.prevent="sortBy('desc');searchCatalogue();">Sort by price: high to low</a>
+													</div>
+												</div>
+											</form>
+										</div>	
+									</div>
+								</div>
 					<div class="col-sm-12 col-md-9 col-lg-9">
 						<div class="size_show">
 							<template v-if="searchTags.length > 0">
@@ -313,7 +338,8 @@
 								parent_id: null,
 								search: 'searchCatalogue',
 								subcategory_id: null,
-								sortby: 'select sort by'
+								sortby: 'sort by',
+								filter_mobile_size: false
 						}
 				},
 				watch: {
@@ -376,6 +402,10 @@
 						}
 				},
 				methods: {
+					listfilter() {
+						// console.log('cmoingn')
+						this.filter_mobile_size =  this.filter_mobile_size == true ? false: true;
+					},
 					async getsubcatItem() {
 						this.search = 'getsubcatItem';
 						let subcategory_id = this.subcategory_id
@@ -462,6 +492,7 @@
 
 					},
 					selectFilter(name, id, index, type) {
+							this.filter_mobile_size = false
 							if(!$(".size_show").hasClass("active")){
 						    $(".size_show").addClass("active");
 						 	}

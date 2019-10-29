@@ -3,46 +3,46 @@
 				<bottom-header :categoryList="categoryList" :url="'women/category/'" :custom_url="'women/'"></bottom-header>
 				<div id="section_part" style="padding-top: 0;" class="section_style">
 
-						<div class="container-fluid">
-								<div class="row">
-										<div class="col-sm-12 col-md-12 content_bel">
-												<div class="banner_below">
-														<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
-																<img v-lazy="data.section_1.image_url">
-														</nuxt-link>
-														<div class="top_in_shop" style="bottom: 35px;">
-																<button class="shop_brand">{{data.section_1.button_text}}</button>
-														</div>
-												</div>
-												<div class="banner_below_res">
-														<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
-																<img v-lazy="data.section_1.mobile_image_url">
-														</nuxt-link>
-														<div class="top_in_shop" style="bottom: 35px;">
-																<button class="shop_brand">{{data.section_1.button_text}}</button>
-														</div>
-												</div>
-												<div class="only_caption">
-														<div class="banner_caption">
-																{{data.section_1.banner_text}}
-														</div>
-												</div>
-										</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-sm-12 col-md-12 content_bel">
+							<div class="banner_below">
+								<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
+										<img v-lazy="data.section_1.image_url">
+								</nuxt-link>
+								<div class="top_in_shop" style="bottom: 35px;">
+										<button class="shop_brand">{{data.section_1.button_text}}</button>
+								</div>
+							</div>
+							<div class="banner_below_res">
+								<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
+										<img v-lazy="data.section_1.mobile_image_url">
+								</nuxt-link>
+								<div class="top_in_shop" style="bottom: 35px;">
+										<button class="shop_brand">{{data.section_1.button_text}}</button>
+								</div>
+							</div>
+							<div class="only_caption">
+								<div class="banner_caption">
+										{{data.section_1.banner_text}}
+								</div>
+							</div>
+						</div>
 
-										<div class="col-sm-12 col-md-6 delight">
-                      <div class="product_img">
-                        <div class="pro_first">
-                          <nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact>
-                            <img v-lazy="data.section_2.image_url">
-                          </nuxt-link>
-                          <div class="top_shop">
-                            <button class="shop_now_cat">{{data.section_2.button_text}}</button>
-                          </div>
-                        </div>
-                      </div>
-										</div>
+						<div class="col-sm-12 col-md-6 delight">
+							<div class="product_img">
+								<div class="pro_first">
+								<nuxt-link :to="$i18n.path(data.section_2.redirect_link)" exact>
+									<img v-lazy="data.section_2.image_url">
+								</nuxt-link>
+								<div class="top_shop">
+									<button class="shop_now_cat">{{data.section_2.button_text}}</button>
+								</div>
+								</div>
+							</div>
+						</div>
 
-										<div class="col-sm-12 col-md-6 delight">
+					<div class="col-sm-12 col-md-6 delight">
                       <div class="product_img">
                         <div class="pro_first">
                           <nuxt-link :to="$i18n.path(data.section_3.redirect_link)" exact>
@@ -65,24 +65,34 @@
 												DISCOVER YOUR STYLE
 										</div>
 										<div class="col-md-12 bot">
-											<no-ssr> <!-- important to add no-ssr-->
+											<client-only> <!-- important to add client-only-->
 												<carousel :items="7">
-														<template v-for="(item, index) in productsList">
-																<div :key="index">
-																	<div class="item" >
-																		<nuxt-link :to="'/product_detail/'+item.id">
-																		<template v-if="item.product_images && item.product_images.length > 0">
-																			<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
-																		</template>
-																		<template v-else>
-																			<img  :src="IMAGE_URL+'images/nopreview.png'"/>
-																		</template>
-																		</nuxt-link>
-																	</div>
+														<template v-for="(item, index) in tagList">
+															<div :key="index">
+																<div class="item" >
+																	<nuxt-link :to="'/catalogue?sizing_gender=women&tagId='+item.id+'&tag_name='+item.title">
+																	<template v-if="item.image_url">
+																		<img  :src="IMAGE_URL+item.image_url"/>
+																		<div class="brand_name">
+																			<div class="brand_title" style="text-align:center; padding-top:10px">
+																				<b>{{item.title}}</b>
+																			</div> 
+																		</div>
+																	</template>
+																	<template v-else>
+																		<img  :src="IMAGE_URL+'/images/nopreview.png'"/>
+																		<div class="brand_name">
+																			<div class="brand_title" style="text-align:center; padding-top:10px">
+																				<b>{{item.title}}</b>
+																			</div> 
+																		</div>
+																	</template>
+																	</nuxt-link>
 																</div>
-															</template>
+															</div>
+														</template>
 												</carousel>
-											</no-ssr>
+											</client-only>
 										</div>
 								</div>
 						</div>
@@ -217,7 +227,7 @@
 								sliderList : [],
 								categoryList:[],
 								featuredList:[],
-								productsList: [],
+								tagList: [],
 								IMAGE_URL: 'http://18.188.214.35/'
 						}
 				},
@@ -268,13 +278,13 @@
 						app.$axios.setHeader('lang', store.state.locale)
 						let response1 = await app.$axios.$get('/women/category');
 						let response2 = await app.$axios.$get('/page/women');
-						let allProducts = await app.$axios.$get('/women/allproducts');
+						let allTags = await app.$axios.$get('tag/womenTags');
 						let featuredProducts = await app.$axios.$get('/women/featuredproducts');
 						return {
 								data: response2.data,
 								categoryList:response1.data,
 								featuredList: featuredProducts,
-								productsList: allProducts
+								tagList: allTags
 						}
 				}
 		}

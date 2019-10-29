@@ -50,7 +50,7 @@
                     <div class="well">
                       <div class="featured-heading">SHOP PRODUCTS</div>
                       <div class="col-md-11">
-                         <no-ssr> <!-- important to add no-ssr-->
+                         <client-only> <!-- important to add client-only-->
                           <carousel :items="3">
                             <template v-for="(item, index) in featuredProducts">
                               <div :key="index">
@@ -65,17 +65,20 @@
                                   <div class="brand_name">
                                      	<div class="brand_title"><b>LECATHVA</b></div>
                                      	<div class="brand_category">Sliver Black Wiz Mules Slip-ons</div>
-                                     	<div class="productbrand_price"><div style="font-size: 12px;text-decoration: line-through;display: inline;padding: 0 8px;
-    padding-left: 0;">IDR 619,000</div><span>IDR 619,000</span></div>
+                                     	<div class="productbrand_price">
+                                            <div style="font-size: 12px; text-decoration:line-through;display:inline; padding: 0 8px; padding-left:0;">
+                                                IDR 619,000
+                                            </div>
+                                            <span>IDR 619,000</span>
+                                        </div>
                                      </div>
                                   </a>
                                 </div>
                               </div>
                             </template>
-												  </carousel>
-											  </no-ssr>
-                        
-										  </div>
+                            </carousel>
+                        </client-only>
+                    </div>
                     </div><!--/well-->
                     <!-- The Modal -->
                     <div class="modal" id="proo_model"  aria-modal="true">

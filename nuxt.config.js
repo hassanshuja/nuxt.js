@@ -22,33 +22,41 @@ export default {
         { rel: 'stylesheet', href: 'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css' },
         { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' },
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat:400,400i,600,600i,700,700i,800,800i,900,900i' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' }
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i' },
+        
     ],
 
     script: [
+      // {
+      //       src: "https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js",
+      //       type: "text/javascript",
+      //       body: true,
+      //       id: "midtrans-script",
+      //       'data-environment':"sandbox",
+      //       'data-client-key':"VT-client-kev115vEOPOwkRiV"
+      //   },
+      //   {
+      //     src: "https://app.sandbox.midtrans.com/snap/snap.js",
+      //     type: "text/javascript",
+      //     body: true,
+      //     'data-environment':"sandbox",
+      //     'data-client-key':"VT-client-kev115vEOPOwkRiV"
+      // },
+      // {
+      //   src: 'https://cdnjs.cloudflare.com/ajax/libs/SlickNav/1.0.4/jquery.slicknav.js'
+      // },
       {
-            src: "https://api.midtrans.com/v2/assets/js/midtrans-new-3ds.min.js",
-            type: "text/javascript",
-            body: true,
-            id: "midtrans-script",
-            'data-environment':"sandbox",
-            'data-client-key':"VT-client-kev115vEOPOwkRiV"
-        },
-        {
-          src: "https://app.sandbox.midtrans.com/snap/snap.js",
-          type: "text/javascript",
-          body: true,
-          'data-environment':"sandbox",
-          'data-client-key':"VT-client-kev115vEOPOwkRiV"
-      },
-      {
-        src: 'http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js'
+        src: '/js/toastr.min.js'
       },
 
-        // {
-        //     src: "/js/jquery.min.js",
-        //     type: "text/javascript"
-        // },
+        {
+            src: "/js/snap.js",
+            type: "text/javascript",
+            body: true,
+            "data-environment":"sandbox",
+            "data-client-key":"VT-client-kev115vEOPOwkRiV"
+        },
+
         // {
         //     src:"/js/popper.min.js",
         //     type: "text/javascript"
@@ -89,6 +97,7 @@ export default {
       { src: '~/plugins/vuejs-paginate', ssr: false, mode: 'client'},
       { src:'~plugins/vue-scrollto.js',ssr:false},
       { src: '~/plugins/localStorage.js', ssr: false },
+
       // { src: '~/plugins/owl.carousel.js', ssr: false }
       
   ],

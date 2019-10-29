@@ -9,25 +9,25 @@
 
 										<div class="col-sm-12 col-md-12 content_bel">
 												<div class="banner_below">
-														<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
-																<img v-lazy="data.section_1.image_url">
-														</nuxt-link>
-														<div class="top_in_shop" style="bottom: 35px;">
-																<button class="shop_brand">{{data.section_1.button_text}}</button>
-														</div>
+													<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
+															<img v-lazy="data.section_1.image_url">
+													</nuxt-link>
+													<div class="top_in_shop" style="bottom: 35px;">
+															<button class="shop_brand">{{data.section_1.button_text}}</button>
+													</div>
 												</div>
 												<div class="banner_below_res">
-														<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
-																<img v-lazy="data.section_1.mobile_image_url">
-														</nuxt-link>
-														<div class="top_in_shop" style="bottom: 35px;">
-																<button class="shop_brand">{{data.section_1.button_text}}</button>
-														</div>
+													<nuxt-link :to="$i18n.path(data.section_1.redirect_link)" exact>
+															<img v-lazy="data.section_1.mobile_image_url">
+													</nuxt-link>
+													<div class="top_in_shop" style="bottom: 35px;">
+															<button class="shop_brand">{{data.section_1.button_text}}</button>
+													</div>
 												</div>
 												<div class="only_caption">
-														<div class="banner_caption">
-																{{data.section_1.banner_text}}
-														</div>
+													<div class="banner_caption">
+															{{data.section_1.banner_text}}
+													</div>
 												</div>
 
 
@@ -70,24 +70,34 @@
 						<div class="row">
 							<div class="dis_title">DISCOVER YOUR STYLE</div>
 								<div class="col-md-12 bot">
-									<no-ssr> <!-- important to add no-ssr-->
+									<client-only> <!-- important to add client-only-->
 										<carousel :items="7">
-												<template v-for="(item, index) in productsList">
-														<div :key="index">
-															<div class="item" >
-																<nuxt-link :to="'/catalogue/men/'+item.tags.tag_id">
-																<template v-if="item.product_images && item.product_images.length > 0">
-																	<img  :src="IMAGE_URL+item.product_images[0].image_url"/>
-																</template>
-																<template v-else>
-																	<img  :src="IMAGE_URL+'/images/nopreview.png'"/>
-																</template>
-																</nuxt-link>
+											<template v-for="(item, index) in tagList">
+												<div :key="index">
+													<div class="item" >
+														<nuxt-link :to="'/catalogue?sizing_gender=men&tagId='+item.id+'&tag_name='+item.title">
+														<template v-if="item.image_url">
+															<img  :src="IMAGE_URL+item.image_url"/>
+															<div class="brand_name">
+																<div class="brand_title" style="text-align:center; padding-top:10px">
+																	<b>{{item.title}}</b>
+																</div> 
 															</div>
-														</div>
-													</template>
+														</template>
+														<template v-else>
+															<img  :src="IMAGE_URL+'/images/nopreview.png'"/>
+															<div class="brand_name">
+																<div class="brand_title" style="text-align:center; padding-top:10px">
+																	<b>{{item.title}}</b>
+																</div> 
+															</div>
+														</template>
+														</nuxt-link>
+													</div>
+												</div>
+											</template>
 										</carousel>
-									</no-ssr>
+									</client-only>
 								</div>
 							</div>
 						</div>
@@ -99,7 +109,6 @@
 										<div class="best_saller_title">
 												BEST SELLER
 										</div>
-
 										<template v-for="(item, index) in featuredList">
 											<div class="col-sm-6 col-md-3 res_two" :key="index">
 												<div class="best_saller_inner">
@@ -220,17 +229,10 @@
 								sliderList : [],
 								categoryList:[],
 								featuredList:[],
-								productsList: [],
+								tagList: [],
 								IMAGE_URL: process.env.IMAGE_URL
 						}
 				},
-			 // transition: 'page',
-				/*transition(to, from) {
-						if (!from) return 'slide-left'
-						return +to.query.page < +from.query.page ? 'slide-right' : 'slide-left'
-				},*/
-
-
 				mounted(){
 					this.$store.dispatch('setGender', 'men');
 				},
@@ -239,13 +241,13 @@
 						app.$axios.setHeader('lang', store.state.locale);
 						let response1 = await app.$axios.$get('men/category');
 						let response2 = await app.$axios.$get('page/men');
-						let allProducts = await app.$axios.$get('men/allproducts');
+						let allTags = await app.$axios.$get('tag/menTags');
 						let featuredProducts = await app.$axios.$get('men/featuredproducts');
 						return {
 								data: response2.data,
 								categoryList:response1.data,
 								featuredList: featuredProducts,
-								productsList: allProducts
+								tagList: allTags
 						}
 				},
 				methods: {

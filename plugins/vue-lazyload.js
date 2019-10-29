@@ -3,7 +3,7 @@ import VueLazyload from 'vue-lazyload';
 
 Vue.use(VueLazyload,{
     preLoad: 1.3,
-    // loading: '/images/loading.gif',
+    loading: '/images/loading.gif',
     attempt: 1,
     observer: true,
    /* observerOptions: {

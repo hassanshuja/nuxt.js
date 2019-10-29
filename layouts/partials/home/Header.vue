@@ -144,12 +144,12 @@
                 </div>
 
                 <!-- ----------------------------------Login  & Register Model ------------------------>
-                <div class="modal" id="login">
+                <div class="modal" id="login" style="    overflow-y: scroll;">
                     <div class="modal-body">
 
                         <div class="row">
                             <div class="col-md-12" >
-                                <button type="button" class="close in" data-dismiss="modal" ><img src="~assets/images/close.svg" class="popup_cross"></button>
+                                <button type="button" style="float: right;background: none;border: none;" data-dismiss="modal" ><img src="~assets/images/close.svg" class="popup_cross"></button>
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs">
                                     <li class="active show">
@@ -380,97 +380,18 @@
                         <!-- Modal footer -->
                     </div>
                 </div>
+                <MobileMenu></MobileMenu>
+
                 <!-- ---------------------------------End thamf Model ------------------------>
             </div>
-
-            <div class="header_menu">
-                <!-- <form class="sidebar-search  sidebar-search-bordered" action="page_general_search_3.html" method="POST">
-                    <a href="javascript:;" class="remove">
-                        <i class="icon-close"></i>
-                    </a>
-                    <img src="~assets/images/APSTROFIICONS_09.png">
-
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <a href="javascript:;" class="btn submit">
-                                <i class="icon-magnifier"></i>
-                            </a>
-                        </span>
-                    </div>
-                </form> -->
-                <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#login">SIGN IN / REGISTER</a></li>
-                    <li><a href="#">MEN</a>
-                        <ul>
-                            <li><a href="#">Clothing</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="women.html">WOMEN</a>
-                        <ul>
-                            <li><a href="#">Women’s Homepage</a></li>
-                            <li><a href="#">New Arrivals</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Women’s Homepage</a></li>
-                            <li><a href="#">New Arrivals</a></li>
-
-                        </ul>
-                    </li>
-                    <li><a class='active' href="#">SALE</a>
-                        <ul>
-                            <li><a href="#">DENIM</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li><a href="brands.html">BRANDS</a></li>
-                    <li><a href="#" class="btn_menu" id="language_change">ID / EN</a></li>
-
-                </ul>
-                <div class="container-fluid">
-                    <div class="height_set">
-                        <div class="col-sm-6 col-md-6 inline_rest">
-                            <div class="header_footer">
-                                <p>About Apstrofi</p>
-                                <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Smart Sizing</a></li>
-                                    <li><a href="#">Partnership</a></li>
-                                    <li><a href="#">Membership</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                                <div class="asp_head">
-                                    <span>Apstrofi © 2019</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 inline_rest">
-                            <div class="header_footer">
-                                <p>Customer Care</p>
-                                <ul>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Orders & Shipping</a></li>
-                                    <li><a href="#">Return & Exchange</a></li>
-                                    <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                </ul>
-
-                            </div>
-                            <div class="social_media_header">
-                                <div class="center_icon">
-                                    <div class='icon social wh'><a href="#"><img src="~assets/images/Whatsapp.svg"><!-- <i class="fa fa-whatsapp" aria-hidden="true"></i> --></a></div>
-                                    <div class='icon social fb'><a href="#"><img src="~assets/images/facebook.svg"><!-- <i class='fa fa-facebook-square'></i> --></a></div>
-                                    <div class='icon social in'><a href="#"><img src="~assets/images/Instagram.svg"></a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </div>
-        <div class="right_ctn search-panel" style="display: none;">
-            <div class="search_below">
 
-                <div class="search-input" >
+
+        <div class="right_ctn search-panel-new" style="display: none;">
+            <div class="search_below" style="z-index:999999">
+
+                <div class="search-input collapse show" >
                     <form class="row border_search" 
                         id="demo-2"  
                         method="GET"
@@ -479,13 +400,13 @@
                         margin-left: 0px;"
                         ref="form"
                     >
-                        <img src="~assets/images/APSTROFIICONS_09.png" class="hide_forres">
+                        <img src="~assets/images/search.svg" class="hide_forres">
                         <!-- <i class="fa fa-search" aria-hidden="true"></i> -->
                         <span class="back_top">
                             <input class="col-sm-12 col-md-12" type="search" placeholder="" v-model="search_query">
                         </span>
-                        <button type="close" class="close">
-                            <!-- × --><img src="~assets/images/APSTROFIICONS_02.png">
+                        <button type="button" class="hidden-lg hidden-md close-search">
+                            <!-- × --><img src="~assets/images/close.svg">
                         </button>
                         <button type="Search" class="col-sm-2 col-md-3 col-lg-3 btn_search">SEARCH</button>
                     </form>
@@ -498,10 +419,13 @@
 
 <script>
     import {mapGetters} from 'vuex';
+    import MobileMenu from "../../../components/Front/MobileMenu";
 
     export default {
       name: "Home-Header",
       middleware: 'guest',
+     components: { MobileMenu },
+    
 
       data: function () {
         return {
@@ -520,16 +444,39 @@
         }
       },
       mounted() {
-           $("#search").click(function(e) {
-                $(".search-panel").toggle();
+           $(document).on("click", "#search", function(e) {
+               $(".search-input").addClass('show')
+                $(".search-panel-new").show();
                 e.stopPropagation();
             });
 
+            $('.close-search').click(function(e){
+                $(".search-panel-new").hide();
+                e.stopPropagation();
+
+            })
+
             $(document).click(function(e) {
-                if (!$(e.target).is('.search-panel, .search-panel *')) {
-                    $(".search-panel").hide();
+                if (!$(e.target).is('.search-panel-new, .search-panel-new *')) {
+                    $(".search-panel-new").hide();
                 }
             });
+
+
+            // $(document).on('click', '.slicknav_btn', function() {
+            // // $('body').toggleClass("overflow");
+
+            // // var header = $('div#header .container-fluid').height();
+            // // var header_top = $('div#header_top').height();
+            // // var new_height = parseInt(header) + parseInt(header_top);
+            // // var win_height = $(window).height();
+            // // var final_height = parseInt(win_height) - parseInt(new_height) + parseInt(7);
+
+            // // setInterval(function(){ 
+            // // $('.slicknav_nav').css('height', final_height);
+            // // }, 300);
+            // });
+
       },
       methods: {
         checkForm: function (e) {
@@ -606,6 +553,6 @@
 
 <style scoped>
 
-.dropdown-demo{display:none;position:absolute;background-color:#f9f9f9;margin:38px 0;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);padding:12px 16px;z-index:1;border:1px solid rgba(9,7,9,.08);float:left;width:264px;right:10px;height:auto;max-height:350px;overflow-y:scroll}.dropdown-demo .add_message{font-family:Lato;font-size:10px;font-weight:900;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#4c4988;border-bottom:1px solid rgba(9,7,9,.08);padding:0 0 11px}button.check_cartpro:hover{background-color:#3d3987!important}.dropdown-demo .add_message span.right img{height:10px}.dropdown-demo .add_message span.right{float:right}.check_cart button.check_cartpro{background-color:#4c4988;border:none;font-family:Lato;cursor:pointer;font-weight:900;font-style:normal;font-stretch:normal;line-height:2.67;letter-spacing:1px;text-align:center;color:#fff;font-size:10px;padding:10px 0;float:left;width:100%}.check_cart{float:left;width:100%}span.addcart_name{font-weight:900}span.addcart_color,span.addcart_name{float:left;padding:0 10px}.dropdown-demo span.item_main span.item_description span{padding:0 9px;width:150px;padding:0 10px!important;line-height:1}span.addcart_price{float:left;padding:0 10px 16px}.dropdown-demo span.item_main span.item_description{float:none;width:auto;font-size:10px;font-family:open Sans;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item_description span{float:left;width:61%;padding:0 17px}.cart_icon{position:relative;display:inline-block}.dropdown-demo span.item_main span.item-info{float:none;font-size:10px;width:auto;font-family:Lato;display:block;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item-left img{float:left;height:93px;width:62px}.dropdown-demo span.item_main{float:left;width:100%;padding-bottom:15px}.dropdown-demo span.item_main span.item-left{float:left;width:100%;padding-top:10px}.cart_icon:hover .dropdown-demo,.dropdown-demo:hover .dropdown-demo{display:block;cursor:-webkit-grab;cursor:grab}.select-selected:after{content:url(/_nuxt/d0696ea4c4fce558b5b452230dc1054c.svg);float:right;width:100%;margin-left:5px;font-weight:600;width:14px;position:absolute;right:10px}.quality_pro span{font-family:Open sans;font-size:11px;font-weight:400;font-style:normal;font-stretch:normal;line-height:2.4;letter-spacing:normal;color:#3d3d3d}.quality_pro{float:left;width:100%;padding:10px 0 0}svg.red path{fill:#4c4988}.custom-drop{position:relative;font-family:Arial}.custom-drop select{display:none}
+.dropdown-demo{display:none;position:absolute;background-color:#f9f9f9;margin:38px 0;box-shadow:0 8px 16px 0 rgba(0,0,0,.2);padding:12px 16px;z-index:1;border:1px solid rgba(9,7,9,.08);float:left;width:264px;right:-5px;height:auto;max-height:350px;overflow-y:scroll}.dropdown-demo .add_message{font-family:Lato;font-size:10px;font-weight:900;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#4c4988;border-bottom:1px solid rgba(9,7,9,.08);padding:0 0 11px}button.check_cartpro:hover{background-color:#3d3987!important}.dropdown-demo .add_message span.right img{height:10px}.dropdown-demo .add_message span.right{float:right}.check_cart button.check_cartpro{background-color:#4c4988;border:none;font-family:Lato;cursor:pointer;font-weight:900;font-style:normal;font-stretch:normal;line-height:2.67;letter-spacing:1px;text-align:center;color:#fff;font-size:10px;padding:10px 0;float:left;width:100%}.check_cart{float:left;width:100%}span.addcart_name{font-weight:900}span.addcart_color,span.addcart_name{float:left;padding:0 10px}.dropdown-demo span.item_main span.item_description span{padding:0 9px;width:150px;padding:0 10px!important;line-height:1}span.addcart_price{float:left;padding:0 10px 16px}.dropdown-demo span.item_main span.item_description{float:none;width:auto;font-size:10px;font-family:open Sans;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item_description span{float:left;width:61%;padding:0 17px}.cart_icon{position:relative;display:inline-block}.dropdown-demo span.item_main span.item-info{float:none;font-size:10px;width:auto;font-family:Lato;display:block;font-weight:400;font-style:normal;font-stretch:normal;line-height:normal;letter-spacing:normal;color:#3d3d3d}.dropdown-demo span.item_main span.item-left img{float:left;height:93px;width:62px}.dropdown-demo span.item_main{float:left;width:100%;padding-bottom:15px}.dropdown-demo span.item_main span.item-left{float:left;width:100%;padding-top:10px}.cart_icon:hover .dropdown-demo,.dropdown-demo:hover .dropdown-demo{display:block;cursor:-webkit-grab;cursor:grab}.select-selected:after{content:url(/_nuxt/d0696ea4c4fce558b5b452230dc1054c.svg);float:right;width:100%;margin-left:5px;font-weight:600;width:14px;position:absolute;right:10px}.quality_pro span{font-family:Open sans;font-size:11px;font-weight:400;font-style:normal;font-stretch:normal;line-height:2.4;letter-spacing:normal;color:#3d3d3d}.quality_pro{float:left;width:100%;padding:10px 0 0}svg.red path{fill:#4c4988}.custom-drop{position:relative;font-family:Arial}.custom-drop select{display:none}
 
 </style>

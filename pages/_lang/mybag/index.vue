@@ -53,8 +53,97 @@
             </template>
           </tbody>
          </table>
-        </div>
-       
+      </div>
+        <div class="mobile_down" style="padding: 0 20px;">
+          <table class="mobile_acc" style="">
+          <tbody>
+            <template v-for="(cart, index) in carts">
+              <tr :key="index">
+                <td width="10%" class="text-left">
+                  <a href="#">
+                    <template v-if="cart.images.length > 0">
+                      <img :src="IMAGE_URL + cart.images[0].image_url" alt="White Blouse Armani">
+                    </template>
+                  </a>
+                </td>
+
+                <td class="text-left" id="req_height" style="width: 22%;padding: 18px 6px !important;height: 36px;transform: translateY(-6%);">
+                  <a style="color: #3d3d3d;font-weight: 900;">{{ cart.modal }}</a>
+                  <p style="margin-bottom: 0px; "> <span v-if="cart.name">{{ cart.name }}</span></p>
+                  <span v-if="cart.product_discount"><p style="text-decoration: line-through;color: #ababab;margin-bottom: 0px;">IDR {{ parseInt(cart.price) + parseInt(cart.product_discount)}}</p>IDR {{ cart.price}}</span>
+                  <span v-else>IDR {{ cart.price}}</span>
+                  <p style="margin-bottom: 0;padding: 10px 0;padding-bottom: 0;">Colour: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></p>
+                  <p style="margin-bottom: 0;;padding-bottom: 0;">Size:  <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></p>
+                  
+                </td>
+                <td class="text-right" id="size_mob" style="transform: translateY(-35%);" colspan="6">
+                  <button type="button" @click="removeCart(cart)" class="close in" data-dismiss="modal"><img src="~assets/images/close.svg" class="popup_cross"></button>
+                  </td>
+                <td class="text-right" style=" color: #3d3d3d;" v-if="cart.product_discount">IDR {{ parseInt(cart.price) * parseInt(cart.selected_quantity) }}
+                  <p style="text-decoration: line-through;color: #ababab;">IDR {{ (parseInt(cart.price) + parseInt(cart.product_discount)) * parseInt(cart.selected_quantity) }}</p>
+                </td>
+                <td class="text-right" style=" color: #3d3d3d;" v-else>IDR {{ cart.total_price }}
+                </td>
+              </tr>
+            </template>
+          </tbody>
+         </table>
+
+                       
+              <div class="product_mobile_total">
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <button class="collapsible active">Add Promo Code</button>
+                  <div class="content" style="display: none;">
+                    <span style="display: flex;">
+                      <input type="text" name="promocode"  v-model="promocode"/>
+                      <button @click.prevent="promo_code">APPLY</button>
+                    </span>
+                    <p v-if="promo_success" class="true_message">Promo code has been added to your order!</p>
+                    <p v-if="promo_failed" class="false_message">*Your promo code is invalid or expired</p>
+                  </div>
+
+                </div>
+                <div v-if="promo_total" class="Shipping_charged" >
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="pro_type_left">Promo Discount</div>
+                    <div class="pro_type_right">{{ promo_total }}</div>
+                  </div>
+                </div>
+                <div class="Shipping_charged" >
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="pro_type_left">Discount</div>
+                    <div class="pro_type_right">{{ total_discount }}</div>
+                  </div>
+                </div>
+                <div class="Shipping_dem" >
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="pro_type_left">SUBTOTAL BEFORE DISCOUNT</div>
+                    <div class="pro_type_right">IDR {{ subtotal_before_discount}}</div>
+                  </div>
+                </div>
+                        <div class="Shipping_dem" >
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <div class="pro_type_left">SUBTOTAL AFTER DISCOUNT/PROMO</div>
+                    <div class="pro_type_right">IDR {{ subtotals}}</div>
+                  </div>
+                </div>
+                <div class="Shipping_term" >
+                    <div class="col-sm-12 col-md-4 col-lg-4">
+                      <p>By proceeding to checkout, you agree to Apstrofi.com <a href="#">Terms and Conditions</a></p>
+                  </div>
+                </div>
+              <div class="proccesd_btn" >
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <button @click="proceed" type="button">PROCEED TO CHECKOUT</button>
+                </div>
+              </div> 
+              <div class="continue_btn" >
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <button type="button">CONTINUE SHOPPING</button>
+                </div>
+              </div> 
+            </div>  
+          </div>
         <div class="below_head" id="inner_pro">
           <div class="col-sm-12 col-md-4 col-lg-4">
             <button class="collapsible active">Add Promo Code</button>
@@ -203,6 +292,9 @@
         methods: {
           async promo_code(){
             let code = this.promocode
+            if(this.promocode == null) {
+              return false;
+            }
             let check_promo =  await this.$axios.$get('promo/getdetails/'+code);
             if(check_promo.length > 0){
               var promo_obj = check_promo[0]

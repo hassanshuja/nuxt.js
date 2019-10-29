@@ -22,7 +22,6 @@
 										 <div class="dropdown">
 												 <button class="dropbtn">SORT BY : <strong>{{sortby}}</strong></button>
 												 <div class="dropdown-content">
-													<a href="@">Sort by average rating</a>
 													<a href="#" @click.prevent="sortBy('latest');searchCatalogue();">Newest to Latest</a>
 													<a href="#" @click.prevent="sortBy('asc');searchCatalogue();">Sort by price: low to high</a>
 													<a href="#" @click.prevent="sortBy('desc');searchCatalogue();">Sort by price: high to low</a>
@@ -126,24 +125,32 @@
 									</div>
 								</div>
 								<div class="filter_mobile">
-									<div class="col-sm-12 col-md-12">
-											<select>
-												<option value="volvo">FILTER</option>
-												<option value="saab">Saab</option>
-												<option value="mercedes">Mercedes</option>
-												<option value="audi">Audi</option>
-											</select>
+									<button @click="listfilter" class="duo_mobile">FILTER</button>
+									<div class="col-sm-12 col-md-12 filtered-div" v-if="filter_mobile_size">
+										<ul>
+											<!-- <li @click="selectFilter()" >Filter</li> -->
+											<template v-for="(item, index) in sizesList">
+												<li :key="index" @click="selectFilter(item.name, item.id, index, 'size')" >{{item.name}}</li>
+											</template>
+										</ul>
 									</div>
 
-									<div class="col-sm-12 col-md-12">
-											<select>
-												<option value="volvo">SORT BY:PRICE HIGH TO LOW</option>
-												<option value="saab">Saab</option>
-												<option value="mercedes">Mercedes</option>
-												<option value="audi">Audi</option>
-											</select>
+									<div class="col-sm-12 col-md-12 border_sorting">
+										<div class="brand_cat">
+											<form class="woocommerce-ordering">
+												<div class="dropdown">
+													<button class="dropbtn"><strong>{{sortby}}</strong></button>
+													<div class="dropdown-content">
+														<a href="#" @click.prevent="sortBy('latest');searchCatalogue();">Newest to Latest</a>
+														<a href="#" @click.prevent="sortBy('asc');searchCatalogue();">Sort by price: low to high</a>
+														<a href="#" @click.prevent="sortBy('desc');searchCatalogue();">Sort by price: high to low</a>
+													</div>
+												</div>
+											</form>
+										</div>	
 									</div>
 								</div>
+							</div>
 
 					<div class="col-sm-12 col-md-9 col-lg-9">
 						<div class="size_show">
@@ -176,11 +183,11 @@
 															
 															<template v-if="item.product_discount.length > 0">
 																<div class="productbrand_price"  v-if="item.product_discount[0].discount" >
-																	<div style="text-decoration: line-through;display: inline;">
+																	<div class="line_through" style="text-decoration: line-through;display: inline;">
 																		IDR {{ item.price }}
 																	</div>
 																	<!-- <span>IDR {{ item.price }}</span> -->
-																	<span v-if="item.product_discount[0].discount.type == 'PERCENTAGE'">
+																	<span class="org_price" v-if="item.product_discount[0].discount.type == 'PERCENTAGE'">
 																		IDR {{ item.price - (item.price * item.product_discount[0].discount.amount/100) }}
 																	</span>
 																</div>
@@ -275,7 +282,8 @@
 								parent_id: null,
 								search: 'searchCatalogue',
 								subcategory_id: null,
-								sortby: 'select sort by'
+								sortby: 'sort by',
+								filter_mobile_size: null
 						}
 				},
 				watch: {
@@ -329,6 +337,10 @@
 						}
 				},
 				methods: {
+					listfilter() {
+						// console.log('cmoingn')
+						this.filter_mobile_size =  this.filter_mobile_size == true ? false: true;
+					},
 					async getsubcatItem() {
 						this.search = 'getsubcatItem';
 						let subcategory_id = this.subcategory_id
@@ -340,7 +352,7 @@
 							var size =  JSON.stringify(this.sizeSearch);
 							searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}?sizing_gender=men&page=${this.page}&colors=${colors}&size=${size}&subcategory_id=${subcategory_id}`;
 						}
-						console.log(searchUrl)
+						// console.log(searchUrl)
 						let	response2 =	await this.$axios.get(searchUrl);
 						if(response2) {
 							if(response2.data.length == 0){
@@ -367,7 +379,6 @@
 						let baseURL = this.baseURL 
 						let subcategory_id = this.subcategory_id
 						let sortby = this.sortby;
-						console.log(sortby)
 						let searchUrl = `${this.baseURL}/page/catalogue/${this.parent_id}
 						?sizing_gender=men&page=${this.page}&subcategory_id=${subcategory_id}&sortby=${sortby}`;
 						if(this.colorSearch.length > 0 || this.sizeSearch.length > 0) {
@@ -415,8 +426,10 @@
 
 					},
 					selectFilter(name, id, index, type) {
+							this.filter_mobile_size = false
+
 							if(!$(".size_show").hasClass("active")){
-						    $(".size_show").addClass("active");
+								$(".size_show").addClass("active");
 						 	}
 						 	var dataId = 0;
 						 	dataId = $(this).find('button').attr('data-id');

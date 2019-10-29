@@ -333,7 +333,7 @@
 								search: 'searchCatalogue',
 								subcategory_id: null,
                                 sortby: 'select sort by',
-								search_result: null,
+								search_result: '',
 								sizing_gender:3,
 								featuredList:[],
 								query_param: null

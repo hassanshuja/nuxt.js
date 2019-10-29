@@ -1,13 +1,17 @@
 
 jQuery(document).ready(function(){
   /*************Stckty Nav *******************/
-  jQuery('.header_menu').slicknav({
-       prependTo:'#menu2',
-       label:'',
-       duration: 500,
-       allowParentLinks:'true'
+  setTimeout(function(){
+      jQuery('.header_menu').slicknav({
+        prependTo:'#menu2',
+        label:'',
+        duration: 500,
+        allowParentLinks:'true'
     }); 
-    });
+
+  }, 1000)
+
+ });
 
 
 /*-----Accoration------*/

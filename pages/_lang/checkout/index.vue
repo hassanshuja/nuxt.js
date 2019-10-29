@@ -232,13 +232,17 @@
                </div>
               </div>
 		 				<button @click="openOrder" class="promo_code show" style="border-top: 1px solid rgba(9, 7, 9, 0.08);border-bottom: 1px solid rgba(9, 7, 9, 0.08);">2. ORDER DETAILS</button>
-			 			<div class="panel" style="border: medium none !important; display: none; max-height: 0px;">
+              <div class="panel col-md-12 col-sm-12" style="position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;">
 						 	<table class="table" id="checkto">
 						 		<thead>
 						 			<tr>
 						 				<th class="text-left" colspan="2">Item</th>
 						 				<th class="text-right" colspan="2">price</th>
-						 				<th class="text-right" colspan="2">Total Price</th>
+						 				<th class="text-right" colspan="2">Total</th>
 						 			</tr>
 						 		</thead>
 						 		<tbody>
@@ -265,44 +269,6 @@
 							 				</td>
 					 					</tr>
 			            </template>
-						 			<!-- <tr>
-						 				<td class="text-left" style="width:25px;">
-						 					<a href="#">
-						 						<img src="images/482244_3250.jpg" alt="White Blouse Armani">
-						 					</a>
-						 				</td>
-						 				<td class="text-left"><a class="text-left" href="#" style="color: #3d3d3d;font-weight: 900;">White Blouse Armani</a>
-						 					<p>Pink Bumb Bag</p>
-						 					<p class="gap_bet">Colour: Pink</p>
-						 					<p class="gap_bet">Size: All Size</p>
-						 					<p class="gap_bet" style="margin: 0px 0;">Quantity: 1</p>
-						 				</td>
-						 				<td class="text-right" colspan="2">IDR 260,000
-						 					<p style="text-decoration: line-through;color: #ababab;">IDR 260,000</p>
-						 				</td>
-						 				<td class="text-right">IDR 260,000
-						 					<p style="text-decoration: line-through;color: #ababab;">IDR 260,000</p>
-						 				</td>
-					 				</tr>
-			 						<tr>
-					 					<td class="text-left">
-					 						<a href="#">
-					 							<img src="images/482244_3250.jpg" alt="Black Blouse Armani">
-					 						</a>
-					 					</td>
-					 					<td class="text-left"><a href="#" style="color: #3d3d3d;font-weight: 900;">Black Blouse Armani</a>
-					 						<p>Pink Bumb Bag</p>
-					 						<p class="gap_bet">Colour: Pink</p>
-					 						<p class="gap_bet">Size: All Size</p>
-					 						<p class="gap_bet" style="margin: 0px 0;">Quantity: 1</p>
-					 					</td>
-				 						<td class="text-right" colspan="2">IDR 260,000
-				 							<p style="text-decoration: line-through;color: #ababab;">IDR 260,000</p>
-				 						</td>
-				 						<td class="text-right">IDR 260,000
-				 							<p style="text-decoration: line-through;color: #ababab;">IDR 260,000</p>
-				 						</td>
-				 					</tr> -->
 				 					<tr>
 				 						<th
 				 							colspan="12"
@@ -372,7 +338,19 @@
 			 					</tfoot>
 			 				</table>
 	 					</div>
-	 				</div>
+            
+            
+
+
+
+
+
+
+
+
+
+            <!-- This code is repeated for small screen size like mobile -->
+          
 	 			</div>
  			</div>
 		</div>
