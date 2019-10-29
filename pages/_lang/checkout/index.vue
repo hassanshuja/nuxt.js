@@ -400,7 +400,7 @@ const buildURLQuery = obj =>
               })
               this.cart = this.$store.state.carts.list
 
-							this.carts =  this.$store.state.carts.list
+							return this.$store.state.carts.list
             },
           subtotal_after_discount() {
             if(this.$store.state.carts.discount){
@@ -474,7 +474,7 @@ const buildURLQuery = obj =>
           }
 				},
 				mounted(){
-          this.$axios.defaults.baseURL = 'http://localhost:3000'
+          this.$axios.defaults.baseURL = 'http://18.221.210.123'
           
           var url = '/api2/prod/public/v1/';
           var cities = 'provinces';
