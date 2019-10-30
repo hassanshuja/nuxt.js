@@ -490,6 +490,7 @@ const buildURLQuery = obj =>
           }}).then(res => {
             this.provinces = res.data.rows
           });
+          
 
 					$('#checkout button.promo_code').on('click', function(){
 				    $('#checkout button').removeClass('selected');
