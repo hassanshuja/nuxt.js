@@ -33,7 +33,7 @@
                                             </div>
                                             <div class="form-group" id="email_another" v-if="login_err">
                                                 <div class="col-sm-12">
-                                                    *Email and Password do not match.
+                                                    *Email or Password do not match.
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -183,7 +183,7 @@
 		export default {
             name: "login",
             middleware: 'guest',
-            data: function () {
+        data: function () {
         return {
             email:'',
             password: '',
@@ -193,24 +193,21 @@
       methods: {
           
         async login(){
-             this.$axios.defaults.baseURL = process.env.baseURL;
+            this.$axios.defaults.baseURL = process.env.baseURL;
             this.$toast.show('Logging in...').goAway(1000);
             await this.$auth.login({
                   data: { email : this.email, password : this.password}
             }).then(data => {
-              this.$router.push({
-                path: '/mybag'
-            });
-            console.log('not working')
-              this.$toast.success('Successfully authenticated').goAway(1500);
-            //   $("#login").css('display', 'none');
+              location.reload()
+            //   this.$router.push({
+            //     path: '/mybag'
+            // });
+            //   this.$toast.success('Successfully authenticated').goAway(1500);
             }).catch((e) => {
               console.log(e)
               this.login_err = 'Unable to authenticate';
               this.$toast.error('Error while authenticating').goAway(1500)
             })
-       
-       
         },
       }
         }

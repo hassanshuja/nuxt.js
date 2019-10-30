@@ -59,7 +59,7 @@
         },
         // transition: 'bounce',
         mounted(){
-            console.log($(document).width())
+            // console.log($(document).width())
             if($(document).width() > 769){
                 setTimeout(function () {
                     $('#mypopup').modal('show');

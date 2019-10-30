@@ -144,7 +144,7 @@ export default {
     redirect: {
       login: '/login',
       logout: '/login',
-      callback: '/',
+      callback: '/mybag',
       home: '/'
     },
     strategies: {

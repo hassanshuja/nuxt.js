@@ -1,9 +1,5 @@
 export default function ({ store, redirect }) {
-  console.log(store.state.auth)
-    if (!store.state.auth.loggedIn) {
-      setTimeout(function(){
-        return redirect('/')
-      },500)
-      
-    }
+  if (store.state.auth.loggedIn) {
+    return redirect('/')
   }
+}

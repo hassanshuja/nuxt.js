@@ -53,7 +53,7 @@ export const mutations = {
 
 export const getters = {
     carts (state) {
-		console.log(state.list)
+		// console.log(state.list)
         return state.list
     }
 }

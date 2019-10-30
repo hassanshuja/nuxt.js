@@ -133,7 +133,7 @@
                                         </span>
                                     </template>
                                <div class="check_cart">
-                                    <button @click="$router.push('/checkout')" type="button" class="check_cartpro">CHEKOUT</button>
+                                    <button @click="$router.push('/mybag')" type="button" class="check_cartpro">CHEKOUT</button>
                                </div>
                             </div>
                         </template>
@@ -183,7 +183,7 @@
                                             </div>
                                             <div class="form-group" id="email_another" v-if="login_err">
                                                 <div class="col-sm-12">
-                                                    *Email and Password do not match.
+                                                    *Email or Password do not match.
                                                 </div>
                                             </div>
                                             <div class="col-sm-12">
@@ -504,15 +504,21 @@
             await this.$auth.login({
                   data: { email : this.email, password : this.password}
             }).then(data => {
-              $('#login').modal('hide')
-              this.$router.push({
-                path: '/'
-            });
+            //  if(data.error){
+            //     this.login_err = data.error
+            //     return false
+            //   }
+            //   $('#login').modal('hide')
+            //   this.$router.push({
+            //     path: '/'
+            // });
             // console.log('not working')
+            // $('#login').modal('hide')
+            // this.removeModal()
+            location.reload()
+
               this.$toast.success('Successfully authenticated').goAway(1500);
-             
             }).catch((e) => {
-              
               this.login_err = 'Unable to authenticate';
               this.$toast.error('Error while authenticating').goAway(1500)
             })
@@ -527,19 +533,24 @@
                 }
             })
             $('#login').modal('hide')
-
+            
             this.$router.push({
                 path: '/'
             });
         },
         logout() {
+            this.$router.push({
+                path: '/'
+            });
             this.$auth.logout();
+            
+            location.reload()
         },
         removeModal(){
-        //     if(window.getElementById('#mypopup') == null){
-        //       console.log(window.getElementById('#mypopup'))
-        //         window.querySelector('.modal-backdrop').remove();
-        //   }
+            if(window.getElementById('#mypopup') == null){
+              console.log(window.getElementById('#mypopup'))
+                window.querySelector('.modal-backdrop').remove();
+          }
         }
       },
     //   computed:{

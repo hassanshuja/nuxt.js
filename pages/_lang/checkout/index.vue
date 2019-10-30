@@ -479,6 +479,7 @@ const buildURLQuery = obj =>
 				},
 				mounted(){
           this.$axios.defaults.baseURL = 'http://18.221.210.123'
+          // this.$axios.defaults.baseURL = 'http://localhost:3000'
           
           var url = '/api2/prod/public/v1/';
           var cities = 'provinces';

@@ -1,23 +1,22 @@
 <template>
 <div id="mybag">
   <div class="container-fluid">
+     <client-only>
     <div class="row" style="margin:auto">
-      <div class="mybag_heading">MY BAG</div>  
-        <template v-if="cart.list.length > 0">
-
-      <div class="desktop_up" style="float: left;width: 100%;">
+      <div class="mybag_heading">MY BAG</div> 
+      <template v-if="carts && carts.length">
+    <client-only>
+        <div class="desktop_up" style="float: left;width: 100%;">
         <table class="table" id="table_pro" >
           <thead>
               <tr>
                 <th class="text-left" colspan="2">Item</th>
-                 <th class="text-left" style="padding: 17px 26px;">Price</th>
-                  <th class="text-center" style="padding: 17px;">Quantity</th>
-                  <th class="text-right">Total Price</th>
+                <th class="text-left" style="padding: 17px 26px;">Price</th>
+                <th class="text-center" style="padding: 17px;">Quantity</th>
+                <th class="text-right">Total Price</th>
               </tr> 
           </thead>
-
           <tbody>
-            <client-only>
             <template v-for="(cart, index) in carts">
               <tr :key="index">
                 <td class="text-left">
@@ -27,17 +26,15 @@
                     </template>
                   </a>
                 </td>
-
                 <td style="width: 22%; padding: 11px 6px !important; height: 36px;">
                   <a class="text-left" href="#" data-toggle="modal" style="font-weight: 900;color: #3d3d3d;">{{ cart.modal }}</a>
                   <p> <span v-if="cart.name">{{ cart.name }}</span></p>
                   <p class="gap_bet">Colour: <span v-if="cart.selected_color">{{ cart.selected_color.name }}</span></p>
                   <p class="gap_bet">Size:  <span v-if="cart.selected_size">{{ cart.selected_size.name }}</span></p>
-                  <p class="gap_bet" >
+                  <p class="gap_bet">
                     <a @click="removeCart(cart)" class="btnDelete" href="#">Remove This item</a>
                   </p>
                 </td>
-
                 <td class="text-left" style=" color: #3d3d3d;" v-if="cart.product_discount">IDR {{ cart.price}}<p style="text-decoration: line-through;color: #ababab;">IDR {{ parseInt(cart.price) + parseInt(cart.product_discount)}}</p></td>
                 <td class="text-left" style=" color: #3d3d3d;" v-else>IDR {{ cart.price}}</td>
                 <td class="text-center">
@@ -52,10 +49,10 @@
                 </td>
               </tr>
             </template>
-            </client-only>
           </tbody>
          </table>
       </div>
+      
         <div class="mobile_down" style="padding: 0 20px;">
           <table class="mobile_acc" style="">
           <tbody>
@@ -90,62 +87,61 @@
             </template>
           </tbody>
          </table>
-
-                       
-              <div class="product_mobile_total">
+            <div class="product_mobile_total">
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <button class="collapsible active">Add Promo Code</button>
+                <div class="content" style="display: none;">
+                  <span style="display: flex;">
+                    <input type="text" name="promocode"  v-model="promocode"/>
+                    <button @click.prevent="promo_code">APPLY</button>
+                  </span>
+                  <p v-if="promo_success" class="true_message">Promo code has been added to your order!</p>
+                  <p v-if="promo_failed" class="false_message">*Your promo code is invalid or expired</p>
+                </div>
+              </div>
+              <div v-if="promo_total" class="Shipping_charged" >
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                  <button class="collapsible active">Add Promo Code</button>
-                  <div class="content" style="display: none;">
-                    <span style="display: flex;">
-                      <input type="text" name="promocode"  v-model="promocode"/>
-                      <button @click.prevent="promo_code">APPLY</button>
-                    </span>
-                    <p v-if="promo_success" class="true_message">Promo code has been added to your order!</p>
-                    <p v-if="promo_failed" class="false_message">*Your promo code is invalid or expired</p>
-                  </div>
-
+                  <div class="pro_type_left">Promo Discount</div>
+                  <div class="pro_type_right">{{ promo_total }}</div>
                 </div>
-                <div v-if="promo_total" class="Shipping_charged" >
-                  <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="pro_type_left">Promo Discount</div>
-                    <div class="pro_type_right">{{ promo_total }}</div>
-                  </div>
-                </div>
-                <div class="Shipping_charged" >
-                  <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="pro_type_left">Discount</div>
-                    <div class="pro_type_right">{{ total_discount }}</div>
-                  </div>
-                </div>
-                <div class="Shipping_dem" >
-                  <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="pro_type_left">SUBTOTAL BEFORE DISCOUNT</div>
-                    <div class="pro_type_right">IDR {{ subtotal_before_discount}}</div>
-                  </div>
-                </div>
-                        <div class="Shipping_dem" >
-                  <div class="col-sm-12 col-md-4 col-lg-4">
-                    <div class="pro_type_left">SUBTOTAL AFTER DISCOUNT/PROMO</div>
-                    <div class="pro_type_right">IDR {{ subtotals}}</div>
-                  </div>
-                </div>
-                <div class="Shipping_term" >
-                    <div class="col-sm-12 col-md-4 col-lg-4">
-                      <p>By proceeding to checkout, you agree to Apstrofi.com <a href="#">Terms and Conditions</a></p>
-                  </div>
-                </div>
-              <div class="proccesd_btn" >
+              </div>
+              <div class="Shipping_charged" >
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                  <button @click="proceed" type="button">PROCEED TO CHECKOUT</button>
+                  <div class="pro_type_left">Discount</div>
+                  <div class="pro_type_right">{{ total_discount }}</div>
                 </div>
-              </div> 
-              <div class="continue_btn" >
+              </div>
+              <div class="Shipping_dem" >
                 <div class="col-sm-12 col-md-4 col-lg-4">
-                  <button type="button">CONTINUE SHOPPING</button>
+                  <div class="pro_type_left">SUBTOTAL BEFORE DISCOUNT</div>
+                  <div class="pro_type_right">IDR {{ subtotal_before_discount}}</div>
                 </div>
-              </div> 
-            </div>  
-          </div>
+              </div>
+                      <div class="Shipping_dem" >
+                <div class="col-sm-12 col-md-4 col-lg-4">
+                  <div class="pro_type_left">SUBTOTAL AFTER DISCOUNT/PROMO</div>
+                  <div class="pro_type_right">IDR {{ subtotals}}</div>
+                </div>
+              </div>
+              <div class="Shipping_term" >
+                  <div class="col-sm-12 col-md-4 col-lg-4">
+                    <p>By proceeding to checkout, you agree to Apstrofi.com <a href="#">Terms and Conditions</a></p>
+                </div>
+              </div>
+            <div class="proccesd_btn" >
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <button @click="proceed" type="button">PROCEED TO CHECKOUT</button>
+              </div>
+            </div> 
+            <div class="continue_btn" >
+              <div class="col-sm-12 col-md-4 col-lg-4">
+                <button type="button">CONTINUE SHOPPING</button>
+              </div>
+            </div> 
+          </div>  
+        </div>
+        
+    </client-only>
         <div class="below_head" id="inner_pro">
           <div class="col-sm-12 col-md-4 col-lg-4">
             <button class="collapsible active">Add Promo Code</button>
@@ -200,8 +196,11 @@
       </div> 
       <!-- The Modal -->
       <!-- End Model -->
+
       </template>
+
     <template v-else>
+      <client-only>
       <div class="desktop_up" style="float: left;width: 100%;">
       <section class="cart-section section-b-space">
         <div class="container">
@@ -219,8 +218,11 @@
         </div>
       </section>
       </div>
+    </client-only>
+
     </template>
     </div>
+ </client-only>
   </div>
 </div>
 </template>
@@ -233,11 +235,12 @@
         name: "index",
         components: {BottomHeader},
         computed:{
-          ...mapGetters({
-            carts: 'carts/carts'
-          }),
+          // ...mapGetters({
+          //   carts: 'carts/carts'
+          // }),
 
           carts () {
+            this.cartos = this.$store.state.carts.list
             return this.$store.state.carts.list
           },
           discount() {
@@ -267,6 +270,7 @@
               promo_failed: false,
               prev_subtotals: null,
               promo_total: 0,
+              cartos:[],
               subtotal_before_discount: 0
           }
         },
@@ -330,9 +334,10 @@
               });
             }
           },
-         getSubtotal() {
+          getSubtotal() {
             let cart = this.cart
-
+            console.log(cart, this.$store.state.carts, this.cart)
+          // console.log(cart, this.subtotals)
           //Saving prev subtotals for any future calculation on previous price
           this.prev_subtotals = this.subtotals
             //getting discount from cart object get from api
@@ -361,7 +366,6 @@
                 
               }
             })
-
             //get all category ids for applying disocunt
             let category_ids = cart.list.map((item, index) => item.category[0].parent_id)
             // let category_qty = cart.list.map((item, index) => item.selected_quantity)
@@ -370,7 +374,6 @@
             if(category_ids.length > 0){
               newcart = this.discount_category_obj.filter((item, index) => category_ids.includes(item.discount_category[0].pivot.category_id))
             }
-
             if(newcart.length > 0){
                 newcart.map((item, index) => {
                   cart.list.map((val, key) => {
@@ -396,10 +399,7 @@
                   })
               })
             }
-            
             // 
-
-
             // this.discount_category_obj.map((item, index) => {
             //   if(!notinclude.includes(item.title)){
             //     //for discount if in percentage
@@ -420,10 +420,8 @@
             //       this.discount_cart = item.max_discount_amount
             //       return this.discount_cart
             //     }
-                
             //   }
             // })
-
             // This is to get products discount
             let products_list = this.$store.state.carts.list
             var totalz = 0;
@@ -431,7 +429,6 @@
               return totalz + parseFloat(item.product_discount)
               }
               , '');
-              console.log(products_discount != 'null' , !isNaN(products_discount), products_discount)
 
             this.discount_product =  !isNaN(products_discount) ? (products_discount) : 0;
 
@@ -443,8 +440,11 @@
             //  console.log(this.subtotals,this.total_discount, this.discount_product, this.discount_cart, this.discount_category)
             let total =  (this.subtotals) - (this.total_discount)
             this.subtotals = total
+            // setTimeout(() => {
             this.subtotal_before_discount = this.prev_subtotals
+            // },1000)
             
+            // console.log(this.subtotal_before_discount ,'this.subtotal_before_discount')
           },
           proceed() { 
             let obj = {
