@@ -748,7 +748,9 @@ const buildURLQuery = obj =>
                 "back_to_store_uri":"http://localhost:3000/thankyou"
             }
 
-          this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://localhost:3000'
+          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+
 
             //Kredivo api pos request          
             this.$axios.$post('/apii33/kredivo/v2/checkout_url', items,{
@@ -799,7 +801,8 @@ const buildURLQuery = obj =>
             var cities = 'cities';
             var param = '&province=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://localhost:3000'
+            this.$axios.defaults.baseURL = 'http://18.221.210.123'
+
             let getprovinces = this.$axios.$get(url+cities+apikey+param+this.shipping_details.province.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -824,7 +827,8 @@ const buildURLQuery = obj =>
             var suburbs = 'suburbs';
             var param = '&city=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://localhost:3000'
+          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+            // this.$axios.defaults.baseURL = 'http://localhost:3000'
            this.$axios.$get(url+suburbs+apikey+param+this.shipping_details.city.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -843,7 +847,9 @@ const buildURLQuery = obj =>
             var areas = 'areas';
             var param = '&suburb=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://localhost:3000'
+            // this.$axios.defaults.baseURL = 'http://localhost:3000'
+          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+
             this.$axios.$get(url+areas+apikey+param+this.shipping_details.suburbs.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -878,7 +884,9 @@ const buildURLQuery = obj =>
             const searchParams = buildURLQuery(params);
             var shipping_rates = new Array();
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f&';
-            this.$axios.defaults.baseURL = 'http://localhost:3000'
+            // this.$axios.defaults.baseURL = 'http://localhost:3000'
+          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+
             this.$axios.$get(url+domesticRates+apikey+searchParams,{
                 headers: {
                   'Access-Control-Allow-Origin': '*'
