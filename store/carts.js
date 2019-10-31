@@ -25,7 +25,8 @@ export const mutations = {
   	state.list.map(item => {
   		state.sub_total += item.total_price
   	})
-  	state.list.sub_total = state.sub_total
+	  state.list.sub_total = state.sub_total
+	  state.carts.discount.subtotal_after_discount = 1110000
   },
   payment(state, payload) {
 	//   console.log('payment')

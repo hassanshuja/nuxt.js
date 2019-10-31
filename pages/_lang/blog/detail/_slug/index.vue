@@ -223,7 +223,7 @@
         data(){
             return{
                 slideIndex : 1,
-                IMAGE_URL: 'http://18.188.214.35/'
+                IMAGE_URL: process.env.IMAGE_URL,
             }
         },
         computed:{

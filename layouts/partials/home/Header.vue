@@ -99,7 +99,7 @@
                             </div>
                         </div> -->
                             
-                        <div class="cart_icon">
+                        <div class="cart_icon" @mouseover="check_hover" @mouseleave="close_hover">
                             <nuxt-link :to="$i18n.path('mybag')" ><img src="~assets/images/bag_aps.svg">
                                 <span style="position:absolute; font-size: 12px;">{{carts.length  == 0 ? 0 : ''}}</span>
                             </nuxt-link>
@@ -109,8 +109,8 @@
                                     <template v-if="carts.length > 0">
                                         <span class="left">{{ carts.length }} items added to your bag!</span>
                                     </template>
-                                  <span class="right">
-                                    <a href="#"><img src="~assets/images/close.svg"></a>
+                                  <span class="right close-main-cart">
+                                    <a href="#" id="close_cart" ><img src="~assets/images/close.svg"></a>
                                     </span>
                                  </div>
                                     <template v-for="(cart,index) in carts">
@@ -133,7 +133,7 @@
                                         </span>
                                     </template>
                                <div class="check_cart">
-                                    <button @click="$router.push('/mybag')" type="button" class="check_cartpro">CHEKOUT</button>
+                                    <button @click="$router.push('/mybag')" type="button" class="check_cartpro">CHECKOUT</button>
                                </div>
                             </div>
                         </template>
@@ -471,10 +471,21 @@
                 }
             });
 
-            // this.getCart()
+            // if($(document).width() < 770){
+            $(document).on("click", "#close_cart", function(e){
+                $('.dropdown-demo').css('display', 'none')
+                e.stopPropagation();
+            })
+        
             
       },
       methods: {
+        check_hover(){
+             $('.dropdown-demo').css('display', 'block')
+        },
+        close_hover(){
+             $('.dropdown-demo').css('display', 'none')
+        },
         getCart(){
             this.carts = this.$store.state.carts.list
         },

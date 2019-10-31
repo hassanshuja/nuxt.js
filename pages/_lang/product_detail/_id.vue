@@ -154,7 +154,6 @@
               <button @click="addToCart" class="addcart">ADD TO CART</button>
               <svg id="heart" width="26px" height="24px" viewBox="0 0 26 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <!-- Generator: Sketch 54.1 (76490) - https://sketchapp.com -->
-
                   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                       <g id="PRODUCT-DETAILS-2-Hover-Text" transform="translate(-1149.000000, -603.000000)" stroke="#4C4988">
                           <path id="heart" class="red" d="M1161.99994,606.598057 C1162.78066,605.65626 1163.67924,604.950515 1164.77183,604.495818 C1168.56149,602.918034 1173.037,605.263689 1173.82294,609.296785 C1174.30329,611.761337 1173.787,614.085167 1172.50814,616.223022 C1171.23985,618.342801 1169.6482,620.20283 1167.72865,621.758388 C1166.12083,623.061024 1164.4752,624.317735 1162.83304,625.577257 C1162.09614,626.142416 1161.91014,626.131972 1161.1858,625.599483 C1159.01492,624.003758 1156.85246,622.393974 1154.90271,620.526581 C1153.53046,619.212296 1152.35169,617.726764 1151.39405,616.08364 C1150.31041,614.224415 1149.84516,612.193674 1150.04532,610.052071 C1150.37615,606.511027 1153.47942,603.792081 1157.11983,604.026928 C1158.96134,604.145824 1160.49473,604.907937 1161.72094,606.290373 C1161.7943,606.372984 1161.86939,606.454257 1161.99994,606.598057"></path>
@@ -164,7 +163,7 @@
               <!-- <label for="toggle-heart" ><img src="images/heart_product.svg" id="heart"> --><!-- <i class="fa fa-heart" id="heart" ></i> --><!-- ♡ --><!-- </label>  -->
               <!-- <i class="fa fa-heart" id="heart" ></i> -->
             </div>
-            <!-- <div class="description_product">
+            <div class="description_product">
               <button class="collapsible">Description</button>
               <div class="desc" style="display: block;" v-html="product.description">
               </div>
@@ -174,7 +173,7 @@
               <button class="collapsible active">Shipping &amp; Return</button>
               <div class="desc" style="display: none;" v-html="product.shipping_return_detail">
               </div>
-            </div> -->
+            </div>
           </div>
         </div>
        <!------------------- Model Popup ------------------------>

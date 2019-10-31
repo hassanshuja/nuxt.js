@@ -2447,6 +2447,11 @@ div#mobile_vi {display: block;}
   padding: 0px;
 }
 
+.dropdown-demo.close-main-cart:active .dropdown-demo{
+  display:none !important;
+
+}
+
 .text-left a, .text-left p{padding-left:5px}
 .tees_section .col-sm-12.col-md-6 {padding: 0;}
 .info_brand {padding: 0px;padding: 15px 15px;}

@@ -1,107 +1,9 @@
 <template>
     <div id="menu">
-        <!-- <div id="mySidenav" class="sidenav slicknav_nav">
-            <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
-            <div class="header_menu">
-                <ul>
-                    <li><a href="#" data-toggle="modal" data-target="#login">SIGN IN / REGISTER</a></li>
-                    <li class="slicknav_parent slicknav_open">
-                        <nuxt-link class="menus" :to="'men'">MEN</nuxt-link>
+        <client-only>
 
-                        <ul class="submenu">
-                            <li>
-                                <nuxt-link  :to="$i18n.path('men/newarrivals/-1')" >
-                                New Arrivals
-                                </nuxt-link>
-                            </li>
-                            <li>
-                                <nuxt-link  :to="$i18n.path('men/sustainable/-2')" >
-                                Sustainable products
-                                </nuxt-link>
-                            </li>
-                            <template v-for="(category,index) in categoryListMen">
-                            <li  v-bind:key="index">
-                                <nuxt-link  :to="$i18n.path('men/'+category.parent_id)" exact>
-                                    {{ category.parent_name }}
-                                </nuxt-link>
-                            </li>
-                            </template>
-                        </ul>
-                    </li>
-                    <li><nuxt-link :to="'women'">WOMEN</nuxt-link> -->
-                        <!-- <ul>
-                            <li><a href="#">Women’s Homepage</a></li>
-                            <li><a href="#">New Arrivals</a></li>
-                            <li><a href="#">Clothing</a></li>
-                            <li><a href="#">Women’s Homepage</a></li>
-                            <li><a href="#">New Arrivals</a></li>
-
-                        </ul> -->
-                    <!-- </li>
-                    <li><a class='active' href="#">SALE</a>
-                        <ul>
-                            <li><a href="#">DENIM</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="blog.html">BLOG</a></li>
-                    <li><a href="brands.html">BRANDS</a></li>
-                    <li><a href="#" class="btn_menu" id="language_change">ID / EN</a></li>
-
-                </ul> -->
-                <!-- <div class="container-fluid">
-                    <div class="height_set">
-                        <div class="col-sm-6 col-md-6 inline_rest">
-                            <div class="header_footer">
-                                <p>About Apstrofi</p>
-                                <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">Smart Sizing</a></li>
-                                    <li><a href="#">Partnership</a></li>
-                                    <li><a href="#">Membership</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                </ul>
-                                <div class="asp_head">
-                                    <span>Apstrofi © 2019</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-md-6 inline_rest">
-                            <div class="header_footer">
-                                <p>Customer Care</p>
-                                <ul>
-                                    <li><a href="#">Contact Us</a></li>
-                                    <li><a href="#">Orders & Shipping</a></li>
-                                    <li><a href="#">Return & Exchange</a></li>
-                                    <li><a href="#">Payment Methods</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                </ul>
-
-                            </div>
-                            <div class="social_media_header">
-                               
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-            <!-- </div>
-        </div>
-        <span class="opennav" @click="openNav">&#9776;</span> -->
-<div class="slicknav_menu"><a href="#" aria-haspopup="true" tabindex="0" class="slicknav_btn slicknav_open" style="outline: none;"><span class="slicknav_menutxt"></span><span class="slicknav_icon slicknav_no-text"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><div class="slicknav_nav" aria-hidden="false" role="menu" style="display: block; height: 574px;">
-         	<!-- <form class="sidebar-search  sidebar-search-bordered" action="page_general_search_3.html" method="POST">
-                                    <a href="javascript:;" class="remove">
-                                        <i class="icon-close"></i>
-                                    </a>
-                                    <img src="images/APSTROFIICONS_09.png">
-
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Search...">
-                                        <span class="input-group-btn">
-                                            <a href="javascript:;" class="btn submit">
-                                                <i class="icon-magnifier"></i>
-                                            </a>
-                                        </span>
-                                    </div>
-                                </form> -->
+        <div class="slicknav_menu">
+            <a href="#" aria-haspopup="true" tabindex="0" class="slicknav_btn slicknav_open" style="outline: none;"><span class="slicknav_menutxt"></span><span class="slicknav_icon slicknav_no-text"><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span><span class="slicknav_icon-bar"></span></span></a><div class="slicknav_nav" aria-hidden="false" role="menu" style="display: block; height: 574px;">
 						<ul>
 							<li><a href="#" data-toggle="modal" data-target="#login" role="menuitem">SIGN IN / REGISTER</a></li> 
 							<li class="slicknav_parent slicknav_collapsed"><a href="#" role="menuitem" aria-haspopup="true" tabindex="-1" class="slicknav_item slicknav_row" style="outline: none;"><a href="#">MEN</a>
@@ -172,7 +74,10 @@
 					        
                        
 				     </div>
-					</div></div>
+					</div>
+            </div>
+        </client-only>
+
     </div>
 </template>
 
@@ -189,6 +94,7 @@ export default {
 		let menCat = await app.$axios.$get('men/category');
         let womenCat = await app.$axios.$get('men/category');
         
+        console.log(menCat)
         return {
             categoryListMen: menCat.data,
             categoryListWomen: womenCat.data

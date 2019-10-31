@@ -2,7 +2,7 @@
     <div>
 <div class="wrapper fadeInDown heading-section">
   <div class="jumbotron text-center">
-   <template v-if="tr_status == 'settlement'">
+   <template v-if="tr_status == 'settlement' || tr_status == 'pending' || tr_status == 'success'">
     <h2 class="display-5">Thank You! We are Processing Your Order</h2>
     <p class="lead"><strong>Your Order ID No #</strong> {{this.order_id}}.</p>
     <p class="lead">Please check your email for reference.</p>
@@ -14,7 +14,7 @@
   </template> 
   <hr>
   <p>
-    Having trouble? <a href="">Contact us</a>
+    Having trouble? <a href="info#contactus">Contact us</a>
   </p>
   <p class="lead">
     <a class="btn btn-primary btn-sm" href="https://apstrofi.com" role="button">Continue to homepage</a>

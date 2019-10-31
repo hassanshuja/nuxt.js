@@ -134,7 +134,6 @@
 											</template>
 										</ul>
 									</div>
-
 									<div class="col-sm-12 col-md-12 border_sorting">
 										<div class="brand_cat">
 											<form class="woocommerce-ordering">

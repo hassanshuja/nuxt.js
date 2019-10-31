@@ -2,7 +2,7 @@
     <div >
         <div id="menu2">
             <div class="slicknav_menu">
-                       <div class="header_menu">
+                <div class="header_menu">
 
                 <ul>
                     <li>
@@ -24,7 +24,7 @@
                                 Sustainable products
                                 </nuxt-link>
                             </li>
-                            <template v-for="(category,index) in categoryListMen">
+                            <template v-for="(category,index) in menCategories">
                             <li  v-bind:key="index">
                                 <nuxt-link  :to="$i18n.path('men/category/'+category.parent_id)" exact>
                                     {{ category.parent_name }}
@@ -45,7 +45,7 @@
                                 Sustainable products
                                 </nuxt-link>
                             </li>
-                            <template v-for="(category,index) in categoryListWomen">
+                            <template v-for="(category,index) in womenCategories">
                             <li  v-bind:key="index">
                                 <nuxt-link  :to="$i18n.path('women/category/'+category.parent_id)" exact>
                                     {{ category.parent_name }}
@@ -109,8 +109,12 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 export default {
     name: "MobileMenu",
+    computed:{
+        ...mapGetters(['menCategories', 'womenCategories'])
+    },
     data() {
         return {
             categoryListMen:[],
@@ -137,6 +141,11 @@ export default {
         });
 
         this.asyncData()
+    },
+    watch: {
+        categoryListMen: function (val) {
+        this.categoryListMen = val 
+        }
     },
     methods:{
         async asyncData() {

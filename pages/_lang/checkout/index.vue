@@ -205,7 +205,7 @@
 						 		<div class="check_btn">
 						 			<div class="cont-row">
 						 				<div class="full-block">
-						 					<input @click="openOrder"  type="button" class="place" name="PLACE ORDER" value="PLACE ORDER">
+						 					<input @click="openOrder"  type="button" class="place" name="CHECK ORDER DETAILS" value="CHECK ORDER DETAILS">
 						 				</div>
 						 			</div>
 						 			<div class="cont-row">
@@ -326,14 +326,14 @@
 			 						<tr>
 			 							<th colspan="12" class="sub_btn">
 			 								<div class="form-group">
-                        <form id="payment-form" method="post" action="snapfinish">
+                        <form id="payment-form" method="post" action="thankyou">
                           <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                           <input type="hidden" name="result_type" id="result-type" value="">
                           <input type="hidden" name="result_data" id="result-data" value="">
                         </form>
-						            <!-- <a href="#" class="d-block btn  white bg-purple btn-block mb-3" id="pay-button" data-header="662">PAYMENT</a> -->
-			 									<button class="d-block btn  white bg-purple btn-block mb-3"  type="button" @click="showPaymentOptions" >PAYMENT</button>
-			 									<!-- <button class="d-block btn  white bg-purple btn-block mb-3"  type="button" id="pay-button" >PAYMENT</button> -->
+						            <!-- <a href="#" class="d-block btn  white bg-purple btn-block mb-3" id="pay-button" data-header="662">CHOOSE PAYMENT METHODS</a> -->
+			 									<button class="d-block btn  white bg-purple btn-block mb-3"  type="button" @click="showPaymentOptions" >CHOOSE PAYMENT METHODS</button>
+			 									<!-- <button class="d-block btn  white bg-purple btn-block mb-3"  type="button" id="pay-button" >CHOOSE PAYMENT METHODS</button> -->
 			 									<button type="button" class="ctn_shopping">CONTINUE SHOPPING</button>
 			 								</div>
 			 							</th>
@@ -385,7 +385,7 @@ const buildURLQuery = obj =>
               let mydata = new Set(cartData);
               this.merchants = Array.from(mydata);
 
-              fetch('http://18.188.214.35/api/merchantDetails', {
+              fetch('/merchantDetails', {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -478,8 +478,8 @@ const buildURLQuery = obj =>
           }
 				},
 				mounted(){
-          this.$axios.defaults.baseURL = 'http://18.221.210.123'
-          // this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://18.221.210.123'
+          this.$axios.defaults.baseURL = 'http://localhost:3000'
           
           var url = '/api2/prod/public/v1/';
           var cities = 'provinces';
@@ -529,7 +529,7 @@ const buildURLQuery = obj =>
               let mydata = new Set(cartData);
               this.merchants = Array.from(mydata);
 
-              fetch('http://18.188.214.35/api/merchantDetails', {
+              fetch('http://bstiz.com/api/merchantDetails', {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -564,7 +564,16 @@ const buildURLQuery = obj =>
             });
 
           },
+          changeResult(type,data){
+            console.log(type, data, 'worklkasdf;sadkf;laksdh')
+            $("#result-type").val(type);
+            $("#result-data").val(JSON.stringify(data));
+            //resultType.innerHTML = type;
+            //resultData.innerHTML = JSON.stringify(data);
+          },
           click_pay_midtrans() {
+          
+           this.$axios.defaults.baseURL = process.env.baseURL
             
            let mydata  = this.$store.state.carts
             // let baseURL = this.baseURL 
@@ -590,32 +599,26 @@ const buildURLQuery = obj =>
                 var resultType = document.getElementById('result-type');
                 var resultData = document.getElementById('result-data');
 
-                function changeResult(type,data){
-                  $("#result-type").val(type);
-                  $("#result-data").val(JSON.stringify(data));
-                  //resultType.innerHTML = type;
-                  //resultData.innerHTML = JSON.stringify(data);
-                }
-
-
                 snap.pay(data, {
                   
-                  onSuccess: function(result){
-                    changeResult('success', result);
-                    console.log(result.status_message);
-                    console.log(result);
-                    $("#payment-form").submit();
+                  onSuccess: (result) => {
+                    this.changeResult('success', result);
+                    this.$axios.$post('payment', result, {method: 'POST'})
+                     this.$router.push(`thankyou?order_id=${result.order_id}&tr_status=${result.transaction_status}`)
                   },
-                  onPending: function(result){
-                    changeResult('pending', result);
-                    console.log(result.status_message);
-                    $("#payment-form").submit();
+                  onPending: (result) => {
+                    this.changeResult('pending', result);
+                    this.$axios.$post('payment', result, {method: 'POST'})
+                     this.$router.push(`thankyou?order_id=${result.order_id}&tr_status=${result.transaction_status}`)
+
                   },
-                  onError: function(result){
-                    changeResult('error', result);
-                    console.log(result.status_message);
-                    $("#payment-form").submit();
+                  onError: (result) => {
+                    this.changeResult('error', result);
+                    this.$axios.$post('payment', result, {method: 'POST'})
+                    this.$router.push(`thankyou?order_id=${result.order_id}&tr_status=${result.transaction_status}`)
+
                   }
+
                 });
               });
 
@@ -748,8 +751,8 @@ const buildURLQuery = obj =>
                 "back_to_store_uri":"http://localhost:3000/thankyou"
             }
 
-          // this.$axios.defaults.baseURL = 'http://localhost:3000'
-          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+          this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
 
             //Kredivo api pos request          
@@ -801,7 +804,8 @@ const buildURLQuery = obj =>
             var cities = 'cities';
             var param = '&province=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://18.221.210.123'
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
+            // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             let getprovinces = this.$axios.$get(url+cities+apikey+param+this.shipping_details.province.id,{
             headers: {
@@ -827,8 +831,8 @@ const buildURLQuery = obj =>
             var suburbs = 'suburbs';
             var param = '&city=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-          this.$axios.defaults.baseURL = 'http://18.221.210.123'
-            // this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://18.221.210.123'
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
            this.$axios.$get(url+suburbs+apikey+param+this.shipping_details.city.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -847,8 +851,8 @@ const buildURLQuery = obj =>
             var areas = 'areas';
             var param = '&suburb=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            // this.$axios.defaults.baseURL = 'http://localhost:3000'
-          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             this.$axios.$get(url+areas+apikey+param+this.shipping_details.suburbs.id,{
             headers: {
@@ -884,8 +888,8 @@ const buildURLQuery = obj =>
             const searchParams = buildURLQuery(params);
             var shipping_rates = new Array();
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f&';
-            // this.$axios.defaults.baseURL = 'http://localhost:3000'
-          this.$axios.defaults.baseURL = 'http://18.221.210.123'
+            this.$axios.defaults.baseURL = 'http://localhost:3000'
+          // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             this.$axios.$get(url+domesticRates+apikey+searchParams,{
                 headers: {
