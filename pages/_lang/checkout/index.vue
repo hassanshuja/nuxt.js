@@ -385,7 +385,7 @@ const buildURLQuery = obj =>
               let mydata = new Set(cartData);
               this.merchants = Array.from(mydata);
 
-              fetch('/merchantDetails', {
+              fetch('http://bstiz.com/api/merchantDetails', {
               method: 'POST', // *GET, POST, PUT, DELETE, etc.
               mode: 'cors', // no-cors, *cors, same-origin
               cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
