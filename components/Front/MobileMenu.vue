@@ -1,5 +1,7 @@
 <template>
     <div >
+            <client-only>
+
         <div id="menu2">
             <div class="slicknav_menu">
                 <div class="header_menu">
@@ -105,6 +107,8 @@
             </div>
                     </div>
 	             </div>
+                    </client-only>
+
     </div>
 </template>
 

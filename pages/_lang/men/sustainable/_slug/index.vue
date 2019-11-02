@@ -417,6 +417,7 @@
 					},
 					async searchCatalogue() {
 						let baseURL = this.baseURL 
+						
 						let subcategory_id = this.subcategory_id
 						let sortby = this.sortby;
 						console.log(sortby)

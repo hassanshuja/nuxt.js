@@ -73,7 +73,7 @@
               <span>{{ product_merchant }}</span><span class="name_or"> - {{ product.name }} </span>
               <br>
               <span class="blow_identi" >
-                <span v-if="product.product_discount.length > 0 && product.product_discount[0].qty >= selected_quantity">
+                <span v-if="product.discount && product.product_discount.length > 0 && product.product_discount[0].qty >= selected_quantity">
                   <span v-if="product.product_discount[0].discount.type == 'PERCENTAGE'">
                     IDR {{ getpercentAmount(product)}}
                   </span>
@@ -384,6 +384,7 @@
           // let response = await app.$axios.$get('categories');
           var response = []
           var gender = store.getters.gender
+          console.log(gender, 'woeirlkd')
           if(gender){
 					  response= await app.$axios.$get(gender+'/category');
           }
@@ -495,12 +496,12 @@
                 }
               },1000);
 
-              (function() {
-                const heart = document.getElementById('heart');
-                heart.addEventListener('click', function() {
-                  heart.classList.toggle('red');
-                });
-              })();
+              // (function() {
+              //   const heart = document.getElementById('heart');
+              //   heart.addEventListener('click', function() {
+              //     heart.classList.toggle('red');
+              //   });
+              // })();
 
               $( "div#squer" ).click(function() {
                   var clas = this.className;

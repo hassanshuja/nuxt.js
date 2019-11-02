@@ -89,7 +89,7 @@
          </table>
             <div class="product_mobile_total">
               <div class="col-sm-12 col-md-4 col-lg-4">
-                <button class="collapsible active">Add Promo Code</button>
+                <button class="collapsible active" @click="showPromo">Add Promo Code</button>
                 <div class="content" style="display: none;">
                   <span style="display: flex;">
                     <input type="text" name="promocode"  v-model="promocode"/>
@@ -144,7 +144,7 @@
     </client-only>
         <div class="below_head" id="inner_pro">
           <div class="col-sm-12 col-md-4 col-lg-4">
-            <button class="collapsible active">Add Promo Code</button>
+            <button class="collapsible active" @click="showPromo">Add Promo Code</button>
             <div class="content" style="display: none;">
               <span style="display: flex;">
                 <input type="text" name="promocode"  v-model="promocode"/>
@@ -170,7 +170,7 @@
         <div class="Shipping_dem" id="shopping_hide">
           <div class="col-sm-12 col-md-4 col-lg-4">
             <div class="pro_type_left">SUBTOTAL BEFORE DISCOUNT</div>
-            <div class="pro_type_right">IDR {{ subtotal_before_discount}}</div>
+            <div class="pro_type_right" >{{ subtotal_before_discount}}</div>
           </div>
         </div>
         <div class="Shipping_dem" id="shopping_hide">
@@ -268,13 +268,14 @@
               promocode: null,
               promo_success: false,
               promo_failed: false,
-              prev_subtotals: null,
+              prev_subtotals: 0,
               promo_total: 0,
               cartos:[],
               subtotal_before_discount: 0
           }
         },
         mounted(){
+          
           this.documentReady()
           this.getSubtotal()
           // if(this.cart.list.length == 0){
@@ -296,6 +297,9 @@
             }
         },
         methods: {
+          showPromo(){
+            $('.content').toggle()
+          },
           async promo_code(){
             let code = this.promocode
             if(this.promocode == null) {
@@ -335,9 +339,8 @@
             }
           },
           getSubtotal() {
-            let cart = this.cart
-            console.log(cart, this.$store.state.carts, this.cart)
-          // console.log(cart, this.subtotals)
+            var vuex = JSON.parse(localStorage.getItem('vuex'))
+            let cart = vuex.carts
           //Saving prev subtotals for any future calculation on previous price
           this.prev_subtotals = this.subtotals
             //getting discount from cart object get from api
@@ -440,9 +443,8 @@
             //  console.log(this.subtotals,this.total_discount, this.discount_product, this.discount_cart, this.discount_category)
             let total =  (this.subtotals) - (this.total_discount)
             this.subtotals = total
-            // setTimeout(() => {
+            
             this.subtotal_before_discount = this.prev_subtotals
-            // },1000)
             
             // console.log(this.subtotal_before_discount ,'this.subtotal_before_discount')
           },

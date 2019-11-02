@@ -149,7 +149,7 @@ width: -webkit-fill-available;background-color: #CADFB3;color: white;white-space
     font-family: Lato;
     color: #3d3d3d;
     padding: 15px;
-    width: 57% !important;
+    width: 100% ;
     font-size: 15px;
     /* line-height: 0; */
 }
@@ -1361,7 +1361,7 @@ p.gap_bet:nth-child(5) a{font-family: Lato;color: #ababab;font-size: 10px;font-w
 #table_pro .collapsible.active:after {content: url(../images/icon-accordion-arrow-hover.svg);width: 14px;height: 12px;-webkit-transform: rotate(180deg);transform: rotate(180deg);}
 #mybag button.collapsible {width: 100%;padding: 20px 0;background-color: transparent;border: none;padding: 1;text-transform: uppercase;text-transform: uppercase;
 font-family: Lato;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #3d3d3d;}
-#mybag input[type="text"] {border-color: #ababab;border: 1px solid #ababab;width: 100%;font-family: Lato;color: #3d3d3d;padding: 15px;width: 70%;font-size: 15px;margin: 0 8px;}
+#mybag input[type="text"] {border-color: #ababab;border: 1px solid #ababab;width: 100%;font-family: Lato;color: #3d3d3d;padding: 15px;width: 70%;font-size: 15px;margin: 0 8px 0px 0px;}
 #mybag button {background-color: transparent;border: 1px solid #ababab;font-size: 10px;
 font-weight: 900;font-style: normal;font-stretch: normal;line-height: 3.6;letter-spacing: 1px;text-align: center;color: #3d3d3d;padding: 8px 39px;padding-bottom: 6px;width: auto;float: right;cursor: pointer;}
 p.true_message {font-family: Lato;font-size: 10px;font-weight: normal;font-style: normal;font-stretch: normal;line-height: normal;letter-spacing: normal;color: #4c4988;width: 100%;text-align: -webkit-auto;

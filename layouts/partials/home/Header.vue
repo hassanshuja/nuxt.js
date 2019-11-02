@@ -121,7 +121,7 @@
                                                 </template>
                                                 <span class="item-info">
                                                     <span class="addcart_name">{{ cart.modal }}</span>
-                                                    <span class="addcart_color">{{ cart.name }}</span>
+                                                    <span class="addcart_color">{{ cart.name.replace(/^(.{15}[^\s]*).*/, "$1") }}</span>
                                                     <span class="addcart_price">IDR {{ cart.price}}</span>
                                                 </span>
                                                 <span class="item_description">
