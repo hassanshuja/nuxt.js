@@ -479,7 +479,7 @@ const buildURLQuery = obj =>
 				},
 				mounted(){
           // this.$axios.defaults.baseURL = 'http://18.221.210.123'
-          this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+          this.$axios.defaults.baseURL = 'http://apstrofi.com'
           
           var url = '/api2/prod/public/v1/';
           var cities = 'provinces';
@@ -650,7 +650,7 @@ const buildURLQuery = obj =>
                 "name":item.name,
                 "price": parseInt(item.price),
                 "type":item.modal,
-                "url":"http://gmbsconsultants.com/product_detail/"+item.id,
+                "url":"http://apstrofi.com/product_detail/"+item.id,
                 "quantity": parseInt(item.selected_quantity)
               }
               myitem.push(arr)
@@ -707,7 +707,7 @@ const buildURLQuery = obj =>
           // Full detail of order that needs to send to kredivo api
           // to get redirect url for payment
            var items = {
-              "server_key":"a592153585cde57ef34d32ba73390b1a",
+              "server_key":"26cdfe2e21bf4b721d7590b9e376f1e4",
                 "payment_type":"30_days",  
                 "tokenize_user": false,
                 "client_user_key": "hi@finaccel.co",
@@ -748,10 +748,10 @@ const buildURLQuery = obj =>
                 },
                 // "callback_url":"https://localhost:8000/api/orders/kredivo_notify", 
                 "push_uri":"https://bstiz.com/api/orders/kredivo_push_uri",
-                "back_to_store_uri":"http://gmbsconsultants.com/thankyou"
+                "back_to_store_uri":"http://apstrofi.com/thankyou"
             }
 
-          this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+          this.$axios.defaults.baseURL = 'http://apstrofi.com'
           // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
 
@@ -804,7 +804,7 @@ const buildURLQuery = obj =>
             var cities = 'cities';
             var param = '&province=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+            this.$axios.defaults.baseURL = 'http://apstrofi.com'
             // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             let getprovinces = this.$axios.$get(url+cities+apikey+param+this.shipping_details.province.id,{
@@ -832,7 +832,7 @@ const buildURLQuery = obj =>
             var param = '&city=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
           // this.$axios.defaults.baseURL = 'http://18.221.210.123'
-            this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+            this.$axios.defaults.baseURL = 'http://apstrofi.com'
            this.$axios.$get(url+suburbs+apikey+param+this.shipping_details.city.id,{
             headers: {
               'Access-Control-Allow-Origin': '*'
@@ -851,7 +851,7 @@ const buildURLQuery = obj =>
             var areas = 'areas';
             var param = '&suburb=';
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f';
-            this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+            this.$axios.defaults.baseURL = 'http://apstrofi.com'
           // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             this.$axios.$get(url+areas+apikey+param+this.shipping_details.suburbs.id,{
@@ -888,7 +888,7 @@ const buildURLQuery = obj =>
             const searchParams = buildURLQuery(params);
             var shipping_rates = new Array();
             var apikey = '?apiKey=b9ea898678816b4b3cd248727a322f4f&';
-            this.$axios.defaults.baseURL = 'http://gmbsconsultants.com'
+            this.$axios.defaults.baseURL = 'http://apstrofi.com'
           // this.$axios.defaults.baseURL = 'http://18.221.210.123'
 
             this.$axios.$get(url+domesticRates+apikey+searchParams,{

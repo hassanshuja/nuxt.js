@@ -8,7 +8,7 @@
 # install dependencies
 $ npm install
 
-# serve with hot reload at gmbsconsultants.com
+# serve with hot reload at apstrofi.com
 $ npm run dev
 
 # build for production and launch server

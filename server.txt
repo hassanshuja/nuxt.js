@@ -15,16 +15,16 @@
    #ProxyRequests Off
     #ProxyPreserveHost On
 
-    #ProxyPass / http://gmbsconsultants.com/client
-    #ProxyPassReverse / http://gmbsconsultants.com/client
+    #ProxyPass / http://apstrofi.com/client
+    #ProxyPassReverse / http://apstrofi.com/client
  <Directory /var/www/html>
         AllowOverride All
         Require all granted
         Options FollowSymLinks
 </Directory>
 <Location /apstrofi>
-  ProxyPass http://gmbsconsultants.com/apstrofi
-  ProxyPassReverse http://gmbsconsultants.com/apstrofi
+  ProxyPass http://apstrofi.com/apstrofi
+  ProxyPassReverse http://apstrofi.com/apstrofi
   ProxyAddHeaders On
   ProxyPreserveHost On
 </Location>

@@ -40,12 +40,15 @@
             },
             methods: {
               updateOrder(){
+                console.log(this.$auth.$state.user)
                 this.order_id  = this.$route.query.order_id
                 this.tr_status = this.$route.query.tr_status
 
                 let obj = {
                     order_id: this.order_id,
-                    transaction_status: this.tr_status
+                    transaction_status: this.tr_status,
+                    username: this.$auth.$state.user.name,
+                    email: this.$auth.$state.user.email
                 }
                 this.$axios.defaults.baseURL = process.env.baseURL
                 this.$axios.$put('/payment/'+this.order_id, obj)
