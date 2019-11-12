@@ -37,6 +37,7 @@ export const mutations = {
         } else if (state.refCount > 0) {
             state.refCount--;
             state.isLoading = (state.refCount > 0);
+            state.isLoading = false
         }
     },
 
