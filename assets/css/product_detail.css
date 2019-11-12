@@ -171,7 +171,7 @@ margin: 0 15px;filter: alpha(Opacity=0);-webkit-transition: opacity .6s;
 background-color: red;border-radius: 53%;padding: 1px 0;height: 18%;width: 100px;
 background-color: rgba(0, 0, 0, 0.3);width: 251%;right: 37px;font-size: 0px !IMPORTANT;
 }
-@media only screen and (max-width: 768px) 
+@media only screen and (max-width: 786px) 
 { 
 .col-sm-4.col-md-4.in_line {display: inline-flex;} 
 .vertical_slider {float: left;width: 100%;padding: 107px 0 !important;padding-bottom: 40px;}

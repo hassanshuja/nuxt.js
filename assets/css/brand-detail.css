@@ -21,7 +21,7 @@ div#bor {
 
     border-bottom: 1px solid rgba(9, 7, 9, 0.08);
 }
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 786px)
 {
     .col-sm-4.col-md-4.in_line {display: inline-flex;}
 }

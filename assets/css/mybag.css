@@ -210,7 +210,7 @@ border: solid 0.3px #3d3d3d;opacity: 0.3;}
 .dropdown_sign {float: left;width: 100%;}
 }
 
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 786px)
 {
 button.close.in img.popup_cross {
     width: auto;

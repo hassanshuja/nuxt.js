@@ -416,7 +416,7 @@
             text-align: -webkit-right;
         }
     }
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 786px) {
 
         .slicknav_btn {
             background-color: #ffffff;
