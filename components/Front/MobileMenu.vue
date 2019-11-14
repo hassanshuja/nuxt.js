@@ -162,7 +162,7 @@ export default {
             this.categoryListWomen = womenCat.data
         },
         logout() {
-        console.log('workinggggggg  ')
+        // console.log('workinggggggg  ')
             this.$auth.logout();
         },
     }

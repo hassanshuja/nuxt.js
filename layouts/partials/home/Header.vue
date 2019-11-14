@@ -550,11 +550,11 @@
             });
         },
         logout() {
+            
+            this.$auth.logout();
             this.$router.push({
                 path: '/'
             });
-            this.$auth.logout();
-            
             location.reload()
         },
         removeModal(){
