@@ -161,9 +161,9 @@ export default {
             this.categoryListMen =  menCat.data,
             this.categoryListWomen = womenCat.data
         },
-        logout() {
-        // console.log('workinggggggg  ')
-            this.$auth.logout();
+        async logout() {
+        // console.log('workinggggggg')
+            await this.$auth.logout();
         },
     }
 }

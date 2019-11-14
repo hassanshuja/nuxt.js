@@ -549,13 +549,9 @@
                 path: '/'
             });
         },
-        logout() {
+        async logout() {
+            await this.$auth.logout();
             
-            this.$auth.logout();
-            this.$router.push({
-                path: '/'
-            });
-            location.reload()
         },
         removeModal(){
             if(window.getElementById('#mypopup') == null){
