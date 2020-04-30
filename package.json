@@ -21,7 +21,7 @@
     "bootstrap": "^4.3.1",
     "cross-env": "^5.2.0",
     "dotenv": "^8.0.0",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "midtrans-client": "^1.0.3",
     "nuxt": "^2.10.2",
     "nuxt-svg": "^0.1.4",
